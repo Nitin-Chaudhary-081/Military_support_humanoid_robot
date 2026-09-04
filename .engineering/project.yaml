@@ -1,22 +1,33 @@
 languages:
   counts:
-    markdown: 3
+    markdown: 5
     yaml: 9
-    python: 51
-    shell: 77
+    python: 52
+    shell: 78
   primary: shell
-  totalFiles: 140
+  totalFiles: 144
 frameworks: []
 packageManagers: []
 entryPoints: []
 config:
   - .gitignore
 git:
-  branch: unknown
-  commit: unknown
-  log: []
-  dirty: false
-  status: []
+  branch: master
+  commit: 4d88862a730b1f237bda1cc8aecda0a581581a44
+  log:
+    - '4d88862 chore: advance lifecycle to validate (4/6), handoff md, 10 reqs 7 verified'
+    - >-
+      ea3b956 feat: ACSR sim scaffolding — URDF 2.5m/450kg, shield/weapon/drone/battery/threat
+      nodes, Gz worlds, Nav2, 26 tests, colcon build OK
+  dirty: true
+  status:
+    - M .engineering/events/events.jsonl
+    - ' M .engineering/lifecycle.yaml'
+    - ' M .engineering/progress/completeness.yaml'
+    - '?? docs/field_test.md'
+    - '?? docs/ops.md'
+    - '?? scripts/calibrate.sh'
+    - '?? tests/test_integration.py'
 envVars: []
 dependencies: {}
 structure:
@@ -32,4 +43,4 @@ structure:
   - src/
   - tests/
 projectType: robotics-project
-analyzedAt: '2026-09-04T09:28:34.914Z'
+analyzedAt: '2026-09-04T10:51:30.157Z'

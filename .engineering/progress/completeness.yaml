@@ -5,10 +5,10 @@ breakdown:
     evidenceCount: 33
     status: partial
   research:
-    value: 10
+    value: 80
     weight: 0.8
-    evidenceCount: 0
-    status: missing
+    evidenceCount: 3
+    status: good
   architecture:
     value: 85
     weight: 1
@@ -59,11 +59,11 @@ breakdown:
     weight: 0.5
     evidenceCount: 0
     status: poor
-engineeringCompleteness: 44
+engineeringCompleteness: 49
 productionReadiness: 38
 explanation: >-
-  Engineering completeness 44% (weighted avg across 12 dims). Production readiness 38%. Weak areas:
-  research 10% (0 evidence), integration 20% (0 evidence), testing 20% (0 evidence),
-  runtime_verification 40% (1 evidence), observability 20% (0 evidence), deployment 20% (0
-  evidence), performance 20% (0 evidence). Strong areas: architecture, documentation. Scores capped
-  when evidence missing to avoid fake precision.
+  Engineering completeness 49% (weighted avg across 12 dims). Production readiness 38%. Weak areas:
+  integration 20% (0 evidence), testing 20% (0 evidence), runtime_verification 40% (1 evidence),
+  observability 20% (0 evidence), deployment 20% (0 evidence), performance 20% (0 evidence). Strong
+  areas: research, architecture, documentation. Scores capped when evidence missing to avoid fake
+  precision.

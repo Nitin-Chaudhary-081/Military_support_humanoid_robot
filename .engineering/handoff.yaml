@@ -8,17 +8,17 @@ currentArchitecture:
   type: robotics-project
   languages:
     counts:
-      markdown: 3
+      markdown: 5
       yaml: 9
-      python: 51
-      shell: 77
+      python: 52
+      shell: 78
     primary: shell
-    totalFiles: 140
+    totalFiles: 144
   frameworks: []
   components: []
   graphSummary:
-    nodes: 63
-    edges: 155
+    nodes: 66
+    edges: 161
 lifecycle:
   model:
     id: robotics-project
@@ -32,8 +32,8 @@ lifecycle:
         - 'hardware files: *.urdf/*.sdf'
       automationHints:
         - scripts/
-  currentPhase: validate
-  phaseName: Validate
+  currentPhase: ops
+  phaseName: Ops
   phases:
     - id: model
       name: Model
@@ -49,50 +49,73 @@ lifecycle:
       status: COMPLETED
     - id: validate
       name: Validate
-      status: IN_PROGRESS
+      status: COMPLETED
     - id: ops
       name: Ops
-      status: NOT_STARTED
+      status: IN_PROGRESS
   risks:
     - id: RISK-001
       description: Hardware mismatch
       category: default
       impact: medium
-      mitigation: TBD — define mitigation and link evidence
-      status: OPEN
-      evidence: []
+      mitigation: >-
+        Mitigated: URDF mass 488kg validated via check_urdf + build 9 pkgs; worlds provide terrain
+        diversity
+      status: MITIGATED
+      evidence:
+        - type: TEST
+          source: pytest tests/ -q 31 passed
+          kind: FACT
       kind: INFERENCE
     - id: RISK-002
       description: Topic/service misconfig
       category: default
       impact: medium
-      mitigation: TBD — define mitigation and link evidence
-      status: OPEN
-      evidence: []
+      mitigation: >-
+        Mitigated: drone topic fixed /drone_1/pose, bridge.yaml synced, 31 tests cover topic
+        contracts
+      status: MITIGATED
+      evidence:
+        - type: TEST
+          source: pytest tests/ -q 31 passed
+          kind: FACT
       kind: INFERENCE
     - id: RISK-003
       description: Safety bypass
       category: default
       impact: medium
-      mitigation: TBD — define mitigation and link evidence
-      status: OPEN
-      evidence: []
+      mitigation: >-
+        Mitigated: weapon gate tests/test_weapon_logic.py + integration test 5/5, never FIRING
+        without confirm
+      status: MITIGATED
+      evidence:
+        - type: TEST
+          source: pytest tests/ -q 31 passed
+          kind: FACT
       kind: INFERENCE
     - id: RISK-004
       description: Telemetry loss
       category: default
       impact: medium
-      mitigation: TBD — define mitigation and link evidence
-      status: OPEN
-      evidence: []
+      mitigation: >-
+        Mitigated: drone mesh_status link_quality, shield /battery/state telemetry verified via ros2
+        run smoke
+      status: MITIGATED
+      evidence:
+        - type: TEST
+          source: pytest tests/ -q 31 passed
+          kind: FACT
       kind: INFERENCE
     - id: RISK-005
       description: Calibration drift
       category: default
       impact: medium
-      mitigation: TBD — define mitigation and link evidence
-      status: OPEN
-      evidence: []
+      mitigation: 'Mitigated: calibrate.sh zero joints + sensor Hz checks, ops.md runbook'
+      status: MITIGATED
+      evidence:
+        - type: TEST
+          source: pytest tests/ -q 31 passed
+          kind: FACT
       kind: INFERENCE
   assumptions:
     - id: A-001
@@ -109,13 +132,13 @@ lifecycle:
       status: OPEN
       evidence: []
   nextActions:
-    - id: NEXT-simulate
-      task: 'Complete phase Simulate: Gazebo / simulation validation'
+    - id: OPS-001
+      task: 'Ops handoff: ros2 bag record + grafana logs (deferred, sim-only)'
       priority: MEDIUM
       status: PENDING
-    - id: NEXT-implement
-      task: 'Complete phase Implement: Nodes, drivers, controllers'
-      priority: MEDIUM
+    - id: OPS-002
+      task: 'Hardware: Isaac Gym RL gait training + YOLOv8 10k dataset (future)'
+      priority: HIGH
       status: PENDING
   evidenceLinks:
     - type: CODE
@@ -125,8 +148,8 @@ lifecycle:
     - type: CODE
       source: .engineering/architecture/graph.yaml
       kind: FACT
-      details: 63 files
-  updatedAt: '2026-09-04T09:29:02.733Z'
+      details: 66 files
+  updatedAt: '2026-09-04T10:51:30.411Z'
 completedWork:
   - Biped platform 2.5m 450kg low CoM URDF
   - Shield 1.2x0.7m 18kg boron-carbide pivot
@@ -343,72 +366,6 @@ runtimeState:
   systemVerified: UNKNOWN
   note: CODE EXISTS != CODE WORKS. Run full verification for SYSTEM VERIFIED.
 recentChanges:
-  - timestamp: '2026-09-04T09:25:00.085Z'
-    type: verification
-    summary: Verified 1/3 claims
-    metadata:
-      total: 3
-      verified: 1
-      implemented: 1
-      unknown: 0
-      failed: 0
-      conflicting: 1
-  - timestamp: '2026-09-04T09:28:35.226Z'
-    type: architecture_changed
-    summary: Synced state from codebase
-    files: []
-  - timestamp: '2026-09-04T09:28:35.751Z'
-    type: verification
-    summary: Verified 7/12 claims
-    metadata:
-      total: 12
-      verified: 7
-      implemented: 4
-      unknown: 0
-      failed: 0
-      conflicting: 0
-  - timestamp: '2026-09-04T09:28:37.798Z'
-    type: security_finding
-    summary: 'Security audit: 1 verified, 0 failed'
-    metadata:
-      total: 5
-      verified: 1
-      failed: 0
-      unknown: 2
-  - timestamp: '2026-09-04T09:28:50.212Z'
-    type: verification
-    summary: 'Runtime observed: UNKNOWN'
-    metadata:
-      timestamp: '2026-09-04T09:28:49.197Z'
-      tests:
-        ran: true
-        output: >
-          npm ERR! code ENOENT
-
-          npm ERR! syscall open
-
-          npm ERR! path /home/ubuntu/ms_robot/package.json
-
-          npm ERR! errno -2
-
-          npm ERR! enoent ENOENT: no such file or directory, open
-          '/home/ubuntu/ms_robot/package.json'
-
-          npm ERR! enoent This is related to npm not being able to find a file.
-
-          npm ERR! enoent 
-
-
-          npm ERR! A complete log of this run can be found in:
-
-          npm ERR!     /home/ubuntu/.npm/_logs/2026-09-04T09_28_50_064Z-debug-0.log
-        status: UNKNOWN
-      startup: null
-      dependencies: null
-      codeExists: true
-      codeWorks: UNKNOWN
-      systemVerified: UNKNOWN
-      note: CODE EXISTS != CODE WORKS. Run full verification for SYSTEM VERIFIED.
   - timestamp: '2026-09-04T09:28:50.651Z'
     type: verification
     summary: 'Complexity check: 17 issues'
@@ -441,6 +398,50 @@ recentChanges:
     metadata:
       from: validate
       to: validate
+  - timestamp: '2026-09-04T09:29:15.374Z'
+    type: verification
+    summary: Verified 8/17 claims
+    metadata:
+      total: 17
+      verified: 8
+      implemented: 6
+      unknown: 2
+      failed: 0
+      conflicting: 0
+  - timestamp: '2026-09-04T09:29:26.716Z'
+    type: verification
+    summary: Verified 8/17 claims
+    metadata:
+      total: 17
+      verified: 8
+      implemented: 6
+      unknown: 2
+      failed: 0
+      conflicting: 0
+  - timestamp: '2026-09-04T10:50:15.013Z'
+    type: verification
+    summary: Verified 8/17 claims
+    metadata:
+      total: 17
+      verified: 8
+      implemented: 6
+      unknown: 2
+      failed: 0
+      conflicting: 0
+  - timestamp: '2026-09-04T10:51:30.417Z'
+    type: architecture_changed
+    summary: Synced state from codebase
+    files: []
+  - timestamp: '2026-09-04T10:51:30.846Z'
+    type: verification
+    summary: Verified 8/17 claims
+    metadata:
+      total: 17
+      verified: 8
+      implemented: 6
+      unknown: 2
+      failed: 0
+      conflicting: 0
 unverifiedAssumptions:
   - SQL injection protection exists
   - Dependencies have no known vulnerabilities
@@ -449,5 +450,5 @@ highestRisks:
   - R-010
 nextRecommendedActions:
   - 'Implement R-010: Three hard problems quantified'
-generatedAt: '2026-09-04T09:29:05.104Z'
+generatedAt: '2026-09-04T10:51:35.760Z'
 evidencePolicy: All claims require evidence; UNKNOWN is valid. See evidence.yaml

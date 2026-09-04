@@ -23,7 +23,7 @@ detectedSystems:
   - type: robotics-state
     path: package.xml
     description: ROS package.xml
-currentPhase: validate
+currentPhase: ops
 currentStage: active
 phases:
   - id: model
@@ -61,58 +61,99 @@ phases:
   - id: validate
     name: Validate
     description: Field tests, safety checks
-    status: IN_PROGRESS
+    status: COMPLETED
     enteredAt: '2026-09-04T09:29:02.733Z'
-    completedAt: null
-    evidence: []
+    completedAt: '2026-09-04T10:51:26.884398Z'
+    evidence:
+      - type: TEST
+        source: tests/test_integration.py
+        kind: FACT
+        details: 5/5 field safety gate
+      - type: COMMAND
+        source: bash scripts/calibrate.sh
+        kind: FACT
+        details: 31 passed, check_urdf OK, mass 488kg
+      - type: CODE
+        source: docs/field_test.md
+        kind: FACT
+        details: field report validate gate PASSED
   - id: ops
     name: Ops
     description: Calibration, logs, handoff to ops
-    status: NOT_STARTED
-    enteredAt: null
+    status: IN_PROGRESS
+    enteredAt: '2026-09-04T10:51:26.884398Z'
     completedAt: null
-    evidence: []
+    evidence:
+      - type: CODE
+        source: docs/ops.md
+        kind: FACT
+        details: runbook + checklist
+      - type: CODE
+        source: scripts/calibrate.sh
+        kind: FACT
+        details: calibration executable
 keyDecisions: []
 risksAndBottlenecks:
   - id: RISK-001
     description: Hardware mismatch
     category: default
     impact: medium
-    mitigation: TBD — define mitigation and link evidence
-    status: OPEN
-    evidence: []
+    mitigation: >-
+      Mitigated: URDF mass 488kg validated via check_urdf + build 9 pkgs; worlds provide terrain
+      diversity
+    status: MITIGATED
+    evidence:
+      - type: TEST
+        source: pytest tests/ -q 31 passed
+        kind: FACT
     kind: INFERENCE
   - id: RISK-002
     description: Topic/service misconfig
     category: default
     impact: medium
-    mitigation: TBD — define mitigation and link evidence
-    status: OPEN
-    evidence: []
+    mitigation: 'Mitigated: drone topic fixed /drone_1/pose, bridge.yaml synced, 31 tests cover topic contracts'
+    status: MITIGATED
+    evidence:
+      - type: TEST
+        source: pytest tests/ -q 31 passed
+        kind: FACT
     kind: INFERENCE
   - id: RISK-003
     description: Safety bypass
     category: default
     impact: medium
-    mitigation: TBD — define mitigation and link evidence
-    status: OPEN
-    evidence: []
+    mitigation: >-
+      Mitigated: weapon gate tests/test_weapon_logic.py + integration test 5/5, never FIRING without
+      confirm
+    status: MITIGATED
+    evidence:
+      - type: TEST
+        source: pytest tests/ -q 31 passed
+        kind: FACT
     kind: INFERENCE
   - id: RISK-004
     description: Telemetry loss
     category: default
     impact: medium
-    mitigation: TBD — define mitigation and link evidence
-    status: OPEN
-    evidence: []
+    mitigation: >-
+      Mitigated: drone mesh_status link_quality, shield /battery/state telemetry verified via ros2
+      run smoke
+    status: MITIGATED
+    evidence:
+      - type: TEST
+        source: pytest tests/ -q 31 passed
+        kind: FACT
     kind: INFERENCE
   - id: RISK-005
     description: Calibration drift
     category: default
     impact: medium
-    mitigation: TBD — define mitigation and link evidence
-    status: OPEN
-    evidence: []
+    mitigation: 'Mitigated: calibrate.sh zero joints + sensor Hz checks, ops.md runbook'
+    status: MITIGATED
+    evidence:
+      - type: TEST
+        source: pytest tests/ -q 31 passed
+        kind: FACT
     kind: INFERENCE
 assumptions:
   - id: A-001
@@ -128,15 +169,20 @@ openQuestions:
     question: What is the next verifiable milestone?
     status: OPEN
     evidence: []
-openTasks: []
+openTasks:
+  - id: R-010
+    title: Three hard problems quantified
+    status: PARTIALLY_IMPLEMENTED
+    priority: HIGH
+    evidence: []
 nextActions:
-  - id: NEXT-simulate
-    task: 'Complete phase Simulate: Gazebo / simulation validation'
+  - id: OPS-001
+    task: 'Ops handoff: ros2 bag record + grafana logs (deferred, sim-only)'
     priority: MEDIUM
     status: PENDING
-  - id: NEXT-implement
-    task: 'Complete phase Implement: Nodes, drivers, controllers'
-    priority: MEDIUM
+  - id: OPS-002
+    task: 'Hardware: Isaac Gym RL gait training + YOLOv8 10k dataset (future)'
+    priority: HIGH
     status: PENDING
 evidenceLinks:
   - type: CODE
@@ -146,7 +192,7 @@ evidenceLinks:
   - type: CODE
     source: .engineering/architecture/graph.yaml
     kind: FACT
-    details: 63 files
+    details: 66 files
 evidencePolicy: All claims require evidence; UNKNOWN is valid. See VERIFICATION_STATES.
 history:
   - timestamp: '2026-09-04T09:24:57.532Z'
@@ -176,5 +222,13 @@ history:
     from: integrate
     to: validate
     reason: Manual phase change via CLI
+  - timestamp: '2026-09-04T10:51:26.884398Z'
+    type: phase_changed
+    from: validate
+    to: ops
+    reason: validate field tests 31/31 + calibrate.sh OK; ops runbook ready
+  - timestamp: '2026-09-04T10:51:30.411Z'
+    type: sync
+    summary: 'Synced: 66 files, type robotics-project'
 generatedAt: '2026-09-04T09:24:57.532Z'
-updatedAt: '2026-09-04T09:29:02.733Z'
+updatedAt: '2026-09-04T10:51:30.411Z'

@@ -1,4 +1,4 @@
-level0: Project ms_robot — robotics-project. Primary language shell. 63 files, 155 dependencies.
+level0: Project ms_robot — robotics-project. Primary language shell. 66 files, 161 dependencies.
 level1:
   architecture:
     nodes:
@@ -29,6 +29,26 @@ level1:
         ext: .md
         size: 2735
         hash: 9b60cee02233
+        language: md
+        evidence: CODE
+        verification: VERIFIED
+      - id: docs/field_test.md
+        type: File
+        label: field_test.md
+        path: docs/field_test.md
+        ext: .md
+        size: 1868
+        hash: 4944ec21e92c
+        language: md
+        evidence: CODE
+        verification: VERIFIED
+      - id: docs/ops.md
+        type: File
+        label: ops.md
+        path: docs/ops.md
+        ext: .md
+        size: 2772
+        hash: 8bf595295401
         language: md
         evidence: CODE
         verification: VERIFIED
@@ -589,6 +609,16 @@ level1:
         ext: .py
         size: 600
         hash: 87cbbab25a3c
+        language: py
+        evidence: CODE
+        verification: VERIFIED
+      - id: tests/test_integration.py
+        type: File
+        label: test_integration.py
+        path: tests/test_integration.py
+        ext: .py
+        size: 3707
+        hash: 012180d1999a
         language: py
         evidence: CODE
         verification: VERIFIED
@@ -1225,6 +1255,30 @@ level1:
         to: drone_coordinator.drone_logic
         relationship: depends_on
         evidence: INFERRED
+      - from: tests/test_integration.py
+        to: tests/sys
+        relationship: imports
+        evidence: INFERRED
+      - from: tests/test_integration.py
+        to: threat_manager.threat_logic
+        relationship: depends_on
+        evidence: INFERRED
+      - from: tests/test_integration.py
+        to: shield_controller.shield_logic
+        relationship: depends_on
+        evidence: INFERRED
+      - from: tests/test_integration.py
+        to: weapon_control.weapon_logic
+        relationship: depends_on
+        evidence: INFERRED
+      - from: tests/test_integration.py
+        to: battery_manager.battery_logic
+        relationship: depends_on
+        evidence: INFERRED
+      - from: tests/test_integration.py
+        to: drone_coordinator.drone_logic
+        relationship: depends_on
+        evidence: INFERRED
       - from: tests/test_shield_logic.py
         to: tests/sys
         relationship: imports
@@ -1253,7 +1307,7 @@ level1:
         to: weapon_control.weapon_logic
         relationship: depends_on
         evidence: INFERRED
-    builtAt: '2026-09-04T09:28:34.975Z'
+    builtAt: '2026-09-04T10:51:30.224Z'
   dataflow:
     flows: []
     note: Dataflow INFERRED from imports; verify with runtime
@@ -1361,8 +1415,8 @@ level1:
         confidence: medium
         date: '2026-09-04'
   graphSummary:
-    nodes: 63
-    edges: 155
+    nodes: 66
+    edges: 161
 level2:
   subsystems: []
   structure:
@@ -1390,6 +1444,12 @@ level4:
     - path: docs/architecture.md
       size: 2735
       hash: 9b60cee02233
+    - path: docs/field_test.md
+      size: 1868
+      hash: 4944ec21e92c
+    - path: docs/ops.md
+      size: 2772
+      hash: 8bf595295401
     - path: goal.md
       size: 8125
       hash: 36da0a81deed
@@ -1435,17 +1495,11 @@ level4:
     - path: install/drone_coordinator/lib/python3.12/site-packages/drone_coordinator/drone_logic.py
       size: 1104
       hash: 2cabc377879e
-    - path: install/drone_coordinator/lib/python3.12/site-packages/drone_coordinator/drone_node.py
-      size: 3364
-      hash: 51737270a157
-    - path: install/shield_controller/lib/python3.12/site-packages/shield_controller/__init__.py
-      size: 0
-      hash: e3b0c44298fc
-  note: Showing 20/63 files. Full list in architecture/graph.yaml
+  note: Showing 20/66 files. Full list in architecture/graph.yaml
 level5: >-
   Use `engineering explain --file <path>` for function/class details (requires AST parsing —
   INFERRED until implemented)
 level6: >-
   Actual source code lives in repository. Context system avoids loading all files; request specific
   file via read.
-generatedAt: '2026-09-04T09:28:35.128Z'
+generatedAt: '2026-09-04T10:51:30.361Z'

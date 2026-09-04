@@ -29,6 +29,26 @@ nodes:
     language: md
     evidence: CODE
     verification: VERIFIED
+  - id: docs/field_test.md
+    type: File
+    label: field_test.md
+    path: docs/field_test.md
+    ext: .md
+    size: 1868
+    hash: 4944ec21e92c
+    language: md
+    evidence: CODE
+    verification: VERIFIED
+  - id: docs/ops.md
+    type: File
+    label: ops.md
+    path: docs/ops.md
+    ext: .md
+    size: 2772
+    hash: 8bf595295401
+    language: md
+    evidence: CODE
+    verification: VERIFIED
   - id: goal.md
     type: File
     label: goal.md
@@ -586,6 +606,16 @@ nodes:
     ext: .py
     size: 600
     hash: 87cbbab25a3c
+    language: py
+    evidence: CODE
+    verification: VERIFIED
+  - id: tests/test_integration.py
+    type: File
+    label: test_integration.py
+    path: tests/test_integration.py
+    ext: .py
+    size: 3707
+    hash: 012180d1999a
     language: py
     evidence: CODE
     verification: VERIFIED
@@ -1222,6 +1252,30 @@ edges:
     to: drone_coordinator.drone_logic
     relationship: depends_on
     evidence: INFERRED
+  - from: tests/test_integration.py
+    to: tests/sys
+    relationship: imports
+    evidence: INFERRED
+  - from: tests/test_integration.py
+    to: threat_manager.threat_logic
+    relationship: depends_on
+    evidence: INFERRED
+  - from: tests/test_integration.py
+    to: shield_controller.shield_logic
+    relationship: depends_on
+    evidence: INFERRED
+  - from: tests/test_integration.py
+    to: weapon_control.weapon_logic
+    relationship: depends_on
+    evidence: INFERRED
+  - from: tests/test_integration.py
+    to: battery_manager.battery_logic
+    relationship: depends_on
+    evidence: INFERRED
+  - from: tests/test_integration.py
+    to: drone_coordinator.drone_logic
+    relationship: depends_on
+    evidence: INFERRED
   - from: tests/test_shield_logic.py
     to: tests/sys
     relationship: imports
@@ -1250,4 +1304,4 @@ edges:
     to: weapon_control.weapon_logic
     relationship: depends_on
     evidence: INFERRED
-builtAt: '2026-09-04T09:28:34.975Z'
+builtAt: '2026-09-04T10:51:30.224Z'
