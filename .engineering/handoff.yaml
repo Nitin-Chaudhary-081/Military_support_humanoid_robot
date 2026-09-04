@@ -8,18 +8,18 @@ currentArchitecture:
   type: robotics-project
   languages:
     counts:
-      markdown: 6
-      yaml: 11
-      python: 55
+      markdown: 7
+      yaml: 12
+      python: 59
       json: 2
-      shell: 78
+      shell: 79
     primary: shell
-    totalFiles: 152
+    totalFiles: 159
   frameworks: []
   components: []
   graphSummary:
-    nodes: 74
-    edges: 178
+    nodes: 80
+    edges: 204
 lifecycle:
   model:
     id: robotics-project
@@ -149,16 +149,17 @@ lifecycle:
     - type: CODE
       source: .engineering/architecture/graph.yaml
       kind: FACT
-      details: 74 files
-  updatedAt: '2026-09-04T11:12:00.540Z'
+      details: 80 files
+  updatedAt: '2026-09-04T15:54:22.498Z'
 completedWork:
-  - Biped platform 2.5m 450kg low CoM URDF
+  - ARES-1 platform 2.43m 447kg 26-DOF mesh URDF
   - Shield 1.2x0.7m 18kg boron-carbide pivot
   - Weapons suite with human-confirm gate
   - Drone mesh 2x 6kg fixed-wing RQ-11
   - Battery 48kWh endurance model
-  - ROS 2 Jazzy integration + bringup
+  - ROS2 Jazzy + MuJoCo + Foxglove integration
   - Foxglove bridge browser visualization
+  - ARES-1 meshes + MJCF + armour separate links
 incompleteWork:
   - id: R-010
     title: Three hard problems quantified
@@ -321,10 +322,13 @@ securityRequirements:
     verified: false
   - id: SEC-INJECTION-001
     claim: SQL injection protection exists
-    status: UNKNOWN
-    evidence: []
+    status: IMPLEMENTED
+    evidence:
+      - type: CODE
+        source: static scan
+        kind: FACT
+        details: Pattern matched for SQL injection protection exists
     verified: false
-    note: Unknown; verification evidence does not exist.
   - id: SEC-SECRETS-001
     claim: Secrets not committed
     status: VERIFIED
@@ -372,44 +376,6 @@ runtimeState:
   systemVerified: UNKNOWN
   note: CODE EXISTS != CODE WORKS. Run full verification for SYSTEM VERIFIED.
 recentChanges:
-  - timestamp: '2026-09-04T09:29:02.126Z'
-    type: decision
-    summary: Lifecycle phase implement entered
-    metadata:
-      from: implement
-      to: implement
-  - timestamp: '2026-09-04T09:29:02.442Z'
-    type: decision
-    summary: Lifecycle phase integrate entered
-    metadata:
-      from: integrate
-      to: integrate
-  - timestamp: '2026-09-04T09:29:02.744Z'
-    type: decision
-    summary: Lifecycle phase validate entered
-    metadata:
-      from: validate
-      to: validate
-  - timestamp: '2026-09-04T09:29:15.374Z'
-    type: verification
-    summary: Verified 8/17 claims
-    metadata:
-      total: 17
-      verified: 8
-      implemented: 6
-      unknown: 2
-      failed: 0
-      conflicting: 0
-  - timestamp: '2026-09-04T09:29:26.716Z'
-    type: verification
-    summary: Verified 8/17 claims
-    metadata:
-      total: 17
-      verified: 8
-      implemented: 6
-      unknown: 2
-      failed: 0
-      conflicting: 0
   - timestamp: '2026-09-04T10:50:15.013Z'
     type: verification
     summary: Verified 8/17 claims
@@ -448,13 +414,48 @@ recentChanges:
       unknown: 2
       failed: 0
       conflicting: 0
+  - timestamp: '2026-09-04T15:53:39.134Z'
+    type: architecture_changed
+    summary: Synced state from codebase
+    files: []
+  - timestamp: '2026-09-04T15:53:39.784Z'
+    type: verification
+    summary: Verified 7/18 claims
+    metadata:
+      total: 18
+      verified: 7
+      implemented: 6
+      unknown: 2
+      failed: 0
+      conflicting: 2
+  - timestamp: '2026-09-04T15:53:54.163Z'
+    type: verification
+    summary: Verified 10/19 claims
+    metadata:
+      total: 19
+      verified: 10
+      implemented: 6
+      unknown: 2
+      failed: 0
+      conflicting: 0
+  - timestamp: '2026-09-04T15:54:04.950Z'
+    type: security_finding
+    summary: 'Security audit: 1 verified, 0 failed'
+    metadata:
+      total: 5
+      verified: 1
+      failed: 0
+      unknown: 1
+  - timestamp: '2026-09-04T15:54:22.504Z'
+    type: architecture_changed
+    summary: Synced state from codebase
+    files: []
 unverifiedAssumptions:
-  - SQL injection protection exists
   - Dependencies have no known vulnerabilities
 conflicts: []
 highestRisks:
   - R-010
 nextRecommendedActions:
   - 'Implement R-010: Three hard problems quantified'
-generatedAt: '2026-09-04T11:12:03.959Z'
+generatedAt: '2026-09-04T15:54:23.048Z'
 evidencePolicy: All claims require evidence; UNKNOWN is valid. See evidence.yaml

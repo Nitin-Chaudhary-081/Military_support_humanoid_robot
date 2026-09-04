@@ -14,8 +14,11 @@ config:
   - .gitignore
 git:
   branch: main
-  commit: b67251265a30a7f9e0e7419cb29f082f91254569
+  commit: 758f294049b15faba5c97e7e79dca7e3b922e5bd
   log:
+    - >-
+      758f294 feat(ares1): hard rename acsr_description→ares1_description per arc.md 447kg 2430mm
+      26-DOF meshes MuJoCo, 16 STL trimesh, ares1_controllers, mujoco placeholder, 41 tests
     - >-
       b672512 feat(foxglove): display launch static robot (robot_state+joint+bridge 8765) for
       browser viz without Gz
@@ -32,32 +35,8 @@ git:
     - >-
       ea3b956 feat: ACSR sim scaffolding — URDF 2.5m/450kg, shield/weapon/drone/battery/threat
       nodes, Gz worlds, Nav2, 26 tests, colcon build OK
-  dirty: true
-  status:
-    - M README.md
-    - ' D acsr.urdf'
-    - ' M docs/architecture.md'
-    - ' M docs/field_test.md'
-    - ' M docs/foxglove.md'
-    - ' M docs/ops.md'
-    - ' M scripts/calibrate.sh'
-    - ' M src/acsr_bringup/launch/foxglove_display.launch.py'
-    - ' M src/acsr_bringup/package.xml'
-    - ' D src/acsr_description/CMakeLists.txt'
-    - ' D src/acsr_description/config/ros2_controllers.yaml'
-    - ' D src/acsr_description/launch/display.launch.py'
-    - ' D src/acsr_description/package.xml'
-    - ' D src/acsr_description/urdf/acsr.urdf.xacro'
-    - ' M src/acsr_gazebo/launch/acsr_world.launch.py'
-    - ' M src/acsr_gazebo/package.xml'
-    - ' M tests/test_urdf.py'
-    - '?? arc.md'
-    - '?? ares1.urdf'
-    - '?? config/ares1_params.yaml'
-    - '?? mujoco/'
-    - '?? scripts/gen_ares1_meshes.py'
-    - '?? src/ares1_description/'
-    - '?? tests/test_ares1_geometry.py'
+  dirty: false
+  status: []
 envVars: []
 dependencies: {}
 structure:
@@ -75,4 +54,4 @@ structure:
   - src/
   - tests/
 projectType: robotics-project
-analyzedAt: '2026-09-04T15:53:38.776Z'
+analyzedAt: '2026-09-04T15:54:22.107Z'
