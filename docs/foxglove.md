@@ -19,10 +19,28 @@ ros2 node list | grep foxglove_bridge
 ros2 topic list | grep -E "threat|shield|battery|drone|tf|camera|lidar"
 ```
 
-## 2) Open in browser
+## 2) Open in browser — AWS VPS (your host `13.207.111.213`)
 
-- **Hosted (no install):** https://app.foxglove.dev → *Open connection* → `ws://localhost:8765`
-  - If `ms_robot` runs on a remote EC2/VM, replace `localhost` with that host IP and open SSH tunnel: `ssh -L 8765:localhost:8765 ubuntu@<host>`
+**Bridge on VPS listens on `0.0.0.0:8765`** (`foxglove_bridge.yaml:7` `address: 0.0.0.0` verified). Pick one connection method:
+
+### A) SSH tunnel (safest, no firewall change) — **recommended for VPS**
+On your **local laptop** (not the VPS):
+```bash
+# replace <vps-ip> with 13.207.111.213 and key path if needed
+ssh -i ~/.ssh/your-key.pem -L 8765:localhost:8765 ubuntu@13.207.111.213
+# keep this shell open — it forwards your laptop's 8765 → VPS's 8765
+```
+Then in browser open **https://app.foxglove.dev** → *Open connection* → `ws://localhost:8765` (note `localhost`, not the VPS IP). Works even if SG closed + `ufw inactive`.
+
+### B) Direct via public IP (needs Lightsail/EC2 firewall)
+1. **Lightsail** (this host): Lightsail console → instance `i-0a9cfd202f1c468be` → *Networking* → *Firewall* → *Add rule* → Custom TCP **8765** `0.0.0.0/0` (or your office IP) → Save.
+2. **EC2**: EC2 console → Security Groups → Inbound → TCP 8765 `0.0.0.0/0`.
+3. VPS `ufw` is **inactive** (`ufw status` = inactive) so no local block; if `active` run `sudo ufw allow 8765/tcp`.
+4. Then in browser: `ws://13.207.111.213:8765` (public IP from `curl https://checkip.amazonaws.com`).
+
+> `curl -v http://13.207.111.213:8765` from your laptop should get `426 Upgrade Required` if reachable (means WS port is open).
+
+- **Hosted (no install):** https://app.foxglove.dev → *Open connection* → URL above
 - **Local Studio:** https://foxglove.dev/download or `sudo snap install foxglove-studio` → same URL.
 
 ## 3) Recommended layout (import `foxglove/acsr_layout.json`)
@@ -56,13 +74,17 @@ Bridge whitelists `['.*']` so every ACSR topic is visible:
 | `/drone/mesh_status`, `/drone_1/pose`, `/drone_2/pose` | `String JSON` + `PoseStamped` | coverage 360° |
 | `/foxglove_bridge/sysinfo` | `foxglove_msgs` | Bridge health |
 
-## 5) Troubleshooting
+## 5) AWS VPS troubleshooting
 
-- `port already in use` → `lsof -i :8765 && kill <pid>` or change `port:=8766`.
+- On VPS: `ss -ltnp | grep 8765` must show `0.0.0.0:8765` `foxglove_bridge` (after `ros2 launch acsr_bringup foxglove.launch.py`). If not, `ps aux | grep foxglove` and `cat /tmp/fox.log`.
+- `port already in use` → `lsof -i :8765 && kill <pid>` or `pkill -f foxglove_bridge` or `port:=8766`.
+- `connection refused` via `ws://13.207.111.213:8765` → SG not open → use SSH tunnel method A or open Lightsail firewall TCP 8765.
+- `curl -v http://13.207.111.213:8765` from laptop: expect `426` (WS needs upgrade) = port reachable; `timeout` = firewall blocks.
 - No TF/robot model → `ros2 run robot_state_publisher robot_state_publisher --ros-args -p robot_description:="$(xacro src/acsr_description/urdf/acsr.urdf.xacro)"` must be running (started by `acsr_full.launch.py`).
-- Image black → `ros2 topic hz /camera/image_raw` must be >10Hz; Gz sensors publish only when `gz sim` is running (check `gz sim --version` 8.11.0).
-- WSS required? Set `tls:=true certfile:=... keyfile:=...` in `foxglove_bridge.yaml`.
-- Remote host: open Security Group TCP 8765 ingress or use SSH tunnel.
+- Image black → `ros2 topic hz /camera/image_raw` must be >10Hz; Gz sensors publish only when `gz sim` is running (`gz sim --version` 8.11.0).
+- `foxglove_bridge: InvalidParameterTypeException topic_whitelist` → fixed in `foxglove_bridge.yaml:10` must be YAML list `['.*']` not string `"['.*']"`.
+- WSS/tls? Set `tls:=true certfile:=... keyfile:=...` in `foxglove_bridge.yaml` then `wss://...`.
+- `aws lightsail open-firewall`: `aws lightsail open-instance-public-ports --instance-name <name> --port-info fromPort=8765,toPort=8765,protocol=TCP` (needs IAM, this VPS role not authorized — do via console).
 
 ## 6) Headless CI
 

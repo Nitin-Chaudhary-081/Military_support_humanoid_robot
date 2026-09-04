@@ -1,0 +1,30 @@
+#!/bin/bash
+# Helper for AWS VPS Foxglove — prints public IP + ws URLs + checks bridge
+set -e
+echo "== ACSR Foxglove AWS helper =="
+PUB=$(curl -s --connect-timeout 3 https://checkip.amazonaws.com || echo "unknown")
+PRIV=$(hostname -I | awk '{print $1}')
+echo "public_ip: $PUB (curl https://checkip.amazonaws.com)"
+echo "private_ip: $PRIV (hostname -I)"
+echo "bridge_config: src/acsr_bringup/config/foxglove_bridge.yaml (address 0.0.0.0:8765)"
+echo ""
+echo "1) On VPS start bridge:"
+echo "   source /opt/ros/jazzy/setup.bash && source install/setup.bash"
+echo "   ros2 launch acsr_bringup foxglove.launch.py              # or acsr_full.launch.py use_foxglove:=true"
+echo "   ss -ltnp | grep 8765   # expect 0.0.0.0:8765 LISTEN foxglove_bridge"
+echo ""
+echo "2A) SSH tunnel (recommended, no SG change) — run ON YOUR LAPTOP:"
+echo "   ssh -i ~/.ssh/<key>.pem -L 8765:localhost:8765 ubuntu@$PUB"
+echo "   then browser => ws://localhost:8765  (https://app.foxglove.dev -> Open connection)"
+echo ""
+echo "2B) Direct public IP — open firewall first:"
+echo "   Lightsail console -> instance -> Networking -> Firewall -> Add rule TCP 8765 0.0.0.0/0"
+echo "   or EC2 SG inbound TCP 8765"
+echo "   then browser => ws://$PUB:8765"
+echo ""
+echo "3) Import layout: src/acsr_bringup/config/foxglove/acsr_layout.json (Foxglove -> File -> Import layout)"
+echo ""
+echo "== checks =="
+ss -ltnp 2>/dev/null | grep 8765 && echo "bridge LISTENING" || echo "bridge NOT listening (start it)"
+ros2 node list 2>/dev/null | grep -q foxglove_bridge && echo "node /foxglove_bridge found" || echo "node not found (is bridge running?)"
+echo "try: curl -v http://localhost:8765  # expect 426 Upgrade Required"
