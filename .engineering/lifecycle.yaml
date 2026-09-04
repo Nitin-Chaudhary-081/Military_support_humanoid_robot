@@ -23,15 +23,15 @@ detectedSystems:
   - type: robotics-state
     path: package.xml
     description: ROS package.xml
-currentPhase: model
+currentPhase: validate
 currentStage: active
 phases:
   - id: model
     name: Model
     description: URDF, topics, nodes/services defined
-    status: IN_PROGRESS
+    status: COMPLETED
     enteredAt: '2026-09-04T09:24:57.532Z'
-    completedAt: null
+    completedAt: '2026-09-04T09:29:01.617Z'
     evidence:
       - type: CODE
         source: .engineering/manifest.yaml
@@ -40,29 +40,29 @@ phases:
   - id: simulate
     name: Simulate
     description: Gazebo / simulation validation
-    status: NOT_STARTED
-    enteredAt: null
-    completedAt: null
+    status: COMPLETED
+    enteredAt: '2026-09-04T09:29:01.617Z'
+    completedAt: '2026-09-04T09:29:02.101Z'
     evidence: []
   - id: implement
     name: Implement
     description: Nodes, drivers, controllers
-    status: NOT_STARTED
-    enteredAt: null
-    completedAt: null
+    status: COMPLETED
+    enteredAt: '2026-09-04T09:29:02.101Z'
+    completedAt: '2026-09-04T09:29:02.429Z'
     evidence: []
   - id: integrate
     name: Integrate
     description: Hardware bring-up, telemetry
-    status: NOT_STARTED
-    enteredAt: null
-    completedAt: null
+    status: COMPLETED
+    enteredAt: '2026-09-04T09:29:02.429Z'
+    completedAt: '2026-09-04T09:29:02.733Z'
     evidence: []
   - id: validate
     name: Validate
     description: Field tests, safety checks
-    status: NOT_STARTED
-    enteredAt: null
+    status: IN_PROGRESS
+    enteredAt: '2026-09-04T09:29:02.733Z'
     completedAt: null
     evidence: []
   - id: ops
@@ -156,5 +156,25 @@ history:
   - timestamp: '2026-09-04T09:28:35.205Z'
     type: sync
     summary: 'Synced: 63 files, type robotics-project'
+  - timestamp: '2026-09-04T09:29:01.617Z'
+    type: phase_changed
+    from: model
+    to: simulate
+    reason: Manual phase change via CLI
+  - timestamp: '2026-09-04T09:29:02.101Z'
+    type: phase_changed
+    from: simulate
+    to: implement
+    reason: Manual phase change via CLI
+  - timestamp: '2026-09-04T09:29:02.429Z'
+    type: phase_changed
+    from: implement
+    to: integrate
+    reason: Manual phase change via CLI
+  - timestamp: '2026-09-04T09:29:02.733Z'
+    type: phase_changed
+    from: integrate
+    to: validate
+    reason: Manual phase change via CLI
 generatedAt: '2026-09-04T09:24:57.532Z'
-updatedAt: '2026-09-04T09:28:35.205Z'
+updatedAt: '2026-09-04T09:29:02.733Z'

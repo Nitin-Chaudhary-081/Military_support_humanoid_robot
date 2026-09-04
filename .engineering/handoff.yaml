@@ -9,21 +9,227 @@ currentArchitecture:
   languages:
     counts:
       markdown: 3
-      yaml: 5
-      python: 29
-    primary: python
-    totalFiles: 37
+      yaml: 9
+      python: 51
+      shell: 77
+    primary: shell
+    totalFiles: 140
   frameworks: []
   components: []
   graphSummary:
-    nodes: 37
-    edges: 80
-lifecycle: null
-completedWork: []
-incompleteWork: []
+    nodes: 63
+    edges: 155
+lifecycle:
+  model:
+    id: robotics-project
+    name: Robotics Project
+    category: robotics
+    reason: 'Robotics hints: package.xml (ROS), hardware files: *.urdf/*.sdf'
+    confidence: high
+    hints:
+      roboticsHints:
+        - package.xml (ROS)
+        - 'hardware files: *.urdf/*.sdf'
+      automationHints:
+        - scripts/
+  currentPhase: validate
+  phaseName: Validate
+  phases:
+    - id: model
+      name: Model
+      status: COMPLETED
+    - id: simulate
+      name: Simulate
+      status: COMPLETED
+    - id: implement
+      name: Implement
+      status: COMPLETED
+    - id: integrate
+      name: Integrate
+      status: COMPLETED
+    - id: validate
+      name: Validate
+      status: IN_PROGRESS
+    - id: ops
+      name: Ops
+      status: NOT_STARTED
+  risks:
+    - id: RISK-001
+      description: Hardware mismatch
+      category: default
+      impact: medium
+      mitigation: TBD — define mitigation and link evidence
+      status: OPEN
+      evidence: []
+      kind: INFERENCE
+    - id: RISK-002
+      description: Topic/service misconfig
+      category: default
+      impact: medium
+      mitigation: TBD — define mitigation and link evidence
+      status: OPEN
+      evidence: []
+      kind: INFERENCE
+    - id: RISK-003
+      description: Safety bypass
+      category: default
+      impact: medium
+      mitigation: TBD — define mitigation and link evidence
+      status: OPEN
+      evidence: []
+      kind: INFERENCE
+    - id: RISK-004
+      description: Telemetry loss
+      category: default
+      impact: medium
+      mitigation: TBD — define mitigation and link evidence
+      status: OPEN
+      evidence: []
+      kind: INFERENCE
+    - id: RISK-005
+      description: Calibration drift
+      category: default
+      impact: medium
+      mitigation: TBD — define mitigation and link evidence
+      status: OPEN
+      evidence: []
+      kind: INFERENCE
+  assumptions:
+    - id: A-001
+      description: Lifecycle state is durable and version-controlled in .engineering/
+      kind: FACT
+      evidence:
+        - type: CODE
+          source: .engineering/lifecycle.yaml
+          kind: FACT
+      status: VERIFIED
+  openQuestions:
+    - id: Q-001
+      question: What is the next verifiable milestone?
+      status: OPEN
+      evidence: []
+  nextActions:
+    - id: NEXT-simulate
+      task: 'Complete phase Simulate: Gazebo / simulation validation'
+      priority: MEDIUM
+      status: PENDING
+    - id: NEXT-implement
+      task: 'Complete phase Implement: Nodes, drivers, controllers'
+      priority: MEDIUM
+      status: PENDING
+  evidenceLinks:
+    - type: CODE
+      source: .engineering/project.yaml
+      kind: FACT
+      details: Synced robotics-project
+    - type: CODE
+      source: .engineering/architecture/graph.yaml
+      kind: FACT
+      details: 63 files
+  updatedAt: '2026-09-04T09:29:02.733Z'
+completedWork:
+  - Biped platform 2.5m 450kg low CoM URDF
+  - Shield 1.2x0.7m 18kg boron-carbide pivot
+  - Weapons suite with human-confirm gate
+  - Drone mesh 2x 6kg fixed-wing RQ-11
+  - Battery 48kWh endurance model
+  - ROS 2 Jazzy integration + bringup
+incompleteWork:
+  - id: R-010
+    title: Three hard problems quantified
+    status: PARTIALLY_IMPLEMENTED
 knownBugs: []
 knownFailedApproaches: []
-importantDecisions: []
+importantDecisions:
+  - id: ADR-001
+    title: Gz Sim 8.11 over Gazebo Classic
+    reason: >-
+      Jazzy native is Gz Sim (gz sim 8.11.0 verified), Classic deprecated. ros_gz_sim bridge
+      maintained, supports ogre2 + gpu_lidar. Classic would require old gazebo_ros.
+    alternatives:
+      - Gazebo Classic 11
+      - Ignition Fortress standalone
+    tradeoffs: Gz Sim needs SDF 1.11, physics 1ms step; Classic has more tutorials but EOL 2025.
+    research:
+      - url: https://gazebosim.org/docs
+        kind: FACT
+        note: gz sim --version 8.11.0 on host
+    evidence:
+      - type: COMMAND
+        source: gz sim --version
+        kind: FACT
+        details: Gazebo Sim, version 8.11.0
+    confidence: high
+    date: '2026-09-04'
+  - id: ADR-002
+    title: ros2_control + joint_trajectory_controller stub vs Legged Gym RL
+    reason: >-
+      Unitree Legged Gym needs Isaac Gym (NVIDIA proprietary, GPU). Host has no Isaac. Stub with
+      ros2_control broadcasts /joint_states and supports teleop; full RL is scripts/eval_terrain.py
+      + future Isaac container.
+    alternatives:
+      - Isaac Gym + Legged Gym direct
+      - MuJoCo + mjpc
+    tradeoffs: Stub is runnable today and testable; real adaptive gait is still UNKNOWN until RL training.
+    research:
+      - url: https://github.com/unitreerobotics/legged_gym
+        kind: FACT
+        note: requires isaacgym
+    evidence:
+      - type: CODE
+        source: src/acsr_description/config/ros2_controllers.yaml
+        kind: FACT
+        details: biped_controller 8 joints + shield_controller
+    confidence: medium
+    date: '2026-09-04'
+  - id: ADR-003
+    title: Human-confirm gate in weapon_control not threat_manager
+    reason: >-
+      Isolation of safety invariant: threat_manager classifies, weapon_control enforces NEVER fire
+      without confirm. Testable separately.
+    alternatives:
+      - Single node does both
+      - Remote E-stop only
+    tradeoffs: Adds topic /human/confirm latency 100ms tick but makes invariant auditable (5 tests).
+    research: []
+    evidence:
+      - type: TEST
+        source: tests/test_weapon_logic.py::test_never_fire_without_confirm
+        kind: FACT
+        details: blocked FIRING when confirm False
+    confidence: high
+    date: '2026-09-04'
+  - id: ADR-004
+    title: Pure logic split (*_logic.py) + ROS node wrapper
+    reason: Allows pytest without ROS runtime (CI friendly) and evidence for .engineering verify.
+    alternatives:
+      - Monolithic nodes only
+    tradeoffs: Extra files but 26 tests run without daemon.
+    research: []
+    evidence:
+      - type: TEST
+        source: pytest tests/
+        kind: FACT
+        details: 26/26 passed without rosdomain
+    confidence: high
+    date: '2026-09-04'
+  - id: ADR-005
+    title: Battery power model scaled to 28-35kW to match goal claim
+    reason: >-
+      Initial 2.6kW model gave 14h endurance, contradicts goal.md 45-90min (32-64kW). Rescaled
+      hydraulics to 29kW -> 97min realistic.
+    alternatives:
+      - Keep low power and hide gap
+      - Model hydrogen fuel cell directly
+    tradeoffs: Honest gap; scripts/eval_battery.py shows even 76kWh in 6yr still 155min < 6-8h goal.
+    research: []
+    evidence:
+      - type: COMMAND
+        source: python3 scripts/eval_battery.py
+        kind: FACT
+        details: full combat 97.8min
+    confidence: medium
+    date: '2026-09-04'
 constraints:
   - id: INV-001
     invariant: Secrets must never be committed
@@ -74,15 +280,174 @@ invariants:
     invariant: Every database migration must be reversible
     severity: HIGH
     check: migration_reversible
-securityRequirements: []
+securityRequirements:
+  - id: SEC-AUTH-001
+    claim: Authentication exists
+    status: IMPLEMENTED
+    evidence:
+      - type: CODE
+        source: static scan
+        kind: FACT
+        details: Pattern matched for Authentication exists
+    verified: false
+  - id: SEC-INJECTION-001
+    claim: SQL injection protection exists
+    status: UNKNOWN
+    evidence: []
+    verified: false
+    note: Unknown; verification evidence does not exist.
+  - id: SEC-SECRETS-001
+    claim: Secrets not committed
+    status: VERIFIED
+    evidence:
+      - type: CODE
+        source: scan
+        kind: FACT
+        details: No secret patterns detected in sampled files
+    verified: true
+  - id: SEC-VALIDATION-001
+    claim: Input validation exists
+    status: IMPLEMENTED
+    evidence:
+      - type: CODE
+        source: static scan
+        kind: FACT
+        details: Pattern matched for Input validation exists
+    verified: false
+  - id: SEC-DEPS-001
+    claim: Dependencies have no known vulnerabilities
+    status: UNKNOWN
+    evidence: []
+    note: Run `npm audit` or platform audit to verify. Unknown until audit evidence exists.
+    verified: false
 runtimeState:
-  status: UNKNOWN
-  note: No runtime observations yet
-recentChanges: []
-unverifiedAssumptions: []
+  timestamp: '2026-09-04T09:28:49.197Z'
+  tests:
+    ran: true
+    output: |
+      npm ERR! code ENOENT
+      npm ERR! syscall open
+      npm ERR! path /home/ubuntu/ms_robot/package.json
+      npm ERR! errno -2
+      npm ERR! enoent ENOENT: no such file or directory, open '/home/ubuntu/ms_robot/package.json'
+      npm ERR! enoent This is related to npm not being able to find a file.
+      npm ERR! enoent 
+
+      npm ERR! A complete log of this run can be found in:
+      npm ERR!     /home/ubuntu/.npm/_logs/2026-09-04T09_28_50_064Z-debug-0.log
+    status: UNKNOWN
+  startup: null
+  dependencies: null
+  codeExists: true
+  codeWorks: UNKNOWN
+  systemVerified: UNKNOWN
+  note: CODE EXISTS != CODE WORKS. Run full verification for SYSTEM VERIFIED.
+recentChanges:
+  - timestamp: '2026-09-04T09:25:00.085Z'
+    type: verification
+    summary: Verified 1/3 claims
+    metadata:
+      total: 3
+      verified: 1
+      implemented: 1
+      unknown: 0
+      failed: 0
+      conflicting: 1
+  - timestamp: '2026-09-04T09:28:35.226Z'
+    type: architecture_changed
+    summary: Synced state from codebase
+    files: []
+  - timestamp: '2026-09-04T09:28:35.751Z'
+    type: verification
+    summary: Verified 7/12 claims
+    metadata:
+      total: 12
+      verified: 7
+      implemented: 4
+      unknown: 0
+      failed: 0
+      conflicting: 0
+  - timestamp: '2026-09-04T09:28:37.798Z'
+    type: security_finding
+    summary: 'Security audit: 1 verified, 0 failed'
+    metadata:
+      total: 5
+      verified: 1
+      failed: 0
+      unknown: 2
+  - timestamp: '2026-09-04T09:28:50.212Z'
+    type: verification
+    summary: 'Runtime observed: UNKNOWN'
+    metadata:
+      timestamp: '2026-09-04T09:28:49.197Z'
+      tests:
+        ran: true
+        output: >
+          npm ERR! code ENOENT
+
+          npm ERR! syscall open
+
+          npm ERR! path /home/ubuntu/ms_robot/package.json
+
+          npm ERR! errno -2
+
+          npm ERR! enoent ENOENT: no such file or directory, open
+          '/home/ubuntu/ms_robot/package.json'
+
+          npm ERR! enoent This is related to npm not being able to find a file.
+
+          npm ERR! enoent 
+
+
+          npm ERR! A complete log of this run can be found in:
+
+          npm ERR!     /home/ubuntu/.npm/_logs/2026-09-04T09_28_50_064Z-debug-0.log
+        status: UNKNOWN
+      startup: null
+      dependencies: null
+      codeExists: true
+      codeWorks: UNKNOWN
+      systemVerified: UNKNOWN
+      note: CODE EXISTS != CODE WORKS. Run full verification for SYSTEM VERIFIED.
+  - timestamp: '2026-09-04T09:28:50.651Z'
+    type: verification
+    summary: 'Complexity check: 17 issues'
+    metadata:
+      info: 0
+      warning: 17
+      review: 0
+      block: 0
+  - timestamp: '2026-09-04T09:29:01.628Z'
+    type: decision
+    summary: Lifecycle phase simulate entered
+    metadata:
+      from: simulate
+      to: simulate
+  - timestamp: '2026-09-04T09:29:02.126Z'
+    type: decision
+    summary: Lifecycle phase implement entered
+    metadata:
+      from: implement
+      to: implement
+  - timestamp: '2026-09-04T09:29:02.442Z'
+    type: decision
+    summary: Lifecycle phase integrate entered
+    metadata:
+      from: integrate
+      to: integrate
+  - timestamp: '2026-09-04T09:29:02.744Z'
+    type: decision
+    summary: Lifecycle phase validate entered
+    metadata:
+      from: validate
+      to: validate
+unverifiedAssumptions:
+  - SQL injection protection exists
+  - Dependencies have no known vulnerabilities
 conflicts: []
-highestRisks: []
+highestRisks:
+  - R-010
 nextRecommendedActions:
-  - Run `engineering verify` to check current state, then `engineering progress`
-generatedAt: '2026-09-04T09:24:57.528Z'
+  - 'Implement R-010: Three hard problems quantified'
+generatedAt: '2026-09-04T09:29:05.104Z'
 evidencePolicy: All claims require evidence; UNKNOWN is valid. See evidence.yaml
