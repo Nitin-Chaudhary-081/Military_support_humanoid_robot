@@ -8,17 +8,18 @@ currentArchitecture:
   type: robotics-project
   languages:
     counts:
-      markdown: 5
-      yaml: 9
-      python: 52
+      markdown: 6
+      yaml: 11
+      python: 55
+      json: 2
       shell: 78
     primary: shell
-    totalFiles: 144
+    totalFiles: 152
   frameworks: []
   components: []
   graphSummary:
-    nodes: 66
-    edges: 161
+    nodes: 74
+    edges: 178
 lifecycle:
   model:
     id: robotics-project
@@ -148,8 +149,8 @@ lifecycle:
     - type: CODE
       source: .engineering/architecture/graph.yaml
       kind: FACT
-      details: 66 files
-  updatedAt: '2026-09-04T10:51:30.411Z'
+      details: 74 files
+  updatedAt: '2026-09-04T11:12:00.540Z'
 completedWork:
   - Biped platform 2.5m 450kg low CoM URDF
   - Shield 1.2x0.7m 18kg boron-carbide pivot
@@ -157,6 +158,7 @@ completedWork:
   - Drone mesh 2x 6kg fixed-wing RQ-11
   - Battery 48kWh endurance model
   - ROS 2 Jazzy integration + bringup
+  - Foxglove bridge browser visualization
 incompleteWork:
   - id: R-010
     title: Three hard problems quantified
@@ -164,26 +166,6 @@ incompleteWork:
 knownBugs: []
 knownFailedApproaches: []
 importantDecisions:
-  - id: ADR-001
-    title: Gz Sim 8.11 over Gazebo Classic
-    reason: >-
-      Jazzy native is Gz Sim (gz sim 8.11.0 verified), Classic deprecated. ros_gz_sim bridge
-      maintained, supports ogre2 + gpu_lidar. Classic would require old gazebo_ros.
-    alternatives:
-      - Gazebo Classic 11
-      - Ignition Fortress standalone
-    tradeoffs: Gz Sim needs SDF 1.11, physics 1ms step; Classic has more tutorials but EOL 2025.
-    research:
-      - url: https://gazebosim.org/docs
-        kind: FACT
-        note: gz sim --version 8.11.0 on host
-    evidence:
-      - type: COMMAND
-        source: gz sim --version
-        kind: FACT
-        details: Gazebo Sim, version 8.11.0
-    confidence: high
-    date: '2026-09-04'
   - id: ADR-002
     title: ros2_control + joint_trajectory_controller stub vs Legged Gym RL
     reason: >-
@@ -252,6 +234,30 @@ importantDecisions:
         kind: FACT
         details: full combat 97.8min
     confidence: medium
+    date: '2026-09-04'
+  - id: ADR-006
+    title: Foxglove bridge over RViz/webviz for browser viz
+    reason: >-
+      Foxglove bridge streams DDS->WebSocket on 8765, works headless/EC2 with app.foxglove.dev,
+      supports URDF assets, lidar Image plots, no local RViz needed. RViz requires X11/Docker;
+      webviz deprecated. Foxglove open-source, jazzy apt available 3.4.1 verified listening.
+    alternatives:
+      - RViz2 only
+      - webviz
+      - rosboard
+    tradeoffs: >-
+      Adds 10M buffer WebSocket, but zero GUI deps; whitelist ['.*'] exposes all topics; TLS
+      optional.
+    research:
+      - url: https://docs.foxglove.dev/docs/connecting-to-data/frameworks/ros2
+        kind: FACT
+        note: bridge docs
+    evidence:
+      - type: COMMAND
+        source: timeout 3 ros2 run foxglove_bridge foxglove_bridge
+        kind: FACT
+        details: Server listening on port 8765
+    confidence: high
     date: '2026-09-04'
 constraints:
   - id: INV-001
@@ -366,20 +372,6 @@ runtimeState:
   systemVerified: UNKNOWN
   note: CODE EXISTS != CODE WORKS. Run full verification for SYSTEM VERIFIED.
 recentChanges:
-  - timestamp: '2026-09-04T09:28:50.651Z'
-    type: verification
-    summary: 'Complexity check: 17 issues'
-    metadata:
-      info: 0
-      warning: 17
-      review: 0
-      block: 0
-  - timestamp: '2026-09-04T09:29:01.628Z'
-    type: decision
-    summary: Lifecycle phase simulate entered
-    metadata:
-      from: simulate
-      to: simulate
   - timestamp: '2026-09-04T09:29:02.126Z'
     type: decision
     summary: Lifecycle phase implement entered
@@ -442,6 +434,20 @@ recentChanges:
       unknown: 2
       failed: 0
       conflicting: 0
+  - timestamp: '2026-09-04T11:12:00.545Z'
+    type: architecture_changed
+    summary: Synced state from codebase
+    files: []
+  - timestamp: '2026-09-04T11:12:00.970Z'
+    type: verification
+    summary: Verified 9/18 claims
+    metadata:
+      total: 18
+      verified: 9
+      implemented: 6
+      unknown: 2
+      failed: 0
+      conflicting: 0
 unverifiedAssumptions:
   - SQL injection protection exists
   - Dependencies have no known vulnerabilities
@@ -450,5 +456,5 @@ highestRisks:
   - R-010
 nextRecommendedActions:
   - 'Implement R-010: Three hard problems quantified'
-generatedAt: '2026-09-04T10:51:35.760Z'
+generatedAt: '2026-09-04T11:12:03.959Z'
 evidencePolicy: All claims require evidence; UNKNOWN is valid. See evidence.yaml

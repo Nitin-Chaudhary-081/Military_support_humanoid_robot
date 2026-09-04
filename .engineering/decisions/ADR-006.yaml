@@ -1,0 +1,22 @@
+id: ADR-006
+title: Foxglove bridge over RViz/webviz for browser viz
+reason: Foxglove bridge streams DDS->WebSocket on 8765, works headless/EC2 with app.foxglove.dev,
+  supports URDF assets, lidar Image plots, no local RViz needed. RViz requires X11/Docker;
+  webviz deprecated. Foxglove open-source, jazzy apt available 3.4.1 verified listening.
+alternatives:
+- RViz2 only
+- webviz
+- rosboard
+tradeoffs: Adds 10M buffer WebSocket, but zero GUI deps; whitelist ['.*'] exposes
+  all topics; TLS optional.
+research:
+- url: https://docs.foxglove.dev/docs/connecting-to-data/frameworks/ros2
+  kind: FACT
+  note: bridge docs
+evidence:
+- type: COMMAND
+  source: timeout 3 ros2 run foxglove_bridge foxglove_bridge
+  kind: FACT
+  details: Server listening on port 8765
+confidence: high
+date: '2026-09-04'

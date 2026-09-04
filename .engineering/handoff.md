@@ -1,6 +1,6 @@
 # Handoff — ms_robot
 
-> Generated 2026-09-04T10:51:35.760Z — compact AI-to-AI transfer
+> Generated 2026-09-04T11:12:03.959Z — compact AI-to-AI transfer
 
 ## Project
 - **Name:** ms_robot
@@ -12,13 +12,13 @@ Not set — define in manifest.yaml
 
 ## Architecture
 - Type: robotics-project
-- Languages: {"counts":{"markdown":5,"yaml":9,"python":52,"shell":78},"primary":"shell","totalFiles":144}
+- Languages: {"counts":{"markdown":6,"yaml":11,"python":55,"json":2,"shell":78},"primary":"shell","totalFiles":152}
 - Frameworks: none
-- Graph: 66 files, 161 edges
+- Graph: 74 files, 178 edges
 
 ## Lifecycle (b.md — 5-min transfer)
 - **Model:** Robotics Project (robotics-project) [high] — Robotics hints: package.xml (ROS), hardware files: *.urdf/*.sdf
-- **Current Phase:** Ops (ops) — updated 2026-09-04T10:51:30.411Z
+- **Current Phase:** Ops (ops) — updated 2026-09-04T11:12:00.540Z
 - **Phases:** model[COMPLETED] → simulate[COMPLETED] → implement[COMPLETED] → integrate[COMPLETED] → validate[COMPLETED] → ops[IN_PROGRESS]
 - **Risks:** Hardware mismatch; Topic/service misconfig; Safety bypass; Telemetry loss; Calibration drift
 - **Next Actions:** Ops handoff: ros2 bag record + grafana logs (deferred, sim-only); Hardware: Isaac Gym RL gait training + YOLOv8 10k dataset (future)
@@ -32,6 +32,7 @@ Not set — define in manifest.yaml
 - Drone mesh 2x 6kg fixed-wing RQ-11
 - Battery 48kWh endurance model
 - ROS 2 Jazzy integration + bringup
+- Foxglove bridge browser visualization
 
 ## Incomplete Work
 - R-010: Three hard problems quantified [PARTIALLY_IMPLEMENTED]
@@ -40,11 +41,11 @@ Not set — define in manifest.yaml
 - None recorded
 
 ## Important Decisions
-- Gz Sim 8.11 over Gazebo Classic: Jazzy native is Gz Sim (gz sim 8.11.0 verified), Classic deprecated. ros_gz_sim bridge maintained, supports ogre2 + gpu_lidar. Classic would require old gazebo_ros.
 - ros2_control + joint_trajectory_controller stub vs Legged Gym RL: Unitree Legged Gym needs Isaac Gym (NVIDIA proprietary, GPU). Host has no Isaac. Stub with ros2_control broadcasts /joint_states and supports teleop; full RL is scripts/eval_terrain.py + future Isaac container.
 - Human-confirm gate in weapon_control not threat_manager: Isolation of safety invariant: threat_manager classifies, weapon_control enforces NEVER fire without confirm. Testable separately.
 - Pure logic split (*_logic.py) + ROS node wrapper: Allows pytest without ROS runtime (CI friendly) and evidence for .engineering verify.
 - Battery power model scaled to 28-35kW to match goal claim: Initial 2.6kW model gave 14h endurance, contradicts goal.md 45-90min (32-64kW). Rescaled hydraulics to 29kW -> 97min realistic.
+- Foxglove bridge over RViz/webviz for browser viz: Foxglove bridge streams DDS->WebSocket on 8765, works headless/EC2 with app.foxglove.dev, supports URDF assets, lidar Image plots, no local RViz needed. RViz requires X11/Docker; webviz deprecated. Foxglove open-source, jazzy apt available 3.4.1 verified listening.
 
 ## Invariants / Contracts
 - INV-001: Secrets must never be committed
@@ -80,8 +81,6 @@ Not set — define in manifest.yaml
 ```
 
 ## Recent Changes
-- 2026-09-04T09:28:50.651Z verification: Complexity check: 17 issues
-- 2026-09-04T09:29:01.628Z decision: Lifecycle phase simulate entered
 - 2026-09-04T09:29:02.126Z decision: Lifecycle phase implement entered
 - 2026-09-04T09:29:02.442Z decision: Lifecycle phase integrate entered
 - 2026-09-04T09:29:02.744Z decision: Lifecycle phase validate entered
@@ -90,6 +89,8 @@ Not set — define in manifest.yaml
 - 2026-09-04T10:50:15.013Z verification: Verified 8/17 claims
 - 2026-09-04T10:51:30.417Z architecture_changed: Synced state from codebase
 - 2026-09-04T10:51:30.846Z verification: Verified 8/17 claims
+- 2026-09-04T11:12:00.545Z architecture_changed: Synced state from codebase
+- 2026-09-04T11:12:00.970Z verification: Verified 9/18 claims
 
 ## Highest Risks
 R-010

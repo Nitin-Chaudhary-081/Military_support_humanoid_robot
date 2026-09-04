@@ -13,14 +13,17 @@
 
 ## Quickstart
 ```bash
-# prerequisites: ROS 2 Jazzy + Gz Sim 8.x (source setup.bash)
+# prerequisites: ROS 2 Jazzy + Gz Sim 8.x + foxglove_bridge (source setup.bash)
+sudo apt install ros-jazzy-foxglove-bridge  # for browser viz
 sudo rosdep init; rosdep update; rosdep install --from-paths src --ignore-src -r -y
 
 colcon build --symlink-install
 source install/setup.bash
-ros2 launch acsr_bringup acsr_full.launch.py world:=battlefield_rubble
-# or minimal:
+ros2 launch acsr_bringup acsr_full.launch.py world:=battlefield_rubble use_foxglove:=true
+# -> then open https://app.foxglove.dev and connect ws://localhost:8765 (see docs/foxglove.md)
+# or minimal without Gz:
 ros2 launch acsr_gazebo acsr_world.launch.py
+ros2 launch acsr_bringup foxglove.launch.py  # bridge only
 
 # nodes (mock-safe without hardware):
 ros2 run threat_manager threat_node --ros-args -p input_topic:=/camera/image_raw
@@ -39,15 +42,18 @@ pytest tests/ -v
 src/
   acsr_description/   URDF/Xacro, meshes (2.5m biped + shield joint + sensor head)
   acsr_gazebo/        Gz worlds (flat/rubble/slope/crater), spawn + bridges
-  acsr_bringup/       One-launch deployment + params
+  acsr_bringup/       One-launch deployment + params + foxglove_bridge
+    launch/foxglove.launch.py  -> ws://localhost:8765 browser bridge
+    config/foxglove/acsr_layout.json  -> Foxglove Studio layout import
   threat_manager/     YOLOv8 → /threat/{level,tracks} (human-confirm gated)
   weapon_control/     arm→brace→confirm→fire state machine, 15 Nm check
   shield_controller/  pivot deploy/retract controller
-  drone_coordinator/  2-UAV mesh, /drone/{1,2}/image
+  drone_coordinator/  2-UAV mesh, /drone_1/image
   battery_manager/    48 kWh drain model, /battery/state (45–90 min sim)
   acsr_nav/           Nav2 terrain-aware config
 config/               global params
-scripts/              gait eval, YOLO training, metrics
+scripts/              gait eval, YOLO training, metrics + calibrate.sh
+docs/foxglove.md      browser viz guide
 ```
 
 ## Safety & Ethics
@@ -67,7 +73,15 @@ node /home/ubuntu/engineering-intelligence/bin/engineering.js handoff --md
 ## Lifecycle (robotics-project)
 `model → simulate → implement → integrate → validate → ops`
 
+## Browser Viz (Foxglove)
+```bash
+ros2 launch acsr_bringup foxglove.launch.py   # ws://0.0.0.0:8765
+# open https://app.foxglove.dev -> ws://localhost:8765 -> import src/acsr_bringup/config/foxglove/acsr_layout.json
+```
+See `docs/foxglove.md` for SSH tunnel, topics, and troubleshooting.
+
 ## References
 - goal.md — authoritative vision + three hard problems
 - .engineering/lifecycle.yaml — durable phase state
 - docs/architecture.md — graph & dataflow
+- docs/foxglove.md — Foxglove browser bridge

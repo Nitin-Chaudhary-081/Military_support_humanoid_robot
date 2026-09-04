@@ -4,8 +4,8 @@ nodes:
     label: README.md
     path: README.md
     ext: .md
-    size: 3140
-    hash: 6f29c567dd81
+    size: 3948
+    hash: 9c5a154b3c88
     language: md
     evidence: CODE
     verification: VERIFIED
@@ -36,6 +36,16 @@ nodes:
     ext: .md
     size: 1868
     hash: 4944ec21e92c
+    language: md
+    evidence: CODE
+    verification: VERIFIED
+  - id: docs/foxglove.md
+    type: File
+    label: foxglove.md
+    path: docs/foxglove.md
+    ext: .md
+    size: 4021
+    hash: 9681e9a3ee9f
     language: md
     evidence: CODE
     verification: VERIFIED
@@ -79,13 +89,43 @@ nodes:
     language: py
     evidence: CODE
     verification: VERIFIED
+  - id: install/acsr_bringup/share/acsr_bringup/config/foxglove/acsr_layout.json
+    type: File
+    label: acsr_layout.json
+    path: install/acsr_bringup/share/acsr_bringup/config/foxglove/acsr_layout.json
+    ext: .json
+    size: 1222
+    hash: 2cd795c36beb
+    language: json
+    evidence: CODE
+    verification: VERIFIED
+  - id: install/acsr_bringup/share/acsr_bringup/config/foxglove_bridge.yaml
+    type: File
+    label: foxglove_bridge.yaml
+    path: install/acsr_bringup/share/acsr_bringup/config/foxglove_bridge.yaml
+    ext: .yaml
+    size: 689
+    hash: c75292717d93
+    language: yaml
+    evidence: CODE
+    verification: VERIFIED
   - id: install/acsr_bringup/share/acsr_bringup/launch/acsr_full.launch.py
     type: File
     label: acsr_full.launch.py
     path: install/acsr_bringup/share/acsr_bringup/launch/acsr_full.launch.py
     ext: .py
-    size: 2234
-    hash: e10a858cb932
+    size: 2888
+    hash: dcff0c0b1472
+    language: py
+    evidence: CODE
+    verification: VERIFIED
+  - id: install/acsr_bringup/share/acsr_bringup/launch/foxglove.launch.py
+    type: File
+    label: foxglove.launch.py
+    path: install/acsr_bringup/share/acsr_bringup/launch/foxglove.launch.py
+    ext: .py
+    size: 1268
+    hash: dc5d9e9bd26d
     language: py
     evidence: CODE
     verification: VERIFIED
@@ -349,13 +389,43 @@ nodes:
     language: py
     evidence: CODE
     verification: VERIFIED
+  - id: src/acsr_bringup/config/foxglove/acsr_layout.json
+    type: File
+    label: acsr_layout.json
+    path: src/acsr_bringup/config/foxglove/acsr_layout.json
+    ext: .json
+    size: 1222
+    hash: 2cd795c36beb
+    language: json
+    evidence: CODE
+    verification: VERIFIED
+  - id: src/acsr_bringup/config/foxglove_bridge.yaml
+    type: File
+    label: foxglove_bridge.yaml
+    path: src/acsr_bringup/config/foxglove_bridge.yaml
+    ext: .yaml
+    size: 689
+    hash: c75292717d93
+    language: yaml
+    evidence: CODE
+    verification: VERIFIED
   - id: src/acsr_bringup/launch/acsr_full.launch.py
     type: File
     label: acsr_full.launch.py
     path: src/acsr_bringup/launch/acsr_full.launch.py
     ext: .py
-    size: 2234
-    hash: e10a858cb932
+    size: 2888
+    hash: dcff0c0b1472
+    language: py
+    evidence: CODE
+    verification: VERIFIED
+  - id: src/acsr_bringup/launch/foxglove.launch.py
+    type: File
+    label: foxglove.launch.py
+    path: src/acsr_bringup/launch/foxglove.launch.py
+    ext: .py
+    size: 1268
+    hash: dc5d9e9bd26d
     language: py
     evidence: CODE
     verification: VERIFIED
@@ -609,6 +679,16 @@ nodes:
     language: py
     evidence: CODE
     verification: VERIFIED
+  - id: tests/test_foxglove.py
+    type: File
+    label: test_foxglove.py
+    path: tests/test_foxglove.py
+    ext: .py
+    size: 1392
+    hash: a5446766fbe5
+    language: py
+    evidence: CODE
+    verification: VERIFIED
   - id: tests/test_integration.py
     type: File
     label: test_integration.py
@@ -725,6 +805,34 @@ edges:
     relationship: depends_on
     evidence: INFERRED
   - from: install/acsr_bringup/share/acsr_bringup/launch/acsr_full.launch.py
+    to: ament_index_python.packages
+    relationship: depends_on
+    evidence: INFERRED
+  - from: install/acsr_bringup/share/acsr_bringup/launch/acsr_full.launch.py
+    to: launch.conditions
+    relationship: depends_on
+    evidence: INFERRED
+  - from: install/acsr_bringup/share/acsr_bringup/launch/foxglove.launch.py
+    to: install/acsr_bringup/share/acsr_bringup/launch/launch
+    relationship: imports
+    evidence: INFERRED
+  - from: install/acsr_bringup/share/acsr_bringup/launch/foxglove.launch.py
+    to: launch_ros.actions
+    relationship: depends_on
+    evidence: INFERRED
+  - from: install/acsr_bringup/share/acsr_bringup/launch/foxglove.launch.py
+    to: launch.actions
+    relationship: depends_on
+    evidence: INFERRED
+  - from: install/acsr_bringup/share/acsr_bringup/launch/foxglove.launch.py
+    to: launch.substitutions
+    relationship: depends_on
+    evidence: INFERRED
+  - from: install/acsr_bringup/share/acsr_bringup/launch/foxglove.launch.py
+    to: install/acsr_bringup/share/acsr_bringup/launch/os
+    relationship: imports
+    evidence: INFERRED
+  - from: install/acsr_bringup/share/acsr_bringup/launch/foxglove.launch.py
     to: ament_index_python.packages
     relationship: depends_on
     evidence: INFERRED
@@ -1004,6 +1112,34 @@ edges:
     to: ament_index_python.packages
     relationship: depends_on
     evidence: INFERRED
+  - from: src/acsr_bringup/launch/acsr_full.launch.py
+    to: launch.conditions
+    relationship: depends_on
+    evidence: INFERRED
+  - from: src/acsr_bringup/launch/foxglove.launch.py
+    to: src/acsr_bringup/launch/launch
+    relationship: imports
+    evidence: INFERRED
+  - from: src/acsr_bringup/launch/foxglove.launch.py
+    to: launch_ros.actions
+    relationship: depends_on
+    evidence: INFERRED
+  - from: src/acsr_bringup/launch/foxglove.launch.py
+    to: launch.actions
+    relationship: depends_on
+    evidence: INFERRED
+  - from: src/acsr_bringup/launch/foxglove.launch.py
+    to: launch.substitutions
+    relationship: depends_on
+    evidence: INFERRED
+  - from: src/acsr_bringup/launch/foxglove.launch.py
+    to: src/acsr_bringup/launch/os
+    relationship: imports
+    evidence: INFERRED
+  - from: src/acsr_bringup/launch/foxglove.launch.py
+    to: ament_index_python.packages
+    relationship: depends_on
+    evidence: INFERRED
   - from: src/acsr_description/launch/display.launch.py
     to: src/acsr_description/launch/launch
     relationship: imports
@@ -1252,6 +1388,18 @@ edges:
     to: drone_coordinator.drone_logic
     relationship: depends_on
     evidence: INFERRED
+  - from: tests/test_foxglove.py
+    to: tests/pathlib
+    relationship: imports
+    evidence: INFERRED
+  - from: tests/test_foxglove.py
+    to: tests/json
+    relationship: imports
+    evidence: INFERRED
+  - from: tests/test_foxglove.py
+    to: tests/yaml
+    relationship: imports
+    evidence: INFERRED
   - from: tests/test_integration.py
     to: tests/sys
     relationship: imports
@@ -1304,4 +1452,4 @@ edges:
     to: weapon_control.weapon_logic
     relationship: depends_on
     evidence: INFERRED
-builtAt: '2026-09-04T10:51:30.224Z'
+builtAt: '2026-09-04T11:12:00.364Z'

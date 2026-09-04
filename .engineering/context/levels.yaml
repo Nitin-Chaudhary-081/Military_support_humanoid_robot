@@ -1,4 +1,4 @@
-level0: Project ms_robot — robotics-project. Primary language shell. 66 files, 161 dependencies.
+level0: Project ms_robot — robotics-project. Primary language shell. 74 files, 178 dependencies.
 level1:
   architecture:
     nodes:
@@ -7,8 +7,8 @@ level1:
         label: README.md
         path: README.md
         ext: .md
-        size: 3140
-        hash: 6f29c567dd81
+        size: 3948
+        hash: 9c5a154b3c88
         language: md
         evidence: CODE
         verification: VERIFIED
@@ -39,6 +39,16 @@ level1:
         ext: .md
         size: 1868
         hash: 4944ec21e92c
+        language: md
+        evidence: CODE
+        verification: VERIFIED
+      - id: docs/foxglove.md
+        type: File
+        label: foxglove.md
+        path: docs/foxglove.md
+        ext: .md
+        size: 4021
+        hash: 9681e9a3ee9f
         language: md
         evidence: CODE
         verification: VERIFIED
@@ -82,13 +92,43 @@ level1:
         language: py
         evidence: CODE
         verification: VERIFIED
+      - id: install/acsr_bringup/share/acsr_bringup/config/foxglove/acsr_layout.json
+        type: File
+        label: acsr_layout.json
+        path: install/acsr_bringup/share/acsr_bringup/config/foxglove/acsr_layout.json
+        ext: .json
+        size: 1222
+        hash: 2cd795c36beb
+        language: json
+        evidence: CODE
+        verification: VERIFIED
+      - id: install/acsr_bringup/share/acsr_bringup/config/foxglove_bridge.yaml
+        type: File
+        label: foxglove_bridge.yaml
+        path: install/acsr_bringup/share/acsr_bringup/config/foxglove_bridge.yaml
+        ext: .yaml
+        size: 689
+        hash: c75292717d93
+        language: yaml
+        evidence: CODE
+        verification: VERIFIED
       - id: install/acsr_bringup/share/acsr_bringup/launch/acsr_full.launch.py
         type: File
         label: acsr_full.launch.py
         path: install/acsr_bringup/share/acsr_bringup/launch/acsr_full.launch.py
         ext: .py
-        size: 2234
-        hash: e10a858cb932
+        size: 2888
+        hash: dcff0c0b1472
+        language: py
+        evidence: CODE
+        verification: VERIFIED
+      - id: install/acsr_bringup/share/acsr_bringup/launch/foxglove.launch.py
+        type: File
+        label: foxglove.launch.py
+        path: install/acsr_bringup/share/acsr_bringup/launch/foxglove.launch.py
+        ext: .py
+        size: 1268
+        hash: dc5d9e9bd26d
         language: py
         evidence: CODE
         verification: VERIFIED
@@ -352,13 +392,43 @@ level1:
         language: py
         evidence: CODE
         verification: VERIFIED
+      - id: src/acsr_bringup/config/foxglove/acsr_layout.json
+        type: File
+        label: acsr_layout.json
+        path: src/acsr_bringup/config/foxglove/acsr_layout.json
+        ext: .json
+        size: 1222
+        hash: 2cd795c36beb
+        language: json
+        evidence: CODE
+        verification: VERIFIED
+      - id: src/acsr_bringup/config/foxglove_bridge.yaml
+        type: File
+        label: foxglove_bridge.yaml
+        path: src/acsr_bringup/config/foxglove_bridge.yaml
+        ext: .yaml
+        size: 689
+        hash: c75292717d93
+        language: yaml
+        evidence: CODE
+        verification: VERIFIED
       - id: src/acsr_bringup/launch/acsr_full.launch.py
         type: File
         label: acsr_full.launch.py
         path: src/acsr_bringup/launch/acsr_full.launch.py
         ext: .py
-        size: 2234
-        hash: e10a858cb932
+        size: 2888
+        hash: dcff0c0b1472
+        language: py
+        evidence: CODE
+        verification: VERIFIED
+      - id: src/acsr_bringup/launch/foxglove.launch.py
+        type: File
+        label: foxglove.launch.py
+        path: src/acsr_bringup/launch/foxglove.launch.py
+        ext: .py
+        size: 1268
+        hash: dc5d9e9bd26d
         language: py
         evidence: CODE
         verification: VERIFIED
@@ -612,6 +682,16 @@ level1:
         language: py
         evidence: CODE
         verification: VERIFIED
+      - id: tests/test_foxglove.py
+        type: File
+        label: test_foxglove.py
+        path: tests/test_foxglove.py
+        ext: .py
+        size: 1392
+        hash: a5446766fbe5
+        language: py
+        evidence: CODE
+        verification: VERIFIED
       - id: tests/test_integration.py
         type: File
         label: test_integration.py
@@ -728,6 +808,34 @@ level1:
         relationship: depends_on
         evidence: INFERRED
       - from: install/acsr_bringup/share/acsr_bringup/launch/acsr_full.launch.py
+        to: ament_index_python.packages
+        relationship: depends_on
+        evidence: INFERRED
+      - from: install/acsr_bringup/share/acsr_bringup/launch/acsr_full.launch.py
+        to: launch.conditions
+        relationship: depends_on
+        evidence: INFERRED
+      - from: install/acsr_bringup/share/acsr_bringup/launch/foxglove.launch.py
+        to: install/acsr_bringup/share/acsr_bringup/launch/launch
+        relationship: imports
+        evidence: INFERRED
+      - from: install/acsr_bringup/share/acsr_bringup/launch/foxglove.launch.py
+        to: launch_ros.actions
+        relationship: depends_on
+        evidence: INFERRED
+      - from: install/acsr_bringup/share/acsr_bringup/launch/foxglove.launch.py
+        to: launch.actions
+        relationship: depends_on
+        evidence: INFERRED
+      - from: install/acsr_bringup/share/acsr_bringup/launch/foxglove.launch.py
+        to: launch.substitutions
+        relationship: depends_on
+        evidence: INFERRED
+      - from: install/acsr_bringup/share/acsr_bringup/launch/foxglove.launch.py
+        to: install/acsr_bringup/share/acsr_bringup/launch/os
+        relationship: imports
+        evidence: INFERRED
+      - from: install/acsr_bringup/share/acsr_bringup/launch/foxglove.launch.py
         to: ament_index_python.packages
         relationship: depends_on
         evidence: INFERRED
@@ -1007,6 +1115,34 @@ level1:
         to: ament_index_python.packages
         relationship: depends_on
         evidence: INFERRED
+      - from: src/acsr_bringup/launch/acsr_full.launch.py
+        to: launch.conditions
+        relationship: depends_on
+        evidence: INFERRED
+      - from: src/acsr_bringup/launch/foxglove.launch.py
+        to: src/acsr_bringup/launch/launch
+        relationship: imports
+        evidence: INFERRED
+      - from: src/acsr_bringup/launch/foxglove.launch.py
+        to: launch_ros.actions
+        relationship: depends_on
+        evidence: INFERRED
+      - from: src/acsr_bringup/launch/foxglove.launch.py
+        to: launch.actions
+        relationship: depends_on
+        evidence: INFERRED
+      - from: src/acsr_bringup/launch/foxglove.launch.py
+        to: launch.substitutions
+        relationship: depends_on
+        evidence: INFERRED
+      - from: src/acsr_bringup/launch/foxglove.launch.py
+        to: src/acsr_bringup/launch/os
+        relationship: imports
+        evidence: INFERRED
+      - from: src/acsr_bringup/launch/foxglove.launch.py
+        to: ament_index_python.packages
+        relationship: depends_on
+        evidence: INFERRED
       - from: src/acsr_description/launch/display.launch.py
         to: src/acsr_description/launch/launch
         relationship: imports
@@ -1255,6 +1391,18 @@ level1:
         to: drone_coordinator.drone_logic
         relationship: depends_on
         evidence: INFERRED
+      - from: tests/test_foxglove.py
+        to: tests/pathlib
+        relationship: imports
+        evidence: INFERRED
+      - from: tests/test_foxglove.py
+        to: tests/json
+        relationship: imports
+        evidence: INFERRED
+      - from: tests/test_foxglove.py
+        to: tests/yaml
+        relationship: imports
+        evidence: INFERRED
       - from: tests/test_integration.py
         to: tests/sys
         relationship: imports
@@ -1307,34 +1455,12 @@ level1:
         to: weapon_control.weapon_logic
         relationship: depends_on
         evidence: INFERRED
-    builtAt: '2026-09-04T10:51:30.224Z'
+    builtAt: '2026-09-04T11:12:00.364Z'
   dataflow:
     flows: []
     note: Dataflow INFERRED from imports; verify with runtime
     generatedAt: '2026-09-04T09:24:57.414Z'
   decisions:
-    - file: decisions/ADR-001.yaml
-      data:
-        id: ADR-001
-        title: Gz Sim 8.11 over Gazebo Classic
-        reason: >-
-          Jazzy native is Gz Sim (gz sim 8.11.0 verified), Classic deprecated. ros_gz_sim bridge
-          maintained, supports ogre2 + gpu_lidar. Classic would require old gazebo_ros.
-        alternatives:
-          - Gazebo Classic 11
-          - Ignition Fortress standalone
-        tradeoffs: Gz Sim needs SDF 1.11, physics 1ms step; Classic has more tutorials but EOL 2025.
-        research:
-          - url: https://gazebosim.org/docs
-            kind: FACT
-            note: gz sim --version 8.11.0 on host
-        evidence:
-          - type: COMMAND
-            source: gz sim --version
-            kind: FACT
-            details: Gazebo Sim, version 8.11.0
-        confidence: high
-        date: '2026-09-04'
     - file: decisions/ADR-002.yaml
       data:
         id: ADR-002
@@ -1414,9 +1540,35 @@ level1:
             details: full combat 97.8min
         confidence: medium
         date: '2026-09-04'
+    - file: decisions/ADR-006.yaml
+      data:
+        id: ADR-006
+        title: Foxglove bridge over RViz/webviz for browser viz
+        reason: >-
+          Foxglove bridge streams DDS->WebSocket on 8765, works headless/EC2 with app.foxglove.dev,
+          supports URDF assets, lidar Image plots, no local RViz needed. RViz requires X11/Docker;
+          webviz deprecated. Foxglove open-source, jazzy apt available 3.4.1 verified listening.
+        alternatives:
+          - RViz2 only
+          - webviz
+          - rosboard
+        tradeoffs: >-
+          Adds 10M buffer WebSocket, but zero GUI deps; whitelist ['.*'] exposes all topics; TLS
+          optional.
+        research:
+          - url: https://docs.foxglove.dev/docs/connecting-to-data/frameworks/ros2
+            kind: FACT
+            note: bridge docs
+        evidence:
+          - type: COMMAND
+            source: timeout 3 ros2 run foxglove_bridge foxglove_bridge
+            kind: FACT
+            details: Server listening on port 8765
+        confidence: high
+        date: '2026-09-04'
   graphSummary:
-    nodes: 66
-    edges: 161
+    nodes: 74
+    edges: 178
 level2:
   subsystems: []
   structure:
@@ -1436,8 +1588,8 @@ level3:
 level4:
   files:
     - path: README.md
-      size: 3140
-      hash: 6f29c567dd81
+      size: 3948
+      hash: 9c5a154b3c88
     - path: config/params.yaml
       size: 743
       hash: 05b8b168e8e7
@@ -1447,6 +1599,9 @@ level4:
     - path: docs/field_test.md
       size: 1868
       hash: 4944ec21e92c
+    - path: docs/foxglove.md
+      size: 4021
+      hash: 9681e9a3ee9f
     - path: docs/ops.md
       size: 2772
       hash: 8bf595295401
@@ -1459,9 +1614,18 @@ level4:
     - path: install/_local_setup_util_sh.py
       size: 14872
       hash: 3f6e8b7fae10
+    - path: install/acsr_bringup/share/acsr_bringup/config/foxglove/acsr_layout.json
+      size: 1222
+      hash: 2cd795c36beb
+    - path: install/acsr_bringup/share/acsr_bringup/config/foxglove_bridge.yaml
+      size: 689
+      hash: c75292717d93
     - path: install/acsr_bringup/share/acsr_bringup/launch/acsr_full.launch.py
-      size: 2234
-      hash: e10a858cb932
+      size: 2888
+      hash: dcff0c0b1472
+    - path: install/acsr_bringup/share/acsr_bringup/launch/foxglove.launch.py
+      size: 1268
+      hash: dc5d9e9bd26d
     - path: install/acsr_description/share/acsr_description/config/ros2_controllers.yaml
       size: 1179
       hash: b846ac3ff194
@@ -1483,23 +1647,11 @@ level4:
     - path: install/battery_manager/lib/python3.12/site-packages/battery_manager/__init__.py
       size: 0
       hash: e3b0c44298fc
-    - path: install/battery_manager/lib/python3.12/site-packages/battery_manager/battery_logic.py
-      size: 1762
-      hash: 17bab3d4ac79
-    - path: install/battery_manager/lib/python3.12/site-packages/battery_manager/battery_node.py
-      size: 2987
-      hash: db8de2e0791f
-    - path: install/drone_coordinator/lib/python3.12/site-packages/drone_coordinator/__init__.py
-      size: 0
-      hash: e3b0c44298fc
-    - path: install/drone_coordinator/lib/python3.12/site-packages/drone_coordinator/drone_logic.py
-      size: 1104
-      hash: 2cabc377879e
-  note: Showing 20/66 files. Full list in architecture/graph.yaml
+  note: Showing 20/74 files. Full list in architecture/graph.yaml
 level5: >-
   Use `engineering explain --file <path>` for function/class details (requires AST parsing —
   INFERRED until implemented)
 level6: >-
   Actual source code lives in repository. Context system avoids loading all files; request specific
   file via read.
-generatedAt: '2026-09-04T10:51:30.361Z'
+generatedAt: '2026-09-04T11:12:00.506Z'

@@ -1,11 +1,12 @@
 languages:
   counts:
-    markdown: 5
-    yaml: 9
-    python: 52
+    markdown: 6
+    yaml: 11
+    python: 55
+    json: 2
     shell: 78
   primary: shell
-  totalFiles: 144
+  totalFiles: 152
 frameworks: []
 packageManagers: []
 entryPoints: []
@@ -13,21 +14,26 @@ config:
   - .gitignore
 git:
   branch: master
-  commit: 4d88862a730b1f237bda1cc8aecda0a581581a44
+  commit: b309570d0dadbd1d51f14a16deeb3b5ba8546dcf
   log:
+    - >-
+      b309570 feat(ops): field_test + ops runbook + calibrate.sh + integration test, lifecycle ops
+      IN_PROGRESS 5/6 phases, risks MITIGATED
     - '4d88862 chore: advance lifecycle to validate (4/6), handoff md, 10 reqs 7 verified'
     - >-
       ea3b956 feat: ACSR sim scaffolding — URDF 2.5m/450kg, shield/weapon/drone/battery/threat
       nodes, Gz worlds, Nav2, 26 tests, colcon build OK
   dirty: true
   status:
-    - M .engineering/events/events.jsonl
-    - ' M .engineering/lifecycle.yaml'
-    - ' M .engineering/progress/completeness.yaml'
-    - '?? docs/field_test.md'
-    - '?? docs/ops.md'
-    - '?? scripts/calibrate.sh'
-    - '?? tests/test_integration.py'
+    - M README.md
+    - ' M src/acsr_bringup/launch/acsr_full.launch.py'
+    - ' M src/acsr_bringup/package.xml'
+    - '?? .engineering/decisions/ADR-006.yaml'
+    - '?? .engineering/requirements/R-011.yaml'
+    - '?? docs/foxglove.md'
+    - '?? src/acsr_bringup/config/'
+    - '?? src/acsr_bringup/launch/foxglove.launch.py'
+    - '?? tests/test_foxglove.py'
 envVars: []
 dependencies: {}
 structure:
@@ -43,4 +49,4 @@ structure:
   - src/
   - tests/
 projectType: robotics-project
-analyzedAt: '2026-09-04T10:51:30.157Z'
+analyzedAt: '2026-09-04T11:12:00.313Z'

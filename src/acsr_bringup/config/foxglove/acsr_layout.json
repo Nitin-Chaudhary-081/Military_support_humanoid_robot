@@ -1,0 +1,33 @@
+{
+  "configById": {
+    "3D": {
+      "layers": {
+        "grid": {"enabled": true},
+        "robot": {"topic": "/robot_description", "enabled": true},
+        "tf": {"enabled": true},
+        "lidar": {"topic": "/lidar/points", "enabled": true, "pointSize": 2},
+        "drones": {"topics": ["/drone_1/pose", "/drone_2/pose"], "enabled": true}
+      },
+      "cameraState": {"distance": 8, "phi": 45, "thetaOffset": -45, "target": [0,0,1]}
+    },
+    "Image_1": {"topic": "/camera/image_raw"},
+    "Image_2": {"topic": "/drone_1/image"},
+    "Plot_battery": {"paths": [{"value": "/battery/soc.data"}]},
+    "Plot_shield": {"paths": [{"value": "/shield/command.data"}]},
+    "Raw_threat": {"topic": "/threat/level"},
+    "Raw_tracks": {"topic": "/threat/tracks"},
+    "Raw_weapon": {"topic": "/weapon/state"},
+    "Raw_mesh": {"topic": "/drone/mesh_status"}
+  },
+  "layout": {
+    "first": "3D",
+    "direction": "row",
+    "splitPercentage": 60,
+    "second": {
+      "first": {"first": "Image_1", "second": "Image_2", "direction": "row"},
+      "second": {"first": "Plot_battery", "second": "Raw_threat", "direction": "row"},
+      "direction": "column"
+    }
+  },
+  "name": "ACSR Sim — Foxglove (Gz + ROS 2 Jazzy)"
+}

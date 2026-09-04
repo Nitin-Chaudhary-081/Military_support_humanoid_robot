@@ -1,0 +1,42 @@
+id: R-011
+title: Foxglove bridge browser visualization
+description: foxglove_bridge 3.4.1 ws://0.0.0.0:8765 bridges all ACSR topics to browser
+  Foxglove Studio; layout acsr_layout.json; integrated in acsr_full.launch.py use_foxglove:=true.
+status: VERIFIED
+evidence:
+- type: CODE
+  source: src/acsr_bringup/launch/foxglove.launch.py
+  kind: FACT
+  details: standalone launch Node foxglove_bridge port 8765 use_sim_time true
+- type: CODE
+  source: src/acsr_bringup/launch/acsr_full.launch.py
+  kind: FACT
+  details: IfCondition use_foxglove Node foxglove_bridge
+- type: CODE
+  source: src/acsr_bringup/config/foxglove_bridge.yaml
+  kind: FACT
+  details: whitelist ['.*'] 10M buffer assets allowlist urdf
+- type: CODE
+  source: src/acsr_bringup/config/foxglove/acsr_layout.json
+  kind: FACT
+  details: 3D+Image+Plot+Raw layout importable
+- type: COMMAND
+  source: timeout 3 ros2 run foxglove_bridge foxglove_bridge
+  kind: FACT
+  details: Server listening on port 8765, Advertising channel /rosout
+- type: COMMAND
+  source: ros2 pkg list | grep foxglove_bridge
+  kind: FACT
+  details: foxglove_bridge 3.4.1 installed
+- type: CODE
+  source: docs/foxglove.md
+  kind: FACT
+  details: SSH tunnel + app.foxglove.dev ws://localhost:8765 guide
+files:
+- src/acsr_bringup/launch/foxglove.launch.py
+- src/acsr_bringup/config/foxglove_bridge.yaml
+- src/acsr_bringup/config/foxglove/acsr_layout.json
+- docs/foxglove.md
+- src/acsr_bringup/launch/acsr_full.launch.py
+risk: LOW
+createdAt: '2026-09-04T10:56:35.656784Z'
