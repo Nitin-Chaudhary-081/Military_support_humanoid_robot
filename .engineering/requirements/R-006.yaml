@@ -1,0 +1,27 @@
+id: R-006
+title: Battery 48kWh endurance model
+description: 45-90min full-combat, solid-state +8%/yr, drains via power(load). goal.md:83
+status: VERIFIED
+evidence:
+- type: CODE
+  source: src/battery_manager/battery_manager/battery_logic.py
+  kind: FACT
+  details: power 29kW full-combat, 97min endurance
+- type: TEST
+  source: tests/test_battery_logic.py
+  kind: FACT
+  details: 5/5 endurance 45-90 bounds
+- type: COMMAND
+  source: python3 scripts/eval_battery.py
+  kind: FACT
+  details: table patrol 134min full-combat 97min 6yr 155min
+- type: RUNTIME
+  source: ros2 run battery_manager battery_node
+  kind: FACT
+  details: node alive publishers /battery/state soc
+files:
+- src/battery_manager/battery_manager/battery_logic.py
+- src/battery_manager/battery_manager/battery_node.py
+- scripts/eval_battery.py
+risk: HIGH
+createdAt: '2026-09-04T09:28:26.231376Z'

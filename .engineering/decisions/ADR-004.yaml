@@ -1,0 +1,15 @@
+id: ADR-004
+title: Pure logic split (*_logic.py) + ROS node wrapper
+reason: Allows pytest without ROS runtime (CI friendly) and evidence for .engineering
+  verify.
+alternatives:
+- Monolithic nodes only
+tradeoffs: Extra files but 26 tests run without daemon.
+research: []
+evidence:
+- type: TEST
+  source: pytest tests/
+  kind: FACT
+  details: 26/26 passed without rosdomain
+confidence: high
+date: '2026-09-04'

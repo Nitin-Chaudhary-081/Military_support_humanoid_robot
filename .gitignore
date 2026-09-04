@@ -1,0 +1,42 @@
+# ROS 2 / colcon
+build/
+install/
+log/
+*.pyc
+__pycache__/
+.venv/
+venv/
+*.egg-info/
+dist/
+*.log
+
+# Gazebo
+*.db
+~/.gazebo/
+
+# Engineering Intelligence
+.engineering/snapshots/
+.engineering/impact/
+
+# YOLO weights / datasets
+*.pt
+*.onnx
+*.weights
+datasets/
+runs/
+
+# Secrets
+.env
+.env.*
+*.key
+*.pem
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo

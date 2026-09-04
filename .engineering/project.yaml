@@ -1,0 +1,35 @@
+languages:
+  counts:
+    markdown: 3
+    yaml: 9
+    python: 51
+    shell: 77
+  primary: shell
+  totalFiles: 140
+frameworks: []
+packageManagers: []
+entryPoints: []
+config:
+  - .gitignore
+git:
+  branch: unknown
+  commit: unknown
+  log: []
+  dirty: false
+  status: []
+envVars: []
+dependencies: {}
+structure:
+  - README.md
+  - acsr.urdf
+  - build/
+  - config/
+  - docs/
+  - goal.md
+  - install/
+  - log/
+  - scripts/
+  - src/
+  - tests/
+projectType: robotics-project
+analyzedAt: '2026-09-04T09:28:34.914Z'

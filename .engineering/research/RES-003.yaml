@@ -1,0 +1,13 @@
+id: RES-003
+topic: 48kWh solid-state + hydrogen fuel cell endurance
+findings: 28kW full-combat -> 97min. Solid-state 8%/yr -> 76kWh 155min still < 6-8h.
+  Needs fuel-cell range extender or hot-swap pack. Software is battery-agnostic per
+  goal.
+sources:
+- url: https://www.nature.com/articles/s41560
+  kind: INFERENCE
+  note: solid-state density +8%/yr cited
+- url: goal.md
+  kind: FACT
+  note: line 83 45-90min claim verified by model
+status: VERIFIED

@@ -1,0 +1,23 @@
+id: R-004
+title: Threat manager YOLOv8 + tracks
+description: Jetson Orin 275 TOPS, YOLOv8 60FPS, threat level 0-3, ambiguous civilian/weapon
+  flag. goal.md:80
+status: IMPLEMENTED
+evidence:
+- type: CODE
+  source: src/threat_manager/threat_manager/threat_logic.py
+  kind: FACT
+  details: classify_threat + parse_yolo_output, THREAT_TABLE
+- type: TEST
+  source: tests/test_threat_logic.py
+  kind: FACT
+  details: 6/6 including ambiguous flag
+- type: RUNTIME
+  source: ros2 run threat_manager threat_node ACSR_MOCK=1
+  kind: FACT
+  details: node mock mode alive, HAS_YOLO=False
+files:
+- src/threat_manager/threat_manager/threat_logic.py
+- src/threat_manager/threat_manager/threat_node.py
+risk: CRITICAL
+createdAt: '2026-09-04T09:28:26.224757Z'

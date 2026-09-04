@@ -1,0 +1,18 @@
+<root main_tree_to_execute="MainTree">
+  <BehaviorTree ID="MainTree">
+    <PipelineSequence name="NavigateWithReplanning">
+      <ControllerSelector selected_controller="FollowPath"/>
+      <PlannerSelector selected_planner="GridBased"/>
+      <RecoveryNode number_of_retries="2" name="NavigateRecovery">
+        <Sequence>
+          <ComputePathToPose goal="{goal}" path="{path}" planner_id="GridBased"/>
+          <FollowPath path="{path}" controller_id="FollowPath"/>
+        </Sequence>
+        <Sequence>
+          <ClearEntireCostmap service_name="global_costmap/clear_entirely_global_costmap"/>
+          <ClearEntireCostmap service_name="local_costmap/clear_entirely_local_costmap"/>
+        </Sequence>
+      </RecoveryNode>
+    </PipelineSequence>
+  </BehaviorTree>
+</root>

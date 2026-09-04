@@ -1,0 +1,23 @@
+id: R-003
+title: Weapons suite with human-confirm gate
+description: 7.62mm 15Nm + 40mm + Spike SR missiles; NEVER fires without human_confirm.
+  goal.md:52
+status: VERIFIED
+evidence:
+- type: CODE
+  source: src/weapon_control/weapon_control/weapon_logic.py
+  kind: FACT
+  details: next_state invariant blocked FIRING without confirm, recoil requires braced
+- type: TEST
+  source: tests/test_weapon_logic.py
+  kind: FACT
+  details: 5/5 including test_never_fire_without_confirm
+- type: RUNTIME
+  source: ros2 run weapon_control weapon_node
+  kind: FACT
+  details: node alive, subscribes /human/confirm, publishes /weapon/state
+files:
+- src/weapon_control/weapon_control/weapon_logic.py
+- src/weapon_control/weapon_control/weapon_node.py
+risk: CRITICAL
+createdAt: '2026-09-04T09:28:26.218891Z'

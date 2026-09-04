@@ -1,0 +1,21 @@
+id: ADR-002
+title: ros2_control + joint_trajectory_controller stub vs Legged Gym RL
+reason: Unitree Legged Gym needs Isaac Gym (NVIDIA proprietary, GPU). Host has no
+  Isaac. Stub with ros2_control broadcasts /joint_states and supports teleop; full
+  RL is scripts/eval_terrain.py + future Isaac container.
+alternatives:
+- Isaac Gym + Legged Gym direct
+- MuJoCo + mjpc
+tradeoffs: Stub is runnable today and testable; real adaptive gait is still UNKNOWN
+  until RL training.
+research:
+- url: https://github.com/unitreerobotics/legged_gym
+  kind: FACT
+  note: requires isaacgym
+evidence:
+- type: CODE
+  source: src/acsr_description/config/ros2_controllers.yaml
+  kind: FACT
+  details: biped_controller 8 joints + shield_controller
+confidence: medium
+date: '2026-09-04'

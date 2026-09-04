@@ -1,0 +1,28 @@
+id: R-010
+title: Three hard problems quantified
+description: terrain 40%->85%, AI 50m phone vs rifle UNKNOWN, battery 48kWh gap measured
+  not hidden. goal.md:69
+status: PARTIALLY_IMPLEMENTED
+evidence:
+- type: COMMAND
+  source: python3 scripts/eval_terrain.py
+  kind: FACT
+  details: rubble success 0.5 vs target 0.85 gap 0.35
+- type: COMMAND
+  source: python3 scripts/eval_perception.py
+  kind: FACT
+  details: poor_50m mAP 0.38 < human 0.85 -> UNKNOWN verdict
+- type: COMMAND
+  source: python3 scripts/eval_battery.py
+  kind: FACT
+  details: 48kWh 97min full-combat, 6yr solid-state still 155min
+- type: RESEARCH
+  source: goal.md
+  kind: FACT
+  details: hard problems documented as engineering gap not solved
+files:
+- scripts/eval_terrain.py
+- scripts/eval_perception.py
+- scripts/eval_battery.py
+risk: CRITICAL
+createdAt: '2026-09-04T09:28:26.239624Z'

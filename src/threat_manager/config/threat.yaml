@@ -1,0 +1,6 @@
+threat_manager:
+  ros__parameters:
+    conf_thresh: 0.45
+    model: "yolov8n"
+    input_topic: "/camera/image_raw"
+    mock: false

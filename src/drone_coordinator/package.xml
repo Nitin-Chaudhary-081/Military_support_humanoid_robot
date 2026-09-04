@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>drone_coordinator</name>
+  <version>0.1.0</version>
+  <description>2-UAV mesh coordinator — 6kg fixed-wing fold-flat RQ-11 class, extends 360° awareness. goal.md:57</description>
+  <maintainer email="acsr@example.com">ACSR Team</maintainer>
+  <license>MIT</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <export><build_type>ament_cmake</build_type></export>
+</package>

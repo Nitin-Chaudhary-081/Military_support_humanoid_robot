@@ -1,0 +1,22 @@
+id: R-005
+title: Drone mesh 2x 6kg fixed-wing RQ-11
+description: "Fold-flat, 60m radius 35m alt, 360\xB0 with 2 UAVs. goal.md:57"
+status: VERIFIED
+evidence:
+- type: CODE
+  source: src/drone_coordinator/drone_coordinator/drone_logic.py
+  kind: FACT
+  details: mesh_status + next_positions
+- type: TEST
+  source: tests/test_drone_logic.py
+  kind: FACT
+  details: 3/3 coverage 360 deg
+- type: RUNTIME
+  source: ros2 run drone_coordinator drone_node
+  kind: FACT
+  details: node alive, /drone_1/pose + /drone/mesh_status after fix numeric topic
+files:
+- src/drone_coordinator/drone_coordinator/drone_logic.py
+- src/drone_coordinator/drone_coordinator/drone_node.py
+risk: MEDIUM
+createdAt: '2026-09-04T09:28:26.229006Z'

@@ -1,0 +1,27 @@
+id: R-002
+title: Shield 1.2x0.7m 18kg boron-carbide pivot
+description: Pivot 0=stowed back to 1.57=deployed forward riot brace, 250Nm shoulder
+  actuator. goal.md:43
+status: VERIFIED
+evidence:
+- type: CODE
+  source: src/shield_controller/shield_controller/shield_logic.py
+  kind: FACT
+  details: desired_position with hysteresis threshold 2/1
+- type: CODE
+  source: src/acsr_description/urdf/acsr.urdf.xacro
+  kind: FACT
+  details: shield_pivot joint limits 0-1.70 rad effort 250
+- type: TEST
+  source: tests/test_shield_logic.py
+  kind: FACT
+  details: 4/4 deploy/retract hysteresis
+- type: RUNTIME
+  source: ros2 run shield_controller shield_node
+  kind: FACT
+  details: node alive 4s, publishes /shield/state
+files:
+- src/shield_controller/shield_controller/shield_logic.py
+- src/shield_controller/shield_controller/shield_node.py
+risk: MEDIUM
+createdAt: '2026-09-04T09:28:26.214679Z'

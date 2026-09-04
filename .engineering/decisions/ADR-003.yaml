@@ -1,0 +1,17 @@
+id: ADR-003
+title: Human-confirm gate in weapon_control not threat_manager
+reason: 'Isolation of safety invariant: threat_manager classifies, weapon_control
+  enforces NEVER fire without confirm. Testable separately.'
+alternatives:
+- Single node does both
+- Remote E-stop only
+tradeoffs: Adds topic /human/confirm latency 100ms tick but makes invariant auditable
+  (5 tests).
+research: []
+evidence:
+- type: TEST
+  source: tests/test_weapon_logic.py::test_never_fire_without_confirm
+  kind: FACT
+  details: blocked FIRING when confirm False
+confidence: high
+date: '2026-09-04'

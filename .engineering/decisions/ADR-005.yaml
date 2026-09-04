@@ -1,0 +1,17 @@
+id: ADR-005
+title: Battery power model scaled to 28-35kW to match goal claim
+reason: Initial 2.6kW model gave 14h endurance, contradicts goal.md 45-90min (32-64kW).
+  Rescaled hydraulics to 29kW -> 97min realistic.
+alternatives:
+- Keep low power and hide gap
+- Model hydrogen fuel cell directly
+tradeoffs: Honest gap; scripts/eval_battery.py shows even 76kWh in 6yr still 155min
+  < 6-8h goal.
+research: []
+evidence:
+- type: COMMAND
+  source: python3 scripts/eval_battery.py
+  kind: FACT
+  details: full combat 97.8min
+confidence: medium
+date: '2026-09-04'

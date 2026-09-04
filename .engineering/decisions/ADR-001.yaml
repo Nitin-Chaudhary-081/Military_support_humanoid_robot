@@ -1,0 +1,20 @@
+id: ADR-001
+title: Gz Sim 8.11 over Gazebo Classic
+reason: Jazzy native is Gz Sim (gz sim 8.11.0 verified), Classic deprecated. ros_gz_sim
+  bridge maintained, supports ogre2 + gpu_lidar. Classic would require old gazebo_ros.
+alternatives:
+- Gazebo Classic 11
+- Ignition Fortress standalone
+tradeoffs: Gz Sim needs SDF 1.11, physics 1ms step; Classic has more tutorials but
+  EOL 2025.
+research:
+- url: https://gazebosim.org/docs
+  kind: FACT
+  note: gz sim --version 8.11.0 on host
+evidence:
+- type: COMMAND
+  source: gz sim --version
+  kind: FACT
+  details: Gazebo Sim, version 8.11.0
+confidence: high
+date: '2026-09-04'

@@ -1,0 +1,13 @@
+id: RES-001
+topic: Terrain gait RL Unitree Legged Gym vs ETH Zurich
+findings: Legged Gym requires Isaac Gym (proprietary NVIDIA). ETH ANYmal approach
+  uses RaiSim+PPO. For host without GPU, stub is ros2_control + eval script. Fall-rate
+  rubble 0.5 vs target 0.85, gap 0.35 proves hard problem.
+sources:
+- url: https://github.com/unitreerobotics/legged_gym
+  kind: FACT
+  note: readme says Isaac Gym dependency
+- url: https://leggedrobotics.github.io/legged_gym/
+  kind: FACT
+  note: ETH Zurich paper
+status: VERIFIED

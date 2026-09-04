@@ -1,0 +1,28 @@
+id: R-007
+title: Gz Sim worlds terrain diversity
+description: flat, rubble, slope worlds + bridge + spawn. goal.md:96
+status: IMPLEMENTED
+evidence:
+- type: CODE
+  source: src/acsr_gazebo/worlds/battlefield_rubble.sdf
+  kind: FACT
+  details: ground+6 obstacles+crater+slope, sensor system gz-sim-sensors-system
+- type: CODE
+  source: src/acsr_gazebo/launch/acsr_world.launch.py
+  kind: FACT
+  details: gz_sim include + robot_state_publisher + spawn + bridge
+- type: COMMAND
+  source: gz sim --version
+  kind: FACT
+  details: Gazebo Sim 8.11.0
+- type: COMMAND
+  source: colcon build
+  kind: FACT
+  details: 9 packages built
+files:
+- src/acsr_gazebo/worlds/battlefield_flat.sdf
+- src/acsr_gazebo/worlds/battlefield_rubble.sdf
+- src/acsr_gazebo/worlds/battlefield_slope.sdf
+- src/acsr_gazebo/launch/acsr_world.launch.py
+risk: HIGH
+createdAt: '2026-09-04T09:28:26.233713Z'

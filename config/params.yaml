@@ -1,0 +1,13 @@
+# Global ACSR params — single source of truth for mass, shield, endurance
+acsr:
+  mass_kg: 450.0
+  height_m: 2.5
+  battery_kwh: 48.0
+  shield: {mass_kg: 18.0, width_m: 0.7, height_m: 1.2, material: "boron_carbide", pivot_deployed_rad: 1.57}
+  weapons: {rifle_recoil_nm: 15.0, require_braced: true, require_human_confirm: true}
+  drones: {count: 2, mass_kg_each: 6.0, class: "RQ-11", radius_m: 60.0, altitude_m: 35.0}
+  jetson: {tops: 275, model: "AGX Orin 64GB", yolo: "yolov8n", fps_target: 60}
+  hard_problems:
+    terrain: "Adaptive gait RL; fall-rate metric; 40% -> 85% target"
+    ai: "YOLOv8 custom + threat manager; phone-vs-rifle at 50m stays UNKNOWN"
+    battery: "48kWh -> 45-90min; solid-state +8%/yr or fuel-cell range extender"

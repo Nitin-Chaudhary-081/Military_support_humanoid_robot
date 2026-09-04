@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>weapon_control</name>
+  <version>0.1.0</version>
+  <description>Weapon control — braced-stance + human-confirm gate + 15Nm recoil check. No autonomous fire. goal.md:52</description>
+  <maintainer email="acsr@example.com">ACSR Team</maintainer>
+  <license>MIT</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <exec_depend>rclpy</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>sensor_msgs</exec_depend>
+  <export><build_type>ament_cmake</build_type></export>
+</package>

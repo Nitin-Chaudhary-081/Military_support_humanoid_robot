@@ -1,0 +1,18 @@
+id: R-009
+title: Nav2 terrain-aware navigation
+description: dwb + NavFn + voxel costmap from lidar, footprint shield-aware. goal.md:99
+status: IMPLEMENTED
+evidence:
+- type: CODE
+  source: src/acsr_nav/config/nav2_params.yaml
+  kind: FACT
+  details: max_vel 0.6 m/s, inflation 0.55, voxel 16 layers
+- type: CODE
+  source: src/acsr_nav/behavior_trees/navigate_to_pose.xml
+  kind: FACT
+  details: PipelineSequence with recovery
+files:
+- src/acsr_nav/config/nav2_params.yaml
+- src/acsr_nav/behavior_trees/navigate_to_pose.xml
+risk: MEDIUM
+createdAt: '2026-09-04T09:28:26.237941Z'

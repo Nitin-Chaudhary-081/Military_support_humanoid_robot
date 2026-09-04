@@ -1,0 +1,229 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="acsr">
+  <!-- ACSR 2.5m 450kg biped — goal.md:35
+       Height 2.5m, mass 450kg, chest battery 110kg low CoM,
+       shield 1.2x0.7m 18kg pivot, Jetson head, rifle TF
+       Simplified geometry for Gz Sim + check_urdf validation.
+       Hydraulic leg joints are revolute + prismatic stubs; full RL gait replaces this in Phase 2.
+  -->
+  <xacro:property name="total_mass" value="450.0"/>
+  <xacro:property name="battery_mass" value="110.0"/>
+  <xacro:property name="shield_mass" value="18.0"/>
+
+  <!-- Base / torso: 1.1m tall, ~0.6m wide, holds 110kg battery low -->
+  <link name="base_link">
+    <inertial>
+      <origin xyz="0 0 0.85" rpy="0 0 0"/>
+      <mass value="150.0"/>
+      <inertia ixx="12.0" ixy="0.0" ixz="0.0" iyy="12.0" iyz="0.0" izz="6.0"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0.85" rpy="0 0 0"/>
+      <geometry><box size="0.6 0.45 1.1"/></geometry>
+      <material name="torso_mat"><color rgba="0.35 0.35 0.38 1.0"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.85" rpy="0 0 0"/>
+      <geometry><box size="0.6 0.45 1.1"/></geometry>
+    </collision>
+  </link>
+
+  <!-- Chest battery (low CoM) — fixed to base -->
+  <link name="chest_battery">
+    <inertial>
+      <origin xyz="0.08 0 0.75" rpy="0 0 0"/>
+      <mass value="${battery_mass}"/>
+      <inertia ixx="4.5" ixy="0" ixz="0" iyy="4.5" iyz="0" izz="2.2"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.08 0 0.75" rpy="0 0 0"/>
+      <geometry><box size="0.35 0.3 0.25"/></geometry>
+      <material name="battery_mat"><color rgba="0.1 0.6 0.2 1.0"/></material>
+    </visual>
+  </link>
+  <joint name="battery_fixed" type="fixed">
+    <parent link="base_link"/><child link="chest_battery"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+  <!-- Sensor head: LiDAR + cameras — Jetson Orin mount -->
+  <link name="sensor_head">
+    <inertial>
+      <origin xyz="0 0 0.08" rpy="0 0 0"/>
+      <mass value="8.0"/>
+      <inertia ixx="0.08" ixy="0" ixz="0" iyy="0.08" iyz="0" izz="0.08"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0.08" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.12" length="0.16"/></geometry>
+      <material name="head_mat"><color rgba="0.15 0.15 0.15 1.0"/></material>
+    </visual>
+  </link>
+  <joint name="head_yaw" type="revolute">
+    <parent link="base_link"/><child link="sensor_head"/>
+    <origin xyz="0 0 1.45" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-1.57" upper="1.57" effort="30" velocity="3.0"/>
+  </joint>
+
+  <!-- Legs: bipedal hydraulic — simplified 3-DoF per leg -->
+  <xacro:macro name="leg" params="prefix y">
+    <link name="${prefix}_thigh">
+      <inertial>
+        <origin xyz="0 0 -0.35" rpy="0 0 0"/>
+        <mass value="42.0"/>
+        <inertia ixx="2.8" ixy="0" ixz="0" iyy="2.8" iyz="0" izz="0.9"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 -0.35" rpy="0 0 0"/>
+        <geometry><cylinder radius="0.09" length="0.70"/></geometry>
+        <material name="leg_mat"><color rgba="0.4 0.4 0.45 1.0"/></material>
+      </visual>
+      <collision>
+        <origin xyz="0 0 -0.35" rpy="0 0 0"/>
+        <geometry><cylinder radius="0.09" length="0.70"/></geometry>
+      </collision>
+    </link>
+    <joint name="${prefix}_hip_pitch" type="revolute">
+      <parent link="base_link"/><child link="${prefix}_thigh"/>
+      <origin xyz="0 ${y} 0.30" rpy="0 0 0"/>
+      <axis xyz="0 1 0"/>
+      <limit lower="-0.8" upper="1.2" effort="900" velocity="2.0"/>
+      <dynamics damping="25" friction="5"/>
+    </joint>
+    <link name="${prefix}_shin">
+      <inertial>
+        <origin xyz="0 0 -0.32" rpy="0 0 0"/>
+        <mass value="28.0"/>
+        <inertia ixx="1.4" ixy="0" ixz="0" iyy="1.4" iyz="0" izz="0.45"/>
+      </inertial>
+      <visual>
+        <origin xyz="0 0 -0.32" rpy="0 0 0"/>
+        <geometry><cylinder radius="0.07" length="0.64"/></geometry>
+      </visual>
+      <collision>
+        <origin xyz="0 0 -0.32" rpy="0 0 0"/>
+        <geometry><cylinder radius="0.07" length="0.64"/></geometry>
+      </collision>
+    </link>
+    <joint name="${prefix}_knee" type="revolute">
+      <parent link="${prefix}_thigh"/><child link="${prefix}_shin"/>
+      <origin xyz="0 0 -0.70" rpy="0 0 0"/>
+      <axis xyz="0 1 0"/>
+      <limit lower="0" upper="2.2" effort="900" velocity="2.2"/>
+      <dynamics damping="20" friction="5"/>
+    </joint>
+    <link name="${prefix}_foot">
+      <inertial>
+        <origin xyz="0.08 0 -0.02" rpy="0 0 0"/>
+        <mass value="9.0"/>
+        <inertia ixx="0.12" ixy="0" ixz="0" iyy="0.20" iyz="0" izz="0.18"/>
+      </inertial>
+      <visual>
+        <origin xyz="0.08 0 -0.02" rpy="0 0 0"/>
+        <geometry><box size="0.28 0.16 0.06"/></geometry>
+        <material name="foot_mat"><color rgba="0.2 0.2 0.22 1.0"/></material>
+      </visual>
+      <collision>
+        <origin xyz="0.08 0 -0.02" rpy="0 0 0"/>
+        <geometry><box size="0.28 0.16 0.06"/></geometry>
+      </collision>
+    </link>
+    <joint name="${prefix}_ankle" type="revolute">
+      <parent link="${prefix}_shin"/><child link="${prefix}_foot"/>
+      <origin xyz="0 0 -0.64" rpy="0 0 0"/>
+      <axis xyz="0 1 0"/>
+      <limit lower="-0.6" upper="0.6" effort="400" velocity="3.0"/>
+    </joint>
+  </xacro:macro>
+
+  <xacro:leg prefix="left" y="0.22"/>
+  <xacro:leg prefix="right" y="-0.22"/>
+
+  <!-- Shield: 1.2x0.7m 18kg boron-carbide — pivot arm on shoulder -->
+  <link name="shield">
+    <inertial>
+      <origin xyz="0 0 0.60" rpy="0 0 0"/>
+      <mass value="${shield_mass}"/>
+      <inertia ixx="2.1" ixy="0" ixz="0" iyy="0.9" iyz="0" izz="2.4"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0.60" rpy="0 0 0"/>
+      <geometry><box size="0.02 0.70 1.20"/></geometry>
+      <material name="shield_mat"><color rgba="0.18 0.25 0.30 1.0"/></material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.60" rpy="0 0 0"/>
+      <geometry><box size="0.02 0.70 1.20"/></geometry>
+    </collision>
+  </link>
+  <joint name="shield_pivot" type="revolute">
+    <parent link="base_link"/><child link="shield"/>
+    <origin xyz="-0.35 0 0.95" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <!-- 0 = stowed on back, 1.57 = deployed forward (riot brace geometry) -->
+    <limit lower="0" upper="1.70" effort="250" velocity="1.5"/>
+    <dynamics damping="15" friction="2"/>
+  </joint>
+
+  <!-- Arms / weapons TF -->
+  <link name="right_arm">
+    <inertial><mass value="18.0"/><inertia ixx="0.6" ixy="0" ixz="0" iyy="0.6" iyz="0" izz="0.3"/><origin xyz="0 0 -0.25"/></inertial>
+    <visual><origin xyz="0 0 -0.25"/><geometry><cylinder radius="0.06" length="0.50"/></geometry></visual>
+  </link>
+  <joint name="right_shoulder" type="revolute">
+    <parent link="base_link"/><child link="right_arm"/>
+    <origin xyz="0.32 -0.30 1.15" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-0.5" upper="1.8" effort="300" velocity="2.0"/>
+  </joint>
+
+  <link name="rifle">
+    <inertial><mass value="4.2"/><inertia ixx="0.04" ixy="0" ixz="0" iyy="0.04" iyz="0" izz="0.02"/><origin xyz="0 0 0"/></inertial>
+    <visual><origin xyz="0.35 0 0"/><geometry><box size="0.70 0.04 0.06"/></geometry><material name="rifle_mat"><color rgba="0.12 0.12 0.12 1.0"/></material></visual>
+  </link>
+  <joint name="rifle_fixed" type="fixed">
+    <parent link="right_arm"/><child link="rifle"/>
+    <origin xyz="0 0 -0.50" rpy="0 1.57 0"/>
+  </joint>
+
+  <!-- 40mm launcher underslung TF -->
+  <link name="launcher"><inertial><mass value="1.8"/><inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/><origin xyz="0 0 0"/></inertial></link>
+  <joint name="launcher_fixed" type="fixed"><parent link="rifle"/><child link="launcher"/><origin xyz="0.10 0 -0.04" rpy="0 0 0"/></joint>
+
+  <!-- Missile pylons (Spike SR 4kg each, x2) -->
+  <link name="missile_left"><inertial><mass value="4.0"/><inertia ixx="0.03" ixy="0" ixz="0" iyy="0.03" iyz="0" izz="0.02"/><origin xyz="0 0 0"/></inertial><visual><origin xyz="0 0 0"/><geometry><cylinder radius="0.06" length="0.85"/></geometry></visual></link>
+  <joint name="missile_left_fixed" type="fixed"><parent link="base_link"/><child link="missile_left"/><origin xyz="-0.15 0.32 0.70" rpy="0 1.57 0"/></joint>
+  <link name="missile_right"><inertial><mass value="4.0"/><inertia ixx="0.03" ixy="0" ixz="0" iyy="0.03" iyz="0" izz="0.02"/><origin xyz="0 0 0"/></inertial><visual><origin xyz="0 0 0"/><geometry><cylinder radius="0.06" length="0.85"/></geometry></visual></link>
+  <joint name="missile_right_fixed" type="fixed"><parent link="base_link"/><child link="missile_right"/><origin xyz="-0.15 -0.32 0.70" rpy="0 1.57 0"/></joint>
+
+  <!-- Drone bay (2x 6kg fold-flat fixed-wing) -->
+  <link name="drone_bay"><inertial><mass value="12.0"/><inertia ixx="0.4" ixy="0" ixz="0" iyy="0.4" iyz="0" izz="0.2"/><origin xyz="0 0 0"/></inertial><visual><origin xyz="0 0 0"/><geometry><box size="0.45 0.50 0.12"/></geometry></visual></link>
+  <joint name="drone_bay_fixed" type="fixed"><parent link="base_link"/><child link="drone_bay"/><origin xyz="-0.32 0 1.30" rpy="0 0 0"/></joint>
+
+  <!-- Gazebo plugins (ros2_control + sensors) -->
+  <gazebo>
+    <plugin filename="libgz_ros2_control-system.so" name="gz_ros2_control">
+      <parameters>config/ros2_controllers.yaml</parameters>
+    </plugin>
+  </gazebo>
+
+  <!-- Sensor head: camera + lidar (gz sensors) -->
+  <gazebo reference="sensor_head">
+    <sensor name="head_camera" type="camera">
+      <camera><image><width>1280</width><height>720</height></image><clip><near>0.1</near><far>80</far></clip></camera>
+      <always_on>true</always_on><update_rate>30</update_rate>
+      <topic>/camera/image_raw</topic>
+      <gz:topic xmlns:gz="http://gazebosim.org/schema">/camera/image_raw</gz:topic>
+    </sensor>
+    <sensor name="head_lidar" type="gpu_lidar">
+      <lidar><scan><horizontal><samples>1024</samples><min_angle>-1.5708</min_angle><max_angle>1.5708</max_angle></horizontal></scan><range><min>0.2</min><max>60</max></range></lidar>
+      <always_on>true</always_on><update_rate>10</update_rate>
+      <topic>/lidar/points</topic>
+    </sensor>
+  </gazebo>
+
+  <gazebo reference="shield">
+    <material>Gazebo/DarkGrey</material>
+  </gazebo>
+</robot>

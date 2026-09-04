@@ -1,0 +1,13 @@
+id: RES-002
+topic: YOLOv8 50m phone vs rifle reliability
+findings: Synthetic mAP poor_50m 0.38 < human 0.85, verdict UNKNOWN. Requires 10k
+  labeled 10-60m dusk images + hard-negative mining, YOLOv8m training, confusion matrix.
+  Human-confirm gate mandatory until >human baseline.
+sources:
+- url: https://docs.ultralytics.com/models/yolov8/
+  kind: FACT
+  note: YOLOv8 60 FPS on Orin 275 TOPS claim plausible
+- url: https://arxiv.org/abs/2304.01238
+  kind: INFERENCE
+  note: small object detection degrades with distance
+status: PARTIALLY_IMPLEMENTED

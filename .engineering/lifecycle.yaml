@@ -1,0 +1,160 @@
+schemaVersion: 1.0.0
+project:
+  name: ms_robot
+  type: robotics-project
+  category: robotics
+  summary: ms_robot — shell markdown, yaml, python, shell
+lifecycleModel:
+  id: robotics-project
+  name: Robotics Project
+  category: robotics
+  reason: 'Robotics hints: package.xml (ROS), hardware files: *.urdf/*.sdf'
+  confidence: high
+  hints:
+    roboticsHints:
+      - package.xml (ROS)
+      - 'hardware files: *.urdf/*.sdf'
+    automationHints:
+      - scripts/
+detectedSystems:
+  - type: architecture
+    path: docs/architecture.md
+    description: docs/architecture.md
+  - type: robotics-state
+    path: package.xml
+    description: ROS package.xml
+currentPhase: model
+currentStage: active
+phases:
+  - id: model
+    name: Model
+    description: URDF, topics, nodes/services defined
+    status: IN_PROGRESS
+    enteredAt: '2026-09-04T09:24:57.532Z'
+    completedAt: null
+    evidence:
+      - type: CODE
+        source: .engineering/manifest.yaml
+        kind: FACT
+        details: Lifecycle initialized
+  - id: simulate
+    name: Simulate
+    description: Gazebo / simulation validation
+    status: NOT_STARTED
+    enteredAt: null
+    completedAt: null
+    evidence: []
+  - id: implement
+    name: Implement
+    description: Nodes, drivers, controllers
+    status: NOT_STARTED
+    enteredAt: null
+    completedAt: null
+    evidence: []
+  - id: integrate
+    name: Integrate
+    description: Hardware bring-up, telemetry
+    status: NOT_STARTED
+    enteredAt: null
+    completedAt: null
+    evidence: []
+  - id: validate
+    name: Validate
+    description: Field tests, safety checks
+    status: NOT_STARTED
+    enteredAt: null
+    completedAt: null
+    evidence: []
+  - id: ops
+    name: Ops
+    description: Calibration, logs, handoff to ops
+    status: NOT_STARTED
+    enteredAt: null
+    completedAt: null
+    evidence: []
+keyDecisions: []
+risksAndBottlenecks:
+  - id: RISK-001
+    description: Hardware mismatch
+    category: default
+    impact: medium
+    mitigation: TBD — define mitigation and link evidence
+    status: OPEN
+    evidence: []
+    kind: INFERENCE
+  - id: RISK-002
+    description: Topic/service misconfig
+    category: default
+    impact: medium
+    mitigation: TBD — define mitigation and link evidence
+    status: OPEN
+    evidence: []
+    kind: INFERENCE
+  - id: RISK-003
+    description: Safety bypass
+    category: default
+    impact: medium
+    mitigation: TBD — define mitigation and link evidence
+    status: OPEN
+    evidence: []
+    kind: INFERENCE
+  - id: RISK-004
+    description: Telemetry loss
+    category: default
+    impact: medium
+    mitigation: TBD — define mitigation and link evidence
+    status: OPEN
+    evidence: []
+    kind: INFERENCE
+  - id: RISK-005
+    description: Calibration drift
+    category: default
+    impact: medium
+    mitigation: TBD — define mitigation and link evidence
+    status: OPEN
+    evidence: []
+    kind: INFERENCE
+assumptions:
+  - id: A-001
+    description: Lifecycle state is durable and version-controlled in .engineering/
+    kind: FACT
+    evidence:
+      - type: CODE
+        source: .engineering/lifecycle.yaml
+        kind: FACT
+    status: VERIFIED
+openQuestions:
+  - id: Q-001
+    question: What is the next verifiable milestone?
+    status: OPEN
+    evidence: []
+openTasks: []
+nextActions:
+  - id: NEXT-simulate
+    task: 'Complete phase Simulate: Gazebo / simulation validation'
+    priority: MEDIUM
+    status: PENDING
+  - id: NEXT-implement
+    task: 'Complete phase Implement: Nodes, drivers, controllers'
+    priority: MEDIUM
+    status: PENDING
+evidenceLinks:
+  - type: CODE
+    source: .engineering/project.yaml
+    kind: FACT
+    details: Synced robotics-project
+  - type: CODE
+    source: .engineering/architecture/graph.yaml
+    kind: FACT
+    details: 63 files
+evidencePolicy: All claims require evidence; UNKNOWN is valid. See VERIFICATION_STATES.
+history:
+  - timestamp: '2026-09-04T09:24:57.532Z'
+    type: lifecycle_created
+    summary: Lifecycle initialized with model robotics-project (high confidence)
+    model: robotics-project
+  - timestamp: '2026-09-04T09:28:35.205Z'
+    type: sync
+    summary: 'Synced: 63 files, type robotics-project'
+generatedAt: '2026-09-04T09:24:57.532Z'
+updatedAt: '2026-09-04T09:28:35.205Z'

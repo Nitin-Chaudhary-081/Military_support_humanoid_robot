@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>acsr_bringup</name>
+  <version>0.1.0</version>
+  <description>One-launch deployment for ACSR sim — bridges, nav, perception. goal.md:101 glue code</description>
+  <maintainer email="acsr@example.com">ACSR Team</maintainer>
+  <license>MIT</license>
+  <buildtool_depend>ament_cmake</buildtool_depend>
+  <exec_depend>acsr_description</exec_depend>
+  <exec_depend>acsr_gazebo</exec_depend>
+  <exec_depend>acsr_nav</exec_depend>
+  <exec_depend>threat_manager</exec_depend>
+  <exec_depend>weapon_control</exec_depend>
+  <exec_depend>shield_controller</exec_depend>
+  <exec_depend>drone_coordinator</exec_depend>
+  <exec_depend>battery_manager</exec_depend>
+  <exec_depend>robot_state_publisher</exec_depend>
+  <exec_depend>ros_gz_sim</exec_depend>
+  <exec_depend>nav2_bringup</exec_depend>
+  <export><build_type>ament_cmake</build_type></export>
+</package>

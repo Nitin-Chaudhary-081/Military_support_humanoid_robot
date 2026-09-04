@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<sdf version="1.11">
+  <world name="battlefield_rubble">
+    <physics name="1ms" type="ignored"><max_step_size>0.001</max_step_size><real_time_factor>0.8</real_time_factor></physics>
+    <plugin filename="gz-sim-physics-system" name="gz::sim::systems::Physics"/>
+    <plugin filename="gz-sim-scene-broadcaster-system" name="gz::sim::systems::SceneBroadcaster"/>
+    <plugin filename="gz-sim-user-commands-system" name="gz::sim::systems::UserCommands"/>
+    <plugin filename="gz-sim-sensors-system" name="gz::sim::systems::Sensors"><render_engine>ogre2</render_engine></plugin>
+    <light type="directional" name="sun"><cast_shadows>true</cast_shadows><pose>0 0 10 0 0 0</pose><diffuse>0.9 0.85 0.8 1</diffuse><direction>-0.5 0.1 -0.9</direction></light>
+    <model name="ground_plane"><static>true</static><link name="link"><collision name="collision"><geometry><plane><normal>0 0 1</normal><size>200 200</size></plane></geometry></collision><visual name="visual"><geometry><plane><normal>0 0 1</normal><size>200 200</size></plane></geometry><material><ambient>0.42 0.38 0.32 1</ambient><diffuse>0.42 0.38 0.32 1</diffuse></material></visual></link></model>
+    <!-- Rubble obstacles: crates + barriers + crater rims — fall-risk terrain goal.md:73 -->
+    <model name="rubble_1"><pose>3 1 0.25 0 0 0.4</pose><static>true</static><link name="link"><collision name="c"><geometry><box><size>0.9 0.6 0.5</size></box></geometry></collision><visual name="v"><geometry><box><size>0.9 0.6 0.5</size></box></geometry><material><diffuse>0.35 0.33 0.30 1</diffuse></material></visual></link></model>
+    <model name="rubble_2"><pose>5 -1.5 0.4 0 0 0.9</pose><static>true</static><link name="link"><collision name="c"><geometry><box><size>1.2 0.8 0.8</size></box></geometry></collision><visual name="v"><geometry><box><size>1.2 0.8 0.8</size></box></geometry><material><diffuse>0.38 0.35 0.32 1</diffuse></material></visual></link></model>
+    <model name="rubble_3"><pose>-2 2 0.3 0 0 -0.6</pose><static>true</static><link name="link"><collision name="c"><geometry><box><size>0.7 0.7 0.6</size></box></geometry></collision><visual name="v"><geometry><box><size>0.7 0.7 0.6</size></box></geometry></visual></link></model>
+    <model name="barrier"><pose>7 0 0.6 0 0 1.57</pose><static>true</static><link name="link"><collision name="c"><geometry><box><size>4 0.25 1.2</size></box></geometry></collision><visual name="v"><geometry><box><size>4 0.25 1.2</size></box></geometry><material><diffuse>0.55 0.50 0.42 1</diffuse></material></visual></link></model>
+    <model name="slope"><pose>10 0 0.5 0 0.18 0</pose><static>true</static><link name="link"><collision name="c"><geometry><box><size>6 6 1.0</size></box></geometry></collision><visual name="v"><geometry><box><size>6 6 1.0</size></box></geometry><material><diffuse>0.50 0.48 0.40 1</diffuse></material></visual></link></model>
+    <model name="crater"><pose>-5 -3  -0.2 0 0 0</pose><static>true</static><link name="link"><collision name="c"><geometry><cylinder><radius>1.8</radius><length>0.15</length></cylinder></geometry></collision><visual name="v"><geometry><cylinder><radius>1.8</radius><length>0.15</length></cylinder></geometry><material><diffuse>0.28 0.26 0.24 1</diffuse></material></visual></link></model>
+    <!-- Friendly / civilian / threat dummies for YOLO eval -->
+    <model name="threat_dummy"><pose>12 2 0.9 0 0 0</pose><static>true</static><link name="link"><visual name="v"><geometry><box><size>0.45 0.30 1.75</size></box></geometry><material><diffuse>0.55 0.05 0.05 1</diffuse></material></visual></link></model>
+    <model name="civilian_dummy"><pose>12 -2 0.9 0 0 0</pose><static>true</static><link name="link"><visual name="v"><geometry><box><size>0.45 0.30 1.70</size></box></geometry><material><diffuse>0.20 0.55 0.20 1</diffuse></material></visual></link></model>
+  </world>
+</sdf>

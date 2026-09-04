@@ -1,0 +1,22 @@
+id: R-008
+title: ROS 2 Jazzy integration + bringup
+description: colcon workspace 9 packages, ros_gz_sim, controller bridge. goal.md:100
+status: VERIFIED
+evidence:
+- type: COMMAND
+  source: colcon build --symlink-install
+  kind: FACT
+  details: 9 packages finished 18.7s
+- type: CODE
+  source: src/acsr_bringup/launch/acsr_full.launch.py
+  kind: FACT
+  details: threat+shield+weapon+drone+battery nodes
+- type: GIT
+  source: git log
+  kind: FACT
+  details: git repo initialized
+files:
+- src/acsr_bringup/launch/acsr_full.launch.py
+- src/acsr_description/CMakeLists.txt
+risk: MEDIUM
+createdAt: '2026-09-04T09:28:26.236036Z'

@@ -1,0 +1,24 @@
+id: R-001
+title: Biped platform 2.5m 450kg low CoM URDF
+description: URDF with 110kg chest battery, hydraulic legs, sensor head. goal.md:35
+status: VERIFIED
+evidence:
+- type: CODE
+  source: src/acsr_description/urdf/acsr.urdf.xacro
+  kind: FACT
+  details: URDF+Xacro 229 lines, 9 base children, shield pivot, rifle TF
+- type: TEST
+  source: tests/test_urdf.py
+  kind: FACT
+  details: test_xacro_processes + mass_positive passed 3/3
+- type: COMMAND
+  source: xacro src/acsr_description/urdf/acsr.urdf.xacro > /tmp/acsr_processed.urdf
+    && check_urdf
+  kind: FACT
+  details: Successfully Parsed XML root base_link
+files:
+- src/acsr_description/urdf/acsr.urdf.xacro
+- src/acsr_description/config/ros2_controllers.yaml
+- acsr.urdf
+risk: HIGH
+createdAt: '2026-09-04T09:28:26.208188Z'
