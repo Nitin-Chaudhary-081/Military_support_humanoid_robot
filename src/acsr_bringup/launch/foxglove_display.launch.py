@@ -14,7 +14,7 @@ import os
 from ament_index_python.packages import get_package_share_directory
 
 def generate_launch_description():
-    pkg_desc = get_package_share_directory('acsr_description')
+    pkg_desc = get_package_share_directory('ares1_description')
     pkg_bringup = get_package_share_directory('acsr_bringup')
     use_sim = LaunchConfiguration('use_sim_time')
     return LaunchDescription([
@@ -24,7 +24,7 @@ def generate_launch_description():
             package='robot_state_publisher',
             executable='robot_state_publisher',
             parameters=[{
-                'robot_description': ParameterValue(Command(['xacro ', os.path.join(pkg_desc, 'urdf', 'acsr.urdf.xacro')]), value_type=str),
+                'robot_description': ParameterValue(Command(['xacro ', os.path.join(pkg_desc, 'urdf', 'ares1.urdf.xacro')]), value_type=str),
                 'use_sim_time': use_sim,
             }],
             output='screen',

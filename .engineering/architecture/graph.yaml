@@ -4,9 +4,29 @@ nodes:
     label: README.md
     path: README.md
     ext: .md
-    size: 3948
-    hash: 9c5a154b3c88
+    size: 5354
+    hash: 0e0b1a2eeec3
     language: md
+    evidence: CODE
+    verification: VERIFIED
+  - id: arc.md
+    type: File
+    label: arc.md
+    path: arc.md
+    ext: .md
+    size: 26829
+    hash: f07c996c0fb3
+    language: md
+    evidence: CODE
+    verification: VERIFIED
+  - id: config/ares1_params.yaml
+    type: File
+    label: ares1_params.yaml
+    path: config/ares1_params.yaml
+    ext: .yaml
+    size: 2651
+    hash: e0ec3eb11524
+    language: yaml
     evidence: CODE
     verification: VERIFIED
   - id: config/params.yaml
@@ -24,8 +44,8 @@ nodes:
     label: architecture.md
     path: docs/architecture.md
     ext: .md
-    size: 2735
-    hash: 9b60cee02233
+    size: 3865
+    hash: cc4d02799be6
     language: md
     evidence: CODE
     verification: VERIFIED
@@ -34,8 +54,8 @@ nodes:
     label: field_test.md
     path: docs/field_test.md
     ext: .md
-    size: 1868
-    hash: 4944ec21e92c
+    size: 1871
+    hash: 2f8dfc70b6e6
     language: md
     evidence: CODE
     verification: VERIFIED
@@ -44,8 +64,8 @@ nodes:
     label: foxglove.md
     path: docs/foxglove.md
     ext: .md
-    size: 4021
-    hash: 9681e9a3ee9f
+    size: 6022
+    hash: 68890d322791
     language: md
     evidence: CODE
     verification: VERIFIED
@@ -54,8 +74,8 @@ nodes:
     label: ops.md
     path: docs/ops.md
     ext: .md
-    size: 2772
-    hash: 8bf595295401
+    size: 2777
+    hash: 7f0ac36f28b2
     language: md
     evidence: CODE
     verification: VERIFIED
@@ -129,23 +149,13 @@ nodes:
     language: py
     evidence: CODE
     verification: VERIFIED
-  - id: install/acsr_description/share/acsr_description/config/ros2_controllers.yaml
+  - id: install/acsr_bringup/share/acsr_bringup/launch/foxglove_display.launch.py
     type: File
-    label: ros2_controllers.yaml
-    path: install/acsr_description/share/acsr_description/config/ros2_controllers.yaml
-    ext: .yaml
-    size: 1179
-    hash: b846ac3ff194
-    language: yaml
-    evidence: CODE
-    verification: VERIFIED
-  - id: install/acsr_description/share/acsr_description/launch/display.launch.py
-    type: File
-    label: display.launch.py
-    path: install/acsr_description/share/acsr_description/launch/display.launch.py
+    label: foxglove_display.launch.py
+    path: install/acsr_bringup/share/acsr_bringup/launch/foxglove_display.launch.py
     ext: .py
-    size: 806
-    hash: 50c30fa2e5fb
+    size: 2226
+    hash: 176df6663530
     language: py
     evidence: CODE
     verification: VERIFIED
@@ -164,8 +174,8 @@ nodes:
     label: acsr_world.launch.py
     path: install/acsr_gazebo/share/acsr_gazebo/launch/acsr_world.launch.py
     ext: .py
-    size: 2857
-    hash: a824203f0d23
+    size: 2981
+    hash: 3955e4e9b985
     language: py
     evidence: CODE
     verification: VERIFIED
@@ -186,6 +196,26 @@ nodes:
     ext: .py
     size: 699
     hash: 03303b3ca874
+    language: py
+    evidence: CODE
+    verification: VERIFIED
+  - id: install/ares1_description/share/ares1_description/config/ares1_controllers.yaml
+    type: File
+    label: ares1_controllers.yaml
+    path: install/ares1_description/share/ares1_description/config/ares1_controllers.yaml
+    ext: .yaml
+    size: 1974
+    hash: 027849032ddd
+    language: yaml
+    evidence: CODE
+    verification: VERIFIED
+  - id: install/ares1_description/share/ares1_description/launch/display.launch.py
+    type: File
+    label: display.launch.py
+    path: install/ares1_description/share/ares1_description/launch/display.launch.py
+    ext: .py
+    size: 809
+    hash: 50dd2d559e25
     language: py
     evidence: CODE
     verification: VERIFIED
@@ -389,6 +419,16 @@ nodes:
     language: py
     evidence: CODE
     verification: VERIFIED
+  - id: scripts/gen_ares1_meshes.py
+    type: File
+    label: gen_ares1_meshes.py
+    path: scripts/gen_ares1_meshes.py
+    ext: .py
+    size: 6573
+    hash: 5a543f3b0f42
+    language: py
+    evidence: CODE
+    verification: VERIFIED
   - id: src/acsr_bringup/config/foxglove/acsr_layout.json
     type: File
     label: acsr_layout.json
@@ -429,23 +469,13 @@ nodes:
     language: py
     evidence: CODE
     verification: VERIFIED
-  - id: src/acsr_description/config/ros2_controllers.yaml
+  - id: src/acsr_bringup/launch/foxglove_display.launch.py
     type: File
-    label: ros2_controllers.yaml
-    path: src/acsr_description/config/ros2_controllers.yaml
-    ext: .yaml
-    size: 1179
-    hash: b846ac3ff194
-    language: yaml
-    evidence: CODE
-    verification: VERIFIED
-  - id: src/acsr_description/launch/display.launch.py
-    type: File
-    label: display.launch.py
-    path: src/acsr_description/launch/display.launch.py
+    label: foxglove_display.launch.py
+    path: src/acsr_bringup/launch/foxglove_display.launch.py
     ext: .py
-    size: 806
-    hash: 50c30fa2e5fb
+    size: 2226
+    hash: 176df6663530
     language: py
     evidence: CODE
     verification: VERIFIED
@@ -464,8 +494,8 @@ nodes:
     label: acsr_world.launch.py
     path: src/acsr_gazebo/launch/acsr_world.launch.py
     ext: .py
-    size: 2857
-    hash: a824203f0d23
+    size: 2981
+    hash: 3955e4e9b985
     language: py
     evidence: CODE
     verification: VERIFIED
@@ -486,6 +516,26 @@ nodes:
     ext: .py
     size: 699
     hash: 03303b3ca874
+    language: py
+    evidence: CODE
+    verification: VERIFIED
+  - id: src/ares1_description/config/ares1_controllers.yaml
+    type: File
+    label: ares1_controllers.yaml
+    path: src/ares1_description/config/ares1_controllers.yaml
+    ext: .yaml
+    size: 1974
+    hash: 027849032ddd
+    language: yaml
+    evidence: CODE
+    verification: VERIFIED
+  - id: src/ares1_description/launch/display.launch.py
+    type: File
+    label: display.launch.py
+    path: src/ares1_description/launch/display.launch.py
+    ext: .py
+    size: 809
+    hash: 50dd2d559e25
     language: py
     evidence: CODE
     verification: VERIFIED
@@ -659,6 +709,16 @@ nodes:
     language: py
     evidence: CODE
     verification: VERIFIED
+  - id: tests/test_ares1_geometry.py
+    type: File
+    label: test_ares1_geometry.py
+    path: tests/test_ares1_geometry.py
+    ext: .py
+    size: 3884
+    hash: 5875cf729f46
+    language: py
+    evidence: CODE
+    verification: VERIFIED
   - id: tests/test_battery_logic.py
     type: File
     label: test_battery_logic.py
@@ -724,8 +784,8 @@ nodes:
     label: test_urdf.py
     path: tests/test_urdf.py
     ext: .py
-    size: 1079
-    hash: 6b3c4a41cb2b
+    size: 1085
+    hash: 69aee884ab75
     language: py
     evidence: CODE
     verification: VERIFIED
@@ -836,21 +896,41 @@ edges:
     to: ament_index_python.packages
     relationship: depends_on
     evidence: INFERRED
-  - from: install/acsr_description/share/acsr_description/launch/display.launch.py
-    to: install/acsr_description/share/acsr_description/launch/launch
+  - from: install/acsr_bringup/share/acsr_bringup/launch/foxglove_display.launch.py
+    to: install/acsr_bringup/share/acsr_bringup/launch/layout
     relationship: imports
     evidence: INFERRED
-  - from: install/acsr_description/share/acsr_description/launch/display.launch.py
+  - from: install/acsr_bringup/share/acsr_bringup/launch/foxglove_display.launch.py
+    to: install/acsr_bringup/share/acsr_bringup/launch/launch
+    relationship: imports
+    evidence: INFERRED
+  - from: install/acsr_bringup/share/acsr_bringup/launch/foxglove_display.launch.py
     to: launch_ros.actions
     relationship: depends_on
     evidence: INFERRED
-  - from: install/acsr_description/share/acsr_description/launch/display.launch.py
-    to: ament_index_python.packages
+  - from: install/acsr_bringup/share/acsr_bringup/launch/foxglove_display.launch.py
+    to: launch.actions
     relationship: depends_on
     evidence: INFERRED
-  - from: install/acsr_description/share/acsr_description/launch/display.launch.py
-    to: install/acsr_description/share/acsr_description/launch/os
+  - from: install/acsr_bringup/share/acsr_bringup/launch/foxglove_display.launch.py
+    to: launch.substitutions
+    relationship: depends_on
+    evidence: INFERRED
+  - from: install/acsr_bringup/share/acsr_bringup/launch/foxglove_display.launch.py
+    to: launch_ros.parameter_descriptions
+    relationship: depends_on
+    evidence: INFERRED
+  - from: install/acsr_bringup/share/acsr_bringup/launch/foxglove_display.launch.py
+    to: launch.conditions
+    relationship: depends_on
+    evidence: INFERRED
+  - from: install/acsr_bringup/share/acsr_bringup/launch/foxglove_display.launch.py
+    to: install/acsr_bringup/share/acsr_bringup/launch/os
     relationship: imports
+    evidence: INFERRED
+  - from: install/acsr_bringup/share/acsr_bringup/launch/foxglove_display.launch.py
+    to: ament_index_python.packages
+    relationship: depends_on
     evidence: INFERRED
   - from: install/acsr_gazebo/share/acsr_gazebo/launch/acsr_world.launch.py
     to: install/acsr_gazebo/share/acsr_gazebo/launch/os
@@ -877,6 +957,10 @@ edges:
     relationship: depends_on
     evidence: INFERRED
   - from: install/acsr_gazebo/share/acsr_gazebo/launch/acsr_world.launch.py
+    to: launch_ros.parameter_descriptions
+    relationship: depends_on
+    evidence: INFERRED
+  - from: install/acsr_gazebo/share/acsr_gazebo/launch/acsr_world.launch.py
     to: ament_index_python.packages
     relationship: depends_on
     evidence: INFERRED
@@ -899,6 +983,22 @@ edges:
   - from: install/acsr_nav/share/acsr_nav/launch/nav.launch.py
     to: ament_index_python.packages
     relationship: depends_on
+    evidence: INFERRED
+  - from: install/ares1_description/share/ares1_description/launch/display.launch.py
+    to: install/ares1_description/share/ares1_description/launch/launch
+    relationship: imports
+    evidence: INFERRED
+  - from: install/ares1_description/share/ares1_description/launch/display.launch.py
+    to: launch_ros.actions
+    relationship: depends_on
+    evidence: INFERRED
+  - from: install/ares1_description/share/ares1_description/launch/display.launch.py
+    to: ament_index_python.packages
+    relationship: depends_on
+    evidence: INFERRED
+  - from: install/ares1_description/share/ares1_description/launch/display.launch.py
+    to: install/ares1_description/share/ares1_description/launch/os
+    relationship: imports
     evidence: INFERRED
   - from: install/battery_manager/lib/python3.12/site-packages/battery_manager/battery_logic.py
     to: install/battery_manager/lib/python3.12/site-packages/battery_manager/dataclasses
@@ -1084,6 +1184,22 @@ edges:
     to: scripts/argparse
     relationship: imports
     evidence: INFERRED
+  - from: scripts/gen_ares1_meshes.py
+    to: scripts/trimesh
+    relationship: imports
+    evidence: INFERRED
+  - from: scripts/gen_ares1_meshes.py
+    to: scripts/numpy
+    relationship: imports
+    evidence: INFERRED
+  - from: scripts/gen_ares1_meshes.py
+    to: scripts/pathlib
+    relationship: imports
+    evidence: INFERRED
+  - from: scripts/gen_ares1_meshes.py
+    to: scripts/math
+    relationship: imports
+    evidence: INFERRED
   - from: src/acsr_bringup/launch/acsr_full.launch.py
     to: src/acsr_bringup/launch/os
     relationship: imports
@@ -1140,21 +1256,41 @@ edges:
     to: ament_index_python.packages
     relationship: depends_on
     evidence: INFERRED
-  - from: src/acsr_description/launch/display.launch.py
-    to: src/acsr_description/launch/launch
+  - from: src/acsr_bringup/launch/foxglove_display.launch.py
+    to: src/acsr_bringup/launch/layout
     relationship: imports
     evidence: INFERRED
-  - from: src/acsr_description/launch/display.launch.py
+  - from: src/acsr_bringup/launch/foxglove_display.launch.py
+    to: src/acsr_bringup/launch/launch
+    relationship: imports
+    evidence: INFERRED
+  - from: src/acsr_bringup/launch/foxglove_display.launch.py
     to: launch_ros.actions
     relationship: depends_on
     evidence: INFERRED
-  - from: src/acsr_description/launch/display.launch.py
-    to: ament_index_python.packages
+  - from: src/acsr_bringup/launch/foxglove_display.launch.py
+    to: launch.actions
     relationship: depends_on
     evidence: INFERRED
-  - from: src/acsr_description/launch/display.launch.py
-    to: src/acsr_description/launch/os
+  - from: src/acsr_bringup/launch/foxglove_display.launch.py
+    to: launch.substitutions
+    relationship: depends_on
+    evidence: INFERRED
+  - from: src/acsr_bringup/launch/foxglove_display.launch.py
+    to: launch_ros.parameter_descriptions
+    relationship: depends_on
+    evidence: INFERRED
+  - from: src/acsr_bringup/launch/foxglove_display.launch.py
+    to: launch.conditions
+    relationship: depends_on
+    evidence: INFERRED
+  - from: src/acsr_bringup/launch/foxglove_display.launch.py
+    to: src/acsr_bringup/launch/os
     relationship: imports
+    evidence: INFERRED
+  - from: src/acsr_bringup/launch/foxglove_display.launch.py
+    to: ament_index_python.packages
+    relationship: depends_on
     evidence: INFERRED
   - from: src/acsr_gazebo/launch/acsr_world.launch.py
     to: src/acsr_gazebo/launch/os
@@ -1181,6 +1317,10 @@ edges:
     relationship: depends_on
     evidence: INFERRED
   - from: src/acsr_gazebo/launch/acsr_world.launch.py
+    to: launch_ros.parameter_descriptions
+    relationship: depends_on
+    evidence: INFERRED
+  - from: src/acsr_gazebo/launch/acsr_world.launch.py
     to: ament_index_python.packages
     relationship: depends_on
     evidence: INFERRED
@@ -1203,6 +1343,22 @@ edges:
   - from: src/acsr_nav/launch/nav.launch.py
     to: ament_index_python.packages
     relationship: depends_on
+    evidence: INFERRED
+  - from: src/ares1_description/launch/display.launch.py
+    to: src/ares1_description/launch/launch
+    relationship: imports
+    evidence: INFERRED
+  - from: src/ares1_description/launch/display.launch.py
+    to: launch_ros.actions
+    relationship: depends_on
+    evidence: INFERRED
+  - from: src/ares1_description/launch/display.launch.py
+    to: ament_index_python.packages
+    relationship: depends_on
+    evidence: INFERRED
+  - from: src/ares1_description/launch/display.launch.py
+    to: src/ares1_description/launch/os
+    relationship: imports
     evidence: INFERRED
   - from: src/battery_manager/battery_manager/battery_logic.py
     to: src/battery_manager/battery_manager/dataclasses
@@ -1372,6 +1528,14 @@ edges:
     to: weapon_control.weapon_logic
     relationship: depends_on
     evidence: INFERRED
+  - from: tests/test_ares1_geometry.py
+    to: tests/subprocess
+    relationship: imports
+    evidence: INFERRED
+  - from: tests/test_ares1_geometry.py
+    to: tests/yaml
+    relationship: imports
+    evidence: INFERRED
   - from: tests/test_battery_logic.py
     to: tests/sys
     relationship: imports
@@ -1452,4 +1616,4 @@ edges:
     to: weapon_control.weapon_logic
     relationship: depends_on
     evidence: INFERRED
-builtAt: '2026-09-04T11:12:00.364Z'
+builtAt: '2026-09-04T15:53:38.947Z'

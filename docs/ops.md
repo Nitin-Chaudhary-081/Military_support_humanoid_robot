@@ -15,7 +15,7 @@ ros2 topic echo /drone/mesh_status --once
 ```
 
 ## Calibration (`scripts/calibrate.sh`)
-- **URDF:** `xacro src/acsr_description/urdf/acsr.urdf.xacro > /tmp/acsr.urdf && check_urdf /tmp/acsr.urdf`
+- **URDF:** `xacro src/ares1_description/urdf/ares1.urdf.xacro > /tmp/ares1.urdf && check_urdf /tmp/ares1.urdf`
 - **Joints:** zero all 9 actuated joints via `ros2 topic pub /shield/command std_msgs/Float64 "{data: 0.0}" --once`
 - **Sensors:** verify `/camera/image_raw` 1280×720 30Hz, `/lidar/points` 1024 samples 10Hz
 - **Expected:** shield 0.0 stowed, battery soc 100% at start, no `FIRING` without `/human/confirm`
@@ -52,7 +52,7 @@ python3 scripts/eval_perception.py
 - **Telemetry loss:** `ros2 topic hz /threat/level` → restart `threat_manager`
 
 ## Ownership
-- Model: `acsr_description` (URDF owner)
+- Model: `ares1_description` (URDF owner)
 - Sim: `acsr_gazebo` (worlds owner)
 - Nodes: per-package maintainers (see `package.xml`)
 - Ops logs: rotate daily, keep 7 days sim bag

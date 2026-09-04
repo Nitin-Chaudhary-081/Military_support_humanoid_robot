@@ -1,22 +1,28 @@
 id: R-008
-title: ROS 2 Jazzy integration + bringup
-description: colcon workspace 9 packages, ros_gz_sim, controller bridge. goal.md:100
+title: ROS2 Jazzy + MuJoCo + Foxglove integration
+description: colcon 9 pkgs ares1_description + acsr_gazebo + bringup + nav + MuJoCo
+  placeholder + foxglove 8765
 status: VERIFIED
 evidence:
 - type: COMMAND
   source: colcon build --symlink-install
   kind: FACT
-  details: 9 packages finished 18.7s
+  details: 9 packages finished 18.3s ares1_description
 - type: CODE
   source: src/acsr_bringup/launch/acsr_full.launch.py
   kind: FACT
-  details: threat+shield+weapon+drone+battery nodes
-- type: GIT
-  source: git log
+  details: Gz+ares1+foxglove IfCondition
+- type: CODE
+  source: mujoco/ares1.xml
   kind: FACT
-  details: git repo initialized
+  details: MJCF placeholder meshdir visual
+- type: COMMAND
+  source: bash scripts/calibrate.sh
+  kind: FACT
+  details: 41 tests, 447.1kg, foxglove 8765
 files:
 - src/acsr_bringup/launch/acsr_full.launch.py
-- src/acsr_description/CMakeLists.txt
+- src/ares1_description/CMakeLists.txt
+- mujoco/ares1.xml
 risk: MEDIUM
 createdAt: '2026-09-04T09:28:26.236036Z'

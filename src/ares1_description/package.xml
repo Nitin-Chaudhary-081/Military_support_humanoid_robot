@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package format="3">
-  <name>acsr_description</name>
-  <version>0.1.0</version>
-  <description>ACSR 2.5m/450kg biped URDF — low CoM, shield pivot, sensor head, weapons TF. goal.md:35</description>
+  <name>ares1_description</name>
+  <version>1.0.0</version>
+  <description>ARES-1 2.43m 447kg biped — detailed per arc.md v1.0: trapezoidal chest, abdomen rings, pelvis hex, 26-DOF, mesh STL</description>
   <maintainer email="acsr@example.com">ACSR Team</maintainer>
   <license>MIT</license>
   <buildtool_depend>ament_cmake</buildtool_depend>

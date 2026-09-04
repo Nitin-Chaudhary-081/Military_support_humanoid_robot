@@ -1,24 +1,30 @@
 id: R-001
-title: Biped platform 2.5m 450kg low CoM URDF
-description: URDF with 110kg chest battery, hydraulic legs, sensor head. goal.md:35
+title: ARES-1 platform 2.43m 447kg 26-DOF mesh URDF
+description: URDF per arc.md v1.0 2430mm height stack 447kg budget 69 links 68 joints
+  + 16 STL meshes + 26-DOF controllers
 status: VERIFIED
 evidence:
 - type: CODE
-  source: src/acsr_description/urdf/acsr.urdf.xacro
+  source: src/ares1_description/urdf/ares1.urdf.xacro
   kind: FACT
-  details: URDF+Xacro 229 lines, 9 base children, shield pivot, rifle TF
+  details: URDF 1310 lines 69 links 68 joints mass 447.1kg dome 90
+- type: TEST
+  source: tests/test_ares1_geometry.py
+  kind: FACT
+  details: 5/5 meshes, mass budget, 26-DOF, sensors, MJCF
 - type: TEST
   source: tests/test_urdf.py
   kind: FACT
-  details: test_xacro_processes + mass_positive passed 3/3
+  details: xacro+check_urdf 3/3 shield pivot 1.83 rad
 - type: COMMAND
-  source: xacro src/acsr_description/urdf/acsr.urdf.xacro > /tmp/acsr_processed.urdf
-    && check_urdf
+  source: xacro src/ares1_description/urdf/ares1.urdf.xacro > /tmp/ares1.urdf && check_urdf
   kind: FACT
-  details: Successfully Parsed XML root base_link
+  details: Successfully Parsed XML root base_link 3 children dome
 files:
-- src/acsr_description/urdf/acsr.urdf.xacro
-- src/acsr_description/config/ros2_controllers.yaml
-- acsr.urdf
+- src/ares1_description/urdf/ares1.urdf.xacro
+- src/ares1_description/config/ares1_controllers.yaml
+- src/ares1_description/meshes/visual/head.stl
+- mujoco/ares1.xml
+- ares1.urdf
 risk: HIGH
 createdAt: '2026-09-04T09:28:26.208188Z'

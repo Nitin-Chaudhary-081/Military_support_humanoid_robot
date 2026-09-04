@@ -1,21 +1,30 @@
 languages:
   counts:
-    markdown: 6
-    yaml: 11
-    python: 55
+    markdown: 7
+    yaml: 12
+    python: 59
     json: 2
-    shell: 78
+    shell: 79
   primary: shell
-  totalFiles: 152
+  totalFiles: 159
 frameworks: []
 packageManagers: []
 entryPoints: []
 config:
   - .gitignore
 git:
-  branch: master
-  commit: b309570d0dadbd1d51f14a16deeb3b5ba8546dcf
+  branch: main
+  commit: b67251265a30a7f9e0e7419cb29f082f91254569
   log:
+    - >-
+      b672512 feat(foxglove): display launch static robot (robot_state+joint+bridge 8765) for
+      browser viz without Gz
+    - >-
+      8fbc109 docs(foxglove): AWS VPS 13.207.111.213 — SSH tunnel vs Lightsail firewall, helper
+      script foxglove_aws.sh, address 0.0.0.0:8765
+    - >-
+      c4a08b3 feat(foxglove): bridge ws://8765 for browser Foxglove Studio, acsr_full
+      use_foxglove:=true, layout json, docs/foxglove.md, R-011 VERIFIED 9/18
     - >-
       b309570 feat(ops): field_test + ops runbook + calibrate.sh + integration test, lifecycle ops
       IN_PROGRESS 5/6 phases, risks MITIGATED
@@ -26,27 +35,44 @@ git:
   dirty: true
   status:
     - M README.md
-    - ' M src/acsr_bringup/launch/acsr_full.launch.py'
+    - ' D acsr.urdf'
+    - ' M docs/architecture.md'
+    - ' M docs/field_test.md'
+    - ' M docs/foxglove.md'
+    - ' M docs/ops.md'
+    - ' M scripts/calibrate.sh'
+    - ' M src/acsr_bringup/launch/foxglove_display.launch.py'
     - ' M src/acsr_bringup/package.xml'
-    - '?? .engineering/decisions/ADR-006.yaml'
-    - '?? .engineering/requirements/R-011.yaml'
-    - '?? docs/foxglove.md'
-    - '?? src/acsr_bringup/config/'
-    - '?? src/acsr_bringup/launch/foxglove.launch.py'
-    - '?? tests/test_foxglove.py'
+    - ' D src/acsr_description/CMakeLists.txt'
+    - ' D src/acsr_description/config/ros2_controllers.yaml'
+    - ' D src/acsr_description/launch/display.launch.py'
+    - ' D src/acsr_description/package.xml'
+    - ' D src/acsr_description/urdf/acsr.urdf.xacro'
+    - ' M src/acsr_gazebo/launch/acsr_world.launch.py'
+    - ' M src/acsr_gazebo/package.xml'
+    - ' M tests/test_urdf.py'
+    - '?? arc.md'
+    - '?? ares1.urdf'
+    - '?? config/ares1_params.yaml'
+    - '?? mujoco/'
+    - '?? scripts/gen_ares1_meshes.py'
+    - '?? src/ares1_description/'
+    - '?? tests/test_ares1_geometry.py'
 envVars: []
 dependencies: {}
 structure:
   - README.md
-  - acsr.urdf
+  - arc.md
+  - ares1.urdf
   - build/
   - config/
   - docs/
   - goal.md
   - install/
   - log/
+  - mujoco/
   - scripts/
   - src/
   - tests/
 projectType: robotics-project
-analyzedAt: '2026-09-04T11:12:00.313Z'
+analyzedAt: '2026-09-04T15:53:38.776Z'

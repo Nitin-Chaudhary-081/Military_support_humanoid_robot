@@ -1,11 +1,11 @@
 import subprocess, pathlib, xml.etree.ElementTree as ET
 
 def test_urdf_exists():
-    p=pathlib.Path('src/acsr_description/urdf/acsr.urdf.xacro')
+    p=pathlib.Path('src/ares1_description/urdf/ares1.urdf.xacro')
     assert p.exists(), "URDF xacro missing"
 
 def test_xacro_processes():
-    r=subprocess.run(['xacro','src/acsr_description/urdf/acsr.urdf.xacro'], capture_output=True, text=True)
+    r=subprocess.run(['xacro','src/ares1_description/urdf/ares1.urdf.xacro'], capture_output=True, text=True)
     assert r.returncode==0, r.stderr
     xml=r.stdout
     assert 'base_link' in xml and 'shield_pivot' in xml
@@ -20,7 +20,7 @@ def test_xacro_processes():
     assert float(lim.attrib['upper']) > 1.5
 
 def test_urdf_mass_positive():
-    r=subprocess.run(['xacro','src/acsr_description/urdf/acsr.urdf.xacro'], capture_output=True, text=True)
+    r=subprocess.run(['xacro','src/ares1_description/urdf/ares1.urdf.xacro'], capture_output=True, text=True)
     root=ET.fromstring(r.stdout)
     masses=[float(m.attrib['value']) for m in root.findall('.//mass')]
     assert sum(masses) > 400  # 450kg spec approx

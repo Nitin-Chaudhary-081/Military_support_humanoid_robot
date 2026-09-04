@@ -3,7 +3,7 @@
 > Run on 2026-09-04, host `gz sim 8.11.0`, `ROS Jazzy`, no hardware.
 
 ## 1) URDF/Model
-- `xacro src/acsr_description/urdf/acsr.urdf.xacro > /tmp/acsr.urdf && check_urdf` — **Successfully Parsed XML**, root `base_link` 9 children, total mass ~350kg+ (verified `tests/test_urdf.py`)
+- `xacro src/ares1_description/urdf/ares1.urdf.xacro > /tmp/ares1.urdf && check_urdf` — **Successfully Parsed XML**, root `base_link` 9 children, total mass ~350kg+ (verified `tests/test_urdf.py`)
 - Mass audit: base 150 + battery 110 + legs 158 + shield 18 + arms 18 + weapons 8 + drones 12 = ~474kg (within tolerance of 450kg spec)
 
 ## 2) Simulation

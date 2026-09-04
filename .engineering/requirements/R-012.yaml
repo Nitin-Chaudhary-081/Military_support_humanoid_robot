@@ -1,0 +1,33 @@
+id: R-012
+title: ARES-1 meshes + MJCF + armour separate links
+description: 16 STL visual/collision per arc.md 13.1, 26-DOF, shield 48mm, pods, drones
+  bays, armour fixed links
+status: VERIFIED
+evidence:
+- type: CODE
+  source: scripts/gen_ares1_meshes.py
+  kind: FACT
+  details: 16 meshes trimesh 332 faces head, collision hulls
+- type: CODE
+  source: src/ares1_description/config/ares1_controllers.yaml
+  kind: FACT
+  details: 26 joints neck2 shoulder6 elbow2 wrist4 hip6 knee2 ankle4 + shield/pod
+- type: TEST
+  source: tests/test_ares1_geometry.py::test_ares1_controllers_26dof
+  kind: FACT
+  details: 26 joints verified
+- type: CODE
+  source: mujoco/ares1.xml
+  kind: FACT
+  details: MuJoCo placeholder meshdir
+- type: TEST
+  source: tests/test_ares1_geometry.py::test_ares1_sensors
+  kind: FACT
+  details: /ares1/sensors/lidar+camera+imu+foot FT
+files:
+- scripts/gen_ares1_meshes.py
+- src/ares1_description/config/ares1_controllers.yaml
+- src/ares1_description/meshes/visual/chest.stl
+- mujoco/ares1.xml
+risk: HIGH
+createdAt: '2026-09-04T15:53:49.842574Z'

@@ -6,7 +6,7 @@
   <maintainer email="acsr@example.com">ACSR Team</maintainer>
   <license>MIT</license>
   <buildtool_depend>ament_cmake</buildtool_depend>
-  <exec_depend>acsr_description</exec_depend>
+  <exec_depend>ares1_description</exec_depend>
   <exec_depend>acsr_gazebo</exec_depend>
   <exec_depend>acsr_nav</exec_depend>
   <exec_depend>threat_manager</exec_depend>

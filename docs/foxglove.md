@@ -46,7 +46,7 @@ Then in browser open **https://app.foxglove.dev** → *Open connection* → `ws:
 ## 3) Recommended layout (import `foxglove/acsr_layout.json`)
 
 Panels:
-- **3D** → `/tf`, `Robot Model` (URDF from `acsr_description`), `/lidar/points` (PointCloud), ground plane
+- **3D** → `/tf`, `Robot Model` (URDF from `ares1_description`), `/lidar/points` (PointCloud), ground plane
 - **Image** → `/camera/image_raw`, `/drone_1/image`, `/drone_2/image`
 - **Plot** → `/battery/soc`, `/shield/command`
 - **Raw Messages** → `/threat/level` (Int32 0-3), `/threat/tracks` (JSON), `/weapon/state`, `/drone/mesh_status`, `/battery/state`
@@ -80,7 +80,7 @@ Bridge whitelists `['.*']` so every ACSR topic is visible:
 - `port already in use` → `lsof -i :8765 && kill <pid>` or `pkill -f foxglove_bridge` or `port:=8766`.
 - `connection refused` via `ws://13.207.111.213:8765` → SG not open → use SSH tunnel method A or open Lightsail firewall TCP 8765.
 - `curl -v http://13.207.111.213:8765` from laptop: expect `426` (WS needs upgrade) = port reachable; `timeout` = firewall blocks.
-- No TF/robot model → `ros2 run robot_state_publisher robot_state_publisher --ros-args -p robot_description:="$(xacro src/acsr_description/urdf/acsr.urdf.xacro)"` must be running (started by `acsr_full.launch.py`).
+- No TF/robot model → `ros2 run robot_state_publisher robot_state_publisher --ros-args -p robot_description:="$(xacro src/ares1_description/urdf/ares1.urdf.xacro)"` must be running (started by `acsr_full.launch.py`).
 - Image black → `ros2 topic hz /camera/image_raw` must be >10Hz; Gz sensors publish only when `gz sim` is running (`gz sim --version` 8.11.0).
 - `foxglove_bridge: InvalidParameterTypeException topic_whitelist` → fixed in `foxglove_bridge.yaml:10` must be YAML list `['.*']` not string `"['.*']"`.
 - WSS/tls? Set `tls:=true certfile:=... keyfile:=...` in `foxglove_bridge.yaml` then `wss://...`.

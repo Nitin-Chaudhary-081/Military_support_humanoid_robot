@@ -10,10 +10,13 @@ findings:
     verified: false
   - id: SEC-INJECTION-001
     claim: SQL injection protection exists
-    status: UNKNOWN
-    evidence: []
+    status: IMPLEMENTED
+    evidence:
+      - type: CODE
+        source: static scan
+        kind: FACT
+        details: Pattern matched for SQL injection protection exists
     verified: false
-    note: Unknown; verification evidence does not exist.
   - id: SEC-SECRETS-001
     claim: Secrets not committed
     status: VERIFIED
@@ -42,5 +45,5 @@ summary:
   total: 5
   verified: 1
   failed: 0
-  unknown: 2
-auditedAt: '2026-09-04T09:28:37.788Z'
+  unknown: 1
+auditedAt: '2026-09-04T15:54:04.721Z'

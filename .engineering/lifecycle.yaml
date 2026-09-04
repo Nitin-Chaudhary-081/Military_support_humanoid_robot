@@ -192,7 +192,7 @@ evidenceLinks:
   - type: CODE
     source: .engineering/architecture/graph.yaml
     kind: FACT
-    details: 74 files
+    details: 80 files
 evidencePolicy: All claims require evidence; UNKNOWN is valid. See VERIFICATION_STATES.
 history:
   - timestamp: '2026-09-04T09:24:57.532Z'
@@ -233,5 +233,8 @@ history:
   - timestamp: '2026-09-04T11:12:00.540Z'
     type: sync
     summary: 'Synced: 74 files, type robotics-project'
+  - timestamp: '2026-09-04T15:53:39.130Z'
+    type: sync
+    summary: 'Synced: 80 files, type robotics-project'
 generatedAt: '2026-09-04T09:24:57.532Z'
-updatedAt: '2026-09-04T11:12:00.540Z'
+updatedAt: '2026-09-04T15:53:39.130Z'

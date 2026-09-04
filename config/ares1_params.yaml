@@ -1,0 +1,19 @@
+# ARES-1 params per arc.md v1.0 — single source of truth, 447kg 2430mm 26-DOF
+ares1:
+  mass_kg: 447.0
+  height_mm: 2430
+  height_breakdown: {foot: 80, shin: 480, knee: 60, thigh: 520, hip: 60, pelvis: 180, abdomen: 220, chest: 380, neck: 120, head: 240, dome: 90}
+  weight_budget: {head_neck: 18, chest: 32, abdomen: 12, pelvis: 22, shoulder_yoke: 14, upper_arm: 12, forearm: 8, hand: 6, thigh: 28, shin: 20, foot: 10, battery: 110, compute: 18, hydraulic: 30, wiring: 8, shield: 18, weapons: 38, drones: 24, armour: 27, fasteners: 12}
+  materials: {Ti6Al4V: 950MPa, Al7075: 503MPa, AISI4340: 1080MPa, B4C: "shield", ceramic: "armour", polycarbonate: "visor", carbon_T800: "drones"}
+  shield: {mass_kg: 18.0, width_m: 0.7, height_m: 1.2, thickness_mm: 48, layers: "25 B4C +15 UHMWPE +8 Ti", arm_length_m: 0.42, deploy_rad: 1.83, deploy_s: 0.3, trigger: "acoustic or threat≥2"}
+  weapons: {rifle: "SCAR-H 7.62 410/880 4.6kg 30x4", grenade: "M320 40mm 230 1.5kg 8 belt", missiles: "6 Spike SR 4kg 50-800m 400mm RHA pods 400x80x80 1.2kg", require_braced: true, require_human_confirm: true}
+  drones: {drone1: "fixed VTOL 1.4kg 900mm 800m 45min bay 340x160x70", drone2: "quad 0.85kg prop150 400m 22min bay 210x210x90", mesh: "5GHz MAVLink"}
+  armour: {panels: "head/chest/back/shoulder/arms/legs/feet", thickness_mm: "8-30", NIJ: "III-IV", blast: "20 RHA+10 UHMWPE STANAG L3"}
+  joints: {total_DOF: 26, neck: "yaw±90 pitch±30 120Nm", shoulder: "pitch±180 roll±90 yaw±45 180-280Nm", elbow: "0-145 200Nm", wrist: "pitch±60 roll±30 60-80Nm", hip: "pitch±90 roll±45 yaw±30 200-360Nm", knee: "0-140 360Nm", ankle: "pitch±40 roll±20 160-220Nm"}
+  sensors: {lidar: "Livox MID-360 10Hz /ares1/sensors/lidar/points", cameras: "D435i 30fps + Boson640 60Hz + IMX477 rear 60fps", imu: "VN-100 800Hz", acoustic: "4xMEMS", foot_FT: "6-axis 1kHz", encoders: "14x magnetic 1kHz"}
+  power: {type: "solid-state 48kWh 96V 800A 110kg chest", charging: "400V 3ph 2.5h", BMS: "balancing+thermal glycol", backup: "2x supercap 5min"}
+  compute: {orin: "275 TOPS 64GB", i7: "i7-1370P", stm32: "14xF4+ H7", storage: "2TB NVMe", SLAM: "RTAB-Map", nav: "Nav2 Legged Gym", threat: "0→3 manager"}
+  topics: {prefix: "/ares1", sensors: "sensors/*", ai: "ai/threat_level detections battle_map", actuators: "actuators/shield/deploy weapons/*", drones: "drones/drone1/* drone2/*", nav: "navigation/goal_pose path footstep_plan"}
+  hard_problems: {terrain: "RL Legged Gym 40%->85%", ai: "YOLOv8 phone-vs-rifle 50m UNKNOWN", battery: "97min full combat, solid-state 8%/yr still 155min vs 6-8h goal"}
+# legacy alias
+acsr: {mass_kg: 447.0, height_m: 2.43, battery_kwh: 48.0}

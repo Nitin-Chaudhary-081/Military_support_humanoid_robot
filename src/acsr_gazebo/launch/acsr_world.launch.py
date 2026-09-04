@@ -1,16 +1,17 @@
-"""Spawn ACSR in Gz Sim + publish TF. Verified with gz sim + check_urdf."""
+"""Spawn ARES-1 in Gz Sim + publish TF per arc.md. Verified with gz sim + check_urdf."""
 import os
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, SetEnvironmentVariable
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.substitutions import LaunchConfiguration, Command
 from launch_ros.actions import Node
+from launch_ros.parameter_descriptions import ParameterValue
 from ament_index_python.packages import get_package_share_directory
 
 def generate_launch_description():
     world = LaunchConfiguration('world')
     use_sim_time = LaunchConfiguration('use_sim_time')
-    pkg_desc = get_package_share_directory('acsr_description')
+    pkg_desc = get_package_share_directory('ares1_description')
     pkg_gz = get_package_share_directory('acsr_gazebo')
     # world mapping
     declare_world = DeclareLaunchArgument('world', default_value='battlefield_flat',
@@ -20,9 +21,9 @@ def generate_launch_description():
 
     world_path = [pkg_gz, '/worlds/', world, '.sdf']
 
-    # Expand xacro to urdf
-    xacro_file = os.path.join(pkg_desc, 'urdf', 'acsr.urdf.xacro')
-    robot_desc = Command(['xacro ', xacro_file])
+    # Expand xacro to urdf ARES-1 arc.md
+    xacro_file = os.path.join(pkg_desc, 'urdf', 'ares1.urdf.xacro')
+    robot_desc = ParameterValue(Command(['xacro ', xacro_file]), value_type=str)
 
     # Gz Sim
     gz_launch = IncludeLaunchDescription(
@@ -33,8 +34,8 @@ def generate_launch_description():
     rsp = Node(package='robot_state_publisher', executable='robot_state_publisher',
                parameters=[{'robot_description': robot_desc, 'use_sim_time': use_sim_time}])
 
-    spawn = Node(package='ros_gz_sim', executable='create', name='spawn_acsr',
-                 arguments=['-topic', 'robot_description', '-name', 'acsr', '-z', '0.90'],
+    spawn = Node(package='ros_gz_sim', executable='create', name='spawn_ares1',
+                 arguments=['-topic', 'robot_description', '-name', 'ares1', '-z', '0.90'],
                  output='screen')
 
     # Bridge clock + image + lidar (mock bridges for headless test; full gz_bridge config in bridge.yaml)

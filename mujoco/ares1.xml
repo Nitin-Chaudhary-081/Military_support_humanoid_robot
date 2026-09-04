@@ -1,0 +1,31 @@
+<mujoco model="ares1">
+  <!-- ARES-1 MJCF placeholder per arc.md 14 — MuJoCo 3.x -->
+  <!-- Generated from URDF: use `python -m mujoco --urdf2mjcf` or `pip install urdf2mjcf` later -->
+  <!-- For now minimal MJCF that loads meshes and references ares1.urdf.xacro via <include> is not yet fully converted -->
+  <compiler angle="degree" meshdir="../src/ares1_description/meshes/visual" autolimits="true"/>
+  <option timestep="0.002" gravity="0 0 -9.81" integrator="implicitfast"/>
+  <worldbody>
+    <light name="sun" pos="0 0 10" dir="-0.5 0.1 -0.9" directional="true" castshadow="true"/>
+    <geom name="ground" type="plane" pos="0 0 -1.3" size="100 100 0.1" material="ground_mat" condim="3"/>
+    <!-- Include full URDF via mujoco's urdf loader fallback: user should run
+         `mujoco src/ares1_description/urdf/ares1.urdf.xacro` via mjpython -->
+    <body name="ares1_root" pos="0 0 0">
+      <joint name="free" type="free" damping="10" armature="0.5"/>
+      <!-- Placeholder: real body is loaded via <include file="../src/ares1_description/urdf/ares1.urdf"/> in python -->
+      <geom name="pelvis_placeholder" type="box" size="0.23 0.13 0.09" pos="0 0 0" rgba="0.18 0.18 0.19 1"/>
+      <body name="chest_dummy" pos="0 0 0.5"><geom type="box" size="0.26 0.14 0.19" rgba="0.18 0.18 0.19 1"/></body>
+      <body name="head_dummy" pos="0 0 0.9"><geom type="box" size="0.14 0.13 0.12" rgba="0.18 0.18 0.19 1"/><geom name="dome" type="sphere" size="0.09" pos="0 0 0.15" rgba="0.08 0.16 0.31 1"/></body>
+    </body>
+  </worldbody>
+  <asset>
+    <material name="ground_mat" rgba="0.45 0.42 0.35 1"/>
+    <material name="dark_grey" rgba="0.18 0.18 0.19 1"/>
+  </asset>
+  <actuator>
+    <!-- Hydraulics placeholders for 26-DOF — to be replaced by generated MJCF from URDF -->
+    <motor name="neck_yaw" joint="free" gear="120"/>
+  </actuator>
+  <sensor>
+    <framepos name="imu" objtype="body" objname="ares1_root"/>
+  </sensor>
+</mujoco>
