@@ -157,8 +157,8 @@ level1:
         label: foxglove_display.launch.py
         path: install/acsr_bringup/share/acsr_bringup/launch/foxglove_display.launch.py
         ext: .py
-        size: 2226
-        hash: 176df6663530
+        size: 2868
+        hash: 48cf0a7b1d81
         language: py
         evidence: CODE
         verification: VERIFIED
@@ -477,8 +477,8 @@ level1:
         label: foxglove_display.launch.py
         path: src/acsr_bringup/launch/foxglove_display.launch.py
         ext: .py
-        size: 2226
-        hash: 176df6663530
+        size: 2868
+        hash: 48cf0a7b1d81
         language: py
         evidence: CODE
         verification: VERIFIED
@@ -1619,7 +1619,7 @@ level1:
         to: weapon_control.weapon_logic
         relationship: depends_on
         evidence: INFERRED
-    builtAt: '2026-09-05T05:44:57.995Z'
+    builtAt: '2026-09-05T05:53:53.505Z'
   dataflow:
     flows: []
     note: Dataflow INFERRED from imports; verify with runtime
@@ -1799,8 +1799,8 @@ level4:
       size: 1268
       hash: dc5d9e9bd26d
     - path: install/acsr_bringup/share/acsr_bringup/launch/foxglove_display.launch.py
-      size: 2226
-      hash: 176df6663530
+      size: 2868
+      hash: 48cf0a7b1d81
     - path: install/acsr_gazebo/share/acsr_gazebo/config/bridge.yaml
       size: 928
       hash: 69e04e641d84
@@ -1820,4 +1820,4 @@ level5: >-
 level6: >-
   Actual source code lives in repository. Context system avoids loading all files; request specific
   file via read.
-generatedAt: '2026-09-05T05:44:58.153Z'
+generatedAt: '2026-09-05T05:53:53.649Z'

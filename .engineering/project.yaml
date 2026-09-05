@@ -14,8 +14,11 @@ config:
   - .gitignore
 git:
   branch: main
-  commit: 82450770782562fcc54b49d5d57a802a5c8343b1
+  commit: c07b6e0cb4134228be2056dea30ebdb0afab280f
   log:
+    - >-
+      c07b6e0 fix(ares1): aesthetic linked body — rpy align chest/pelvis/yoke to Y lateral, foot toe
+      forward, joint ball housings, no floating plates
     - >-
       8245077 fix(ares1): align STL origins to joint frames, remove head dome duplicate,
       visual/collision 0 0 0, limbs top-origin, Foxglove verified
@@ -41,10 +44,7 @@ git:
       nodes, Gz worlds, Nav2, 26 tests, colcon build OK
   dirty: true
   status:
-    - M scripts/gen_ares1_meshes.py
-    - ' M src/ares1_description/meshes/collision/foot_col.stl'
-    - ' M src/ares1_description/meshes/visual/foot.stl'
-    - ' M src/ares1_description/urdf/ares1.urdf.xacro'
+    - M  src/acsr_bringup/launch/foxglove_display.launch.py
 envVars: []
 dependencies: {}
 structure:
@@ -62,4 +62,4 @@ structure:
   - src/
   - tests/
 projectType: robotics-project
-analyzedAt: '2026-09-05T05:44:57.893Z'
+analyzedAt: '2026-09-05T05:53:53.431Z'

@@ -154,8 +154,8 @@ nodes:
     label: foxglove_display.launch.py
     path: install/acsr_bringup/share/acsr_bringup/launch/foxglove_display.launch.py
     ext: .py
-    size: 2226
-    hash: 176df6663530
+    size: 2868
+    hash: 48cf0a7b1d81
     language: py
     evidence: CODE
     verification: VERIFIED
@@ -474,8 +474,8 @@ nodes:
     label: foxglove_display.launch.py
     path: src/acsr_bringup/launch/foxglove_display.launch.py
     ext: .py
-    size: 2226
-    hash: 176df6663530
+    size: 2868
+    hash: 48cf0a7b1d81
     language: py
     evidence: CODE
     verification: VERIFIED
@@ -1616,4 +1616,4 @@ edges:
     to: weapon_control.weapon_logic
     relationship: depends_on
     evidence: INFERRED
-builtAt: '2026-09-05T05:44:57.995Z'
+builtAt: '2026-09-05T05:53:53.505Z'
