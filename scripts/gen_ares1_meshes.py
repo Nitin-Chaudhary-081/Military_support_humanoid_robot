@@ -77,14 +77,13 @@ def shin():
     m.apply_translation([0, 0, -0.240])
     return m
 
-# 5 foot — organic foot 380x200 heel80 toe40 — origin at ankle TOP (0,0,0)
+# 5 foot — organic foot 380x200 heel80 toe40 — origin at ankle TOP (0,0,0) toe forward +X
 def foot():
     heel = trimesh.creation.box(extents=[0.220, 0.200, 0.080])
-    heel.apply_translation([0.080, 0, 0.040])
+    heel.apply_translation([-0.080, 0, 0.040])  # heel behind (-X)
     toe = trimesh.creation.box(extents=[0.160, 0.200, 0.040])
-    toe.apply_translation([-0.100, 0, 0.020])
+    toe.apply_translation([0.100, 0, 0.020])   # toe forward (+X)
     m = trimesh.util.concatenate([heel, toe])
-    # translate so top (max_z = 0.08 heel) is at 0
     m.apply_translation([0, 0, -0.080])
     return m
 

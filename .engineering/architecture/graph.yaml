@@ -424,8 +424,8 @@ nodes:
     label: gen_ares1_meshes.py
     path: scripts/gen_ares1_meshes.py
     ext: .py
-    size: 6804
-    hash: 515a92c7c329
+    size: 6809
+    hash: b1dd28e247fe
     language: py
     evidence: CODE
     verification: VERIFIED
@@ -1616,4 +1616,4 @@ edges:
     to: weapon_control.weapon_logic
     relationship: depends_on
     evidence: INFERRED
-builtAt: '2026-09-05T05:31:31.364Z'
+builtAt: '2026-09-05T05:44:57.995Z'

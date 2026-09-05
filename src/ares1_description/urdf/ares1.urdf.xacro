@@ -29,7 +29,7 @@
   <material name="olive_drab"><color rgba="0.333 0.353 0.235 1.0"/></material>
   <material name="charcoal"><color rgba="0.216 0.216 0.227 1.0"/></material>
 
-  <!-- ========== PELVIS (base_link) — hex 460x260x180 22kg ========== -->
+  <!-- ========== PELVIS (base_link) — hex 460x260x180 22kg — rpy aligns width Y 460 depth X 260 -->
   <link name="base_link">
     <inertial>
       <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -37,11 +37,12 @@
       <inertia ixx="0.85" ixy="0" ixz="0" iyy="0.92" iyz="0" izz="0.78"/>
     </inertial>
     <visual>
-      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <origin xyz="0 0 0" rpy="0 0 1.5708"/>
       <geometry><mesh filename="package://ares1_description/meshes/visual/pelvis.stl" scale="1 1 1"/></geometry>
       <material name="dark_grey"/>
     </visual>
     <collision>
+      <origin xyz="0 0 0" rpy="0 0 1.5708"/>
       <geometry><mesh filename="package://ares1_description/meshes/collision/pelvis_col.stl" scale="1 1 1"/></geometry>
     </collision>
   </link>
@@ -73,11 +74,11 @@
   </link>
   <joint name="abdomen3_fixed" type="fixed"><parent link="abdomen_ring2"/><child link="abdomen_ring3"/><origin xyz="0 0 0.085" rpy="0 0 0"/></joint>
 
-  <!-- ========== CHEST 520->440x280x380 32kg trapezoidal ========== -->
+  <!-- ========== CHEST 520->440x280x380 32kg trapezoidal — rpy aligns width Y 520 depth X 280 -->
   <link name="chest">
     <inertial><mass value="${mass_chest}"/><inertia ixx="1.2" ixy="0" ixz="0" iyy="1.0" iyz="0" izz="0.9"/><origin xyz="0 0 0"/></inertial>
-    <visual><geometry><mesh filename="package://ares1_description/meshes/visual/chest.stl"/></geometry><material name="dark_grey"/></visual>
-    <collision><geometry><mesh filename="package://ares1_description/meshes/collision/chest_col.stl"/></geometry></collision>
+    <visual><origin xyz="0 0 0" rpy="0 0 1.5708"/><geometry><mesh filename="package://ares1_description/meshes/visual/chest.stl"/></geometry><material name="dark_grey"/></visual>
+    <collision><origin xyz="0 0 0" rpy="0 0 1.5708"/><geometry><mesh filename="package://ares1_description/meshes/collision/chest_col.stl"/></geometry></collision>
   </link>
   <joint name="chest_joint" type="fixed"><parent link="abdomen_ring3"/><child link="chest"/><origin xyz="0 0 0.225" rpy="0 0 0"/></joint>
   <joint name="battery_joint" type="fixed"><parent link="chest"/><child link="battery_pack"/><origin xyz="0 0 -0.05" rpy="0 0 0"/></joint>
@@ -110,11 +111,11 @@
   <link name="fasteners"><inertial><mass value="4.8"/><inertia ixx="0.08" ixy="0" ixz="0" iyy="0.08" iyz="0" izz="0.06"/><origin xyz="0 0 0"/></inertial></link>
   <joint name="fasteners_joint" type="fixed"><parent link="base_link"/><child link="fasteners"/><origin xyz="0 0 0" rpy="0 0 0"/></joint>
 
-  <!-- ========== SHOULDER YOKE 640 span 80x120 14kg + pods ========== -->
+  <!-- ========== SHOULDER YOKE 640 span 80x120 14kg + pods — rpy aligns span Y 640 -->
   <link name="shoulder_yoke">
     <inertial><mass value="${mass_shoulder_yoke}"/><inertia ixx="0.45" ixy="0" ixz="0" iyy="0.85" iyz="0" izz="0.65"/><origin xyz="0 0 0"/></inertial>
-    <visual><geometry><mesh filename="package://ares1_description/meshes/visual/shoulder_yoke.stl"/></geometry><material name="gunmetal"/></visual>
-    <collision><geometry><mesh filename="package://ares1_description/meshes/collision/shoulder_yoke_col.stl"/></geometry></collision>
+    <visual><origin xyz="0 0 0" rpy="0 0 1.5708"/><geometry><mesh filename="package://ares1_description/meshes/visual/shoulder_yoke.stl"/></geometry><material name="gunmetal"/></visual>
+    <collision><origin xyz="0 0 0" rpy="0 0 1.5708"/><geometry><mesh filename="package://ares1_description/meshes/collision/shoulder_yoke_col.stl"/></geometry></collision>
   </link>
   <joint name="yoke_joint" type="fixed"><parent link="chest"/><child link="shoulder_yoke"/><origin xyz="0 0 0.235" rpy="0 0 0"/></joint>
 
@@ -172,20 +173,23 @@
 
   <!-- ========== ARMS 26-DOF detailed ========== -->
   <xacro:macro name="arm" params="prefix y">
-    <!-- shoulder 3 DOF: yaw->roll->pitch with dummy intermediates -->
-    <link name="${prefix}_shoulder_yaw"><inertial><mass value="0.5"/><inertia ixx="0.005" ixy="0" ixz="0" iyy="0.005" iyz="0" izz="0.005"/></inertial></link>
+    <!-- shoulder 3 DOF: yaw->roll->pitch — ball housing 110mm aesthetic -->
+    <link name="${prefix}_shoulder_yaw"><inertial><mass value="0.5"/><inertia ixx="0.005" ixy="0" ixz="0" iyy="0.005" iyz="0" izz="0.005"/></inertial>
+      <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><sphere radius="0.055"/></geometry><material name="gunmetal"/></visual></link>
     <joint name="${prefix}_shoulder_yaw" type="revolute">
       <parent link="shoulder_yoke"/><child link="${prefix}_shoulder_yaw"/>
       <origin xyz="0 ${y} 0.0" rpy="0 0 0"/>
       <axis xyz="0 0 1"/><limit lower="-0.785" upper="0.785" effort="180" velocity="2.0"/>
     </joint>
-    <link name="${prefix}_shoulder_roll"><inertial><mass value="0.5"/><inertia ixx="0.005" ixy="0" ixz="0" iyy="0.005" iyz="0" izz="0.005"/></inertial></link>
+    <link name="${prefix}_shoulder_roll"><inertial><mass value="0.5"/><inertia ixx="0.005" ixy="0" ixz="0" iyy="0.005" iyz="0" izz="0.005"/></inertial>
+      <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><sphere radius="0.050"/></geometry><material name="dark_grey"/></visual></link>
     <joint name="${prefix}_shoulder_roll" type="revolute">
       <parent link="${prefix}_shoulder_yaw"/><child link="${prefix}_shoulder_roll"/>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <axis xyz="1 0 0"/><limit lower="-1.57" upper="1.57" effort="220" velocity="2.0"/>
     </joint>
-    <link name="${prefix}_shoulder_pitch"><inertial><mass value="1.0"/><inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/></inertial></link>
+    <link name="${prefix}_shoulder_pitch"><inertial><mass value="1.0"/><inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/></inertial>
+      <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><sphere radius="0.045"/></geometry><material name="gunmetal"/></visual></link>
     <joint name="${prefix}_shoulder_pitch" type="revolute">
       <parent link="${prefix}_shoulder_roll"/><child link="${prefix}_shoulder_pitch"/>
       <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -198,10 +202,11 @@
       <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/collision/upper_arm_col.stl"/></geometry></collision>
     </link>
     <joint name="${prefix}_upper_fixed" type="fixed"><parent link="${prefix}_shoulder_pitch"/><child link="${prefix}_upper_arm"/><origin xyz="0 0 -0.04" rpy="0 0 0"/></joint>
-    <link name="armour_${prefix}_upper"><inertial><mass value="0.4"/><inertia ixx="0.005" ixy="0" ixz="0" iyy="0.005" iyz="0" izz="0.005"/></inertial><visual><origin xyz="0 0.02 -0.19" rpy="0 0 0"/><geometry><box size="0.008 0.04 0.20"/></geometry><material name="flat_black"/></visual></link>
+    <link name="armour_${prefix}_upper"><inertial><mass value="0.4"/><inertia ixx="0.005" ixy="0" ixz="0" iyy="0.005" iyz="0" izz="0.005"/></inertial><visual><origin xyz="0.064 0 -0.19" rpy="0 0 0"/><geometry><box size="0.012 0.04 0.20"/></geometry><material name="flat_black"/></visual></link>
     <joint name="armour_${prefix}_upper_joint" type="fixed"><parent link="${prefix}_upper_arm"/><child link="armour_${prefix}_upper"/><origin xyz="0 0 0" rpy="0 0 0"/></joint>
-    <!-- elbow -->
-    <link name="${prefix}_elbow_link"><inertial><mass value="0.3"/><inertia ixx="0.003" ixy="0" ixz="0" iyy="0.003" iyz="0" izz="0.002"/></inertial></link>
+    <!-- elbow — pin housing 85mm -->
+    <link name="${prefix}_elbow_link"><inertial><mass value="0.3"/><inertia ixx="0.003" ixy="0" ixz="0" iyy="0.003" iyz="0" izz="0.002"/></inertial>
+      <visual><origin xyz="0 0 0" rpy="0 1.5708 0"/><geometry><cylinder radius="0.042" length="0.10"/></geometry><material name="gunmetal"/></visual></link>
     <joint name="${prefix}_elbow" type="revolute">
       <parent link="${prefix}_upper_arm"/><child link="${prefix}_elbow_link"/>
       <origin xyz="0 0 -0.38" rpy="0 0 0"/>
@@ -214,7 +219,7 @@
       <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/collision/forearm_col.stl"/></geometry></collision>
     </link>
     <joint name="${prefix}_forearm_fixed" type="fixed"><parent link="${prefix}_elbow_link"/><child link="${prefix}_forearm"/><origin xyz="0 0 0" rpy="0 0 0"/></joint>
-    <link name="armour_${prefix}_forearm"><inertial><mass value="0.5"/><inertia ixx="0.006" ixy="0" ixz="0" iyy="0.006" iyz="0" izz="0.003"/></inertial><visual><origin xyz="0 0 -0.17" rpy="0 0 0"/><geometry><box size="0.012 0.06 0.20"/></geometry><material name="flat_black"/></visual></link>
+    <link name="armour_${prefix}_forearm"><inertial><mass value="0.5"/><inertia ixx="0.006" ixy="0" ixz="0" iyy="0.006" iyz="0" izz="0.003"/></inertial><visual><origin xyz="0.055 0 -0.17" rpy="0 0 0"/><geometry><box size="0.010 0.06 0.20"/></geometry><material name="flat_black"/></visual></link>
     <joint name="armour_${prefix}_forearm_joint" type="fixed"><parent link="${prefix}_forearm"/><child link="armour_${prefix}_forearm"/><origin xyz="0 0 0" rpy="0 0 0"/></joint>
     <!-- weapons per arm: left rifle SCAR-H 4.6kg 880mm, right grenade M320 1.5kg -->
     <xacro:if value="${prefix == 'left'}">
@@ -225,14 +230,16 @@
       <link name="${prefix}_launcher"><inertial><mass value="1.5"/><inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.005"/><origin xyz="0 0 -0.12"/></inertial><visual><origin xyz="0 0 -0.12" rpy="0 1.57 0"/><geometry><box size="0.23 0.04 0.04"/></geometry><material name="olive_drab"/></visual></link>
       <joint name="${prefix}_launcher_joint" type="fixed"><parent link="${prefix}_forearm"/><child link="${prefix}_launcher"/><origin xyz="0.02 0 -0.34" rpy="0 0 0"/></joint>
     </xacro:if>
-    <!-- wrist 2 DOF -->
-    <link name="${prefix}_wrist_pitch"><inertial><mass value="0.6"/><inertia ixx="0.004" ixy="0" ixz="0" iyy="0.004" iyz="0" izz="0.002"/></inertial></link>
+    <!-- wrist 2 DOF — housing -->
+    <link name="${prefix}_wrist_pitch"><inertial><mass value="0.6"/><inertia ixx="0.004" ixy="0" ixz="0" iyy="0.004" iyz="0" izz="0.002"/></inertial>
+      <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><cylinder radius="0.035" length="0.04"/></geometry><material name="dark_grey"/></visual></link>
     <joint name="${prefix}_wrist_pitch" type="revolute">
       <parent link="${prefix}_forearm"/><child link="${prefix}_wrist_pitch"/>
       <origin xyz="0 0 -0.34" rpy="0 0 0"/>
       <axis xyz="0 1 0"/><limit lower="-1.047" upper="1.047" effort="80" velocity="3.0"/>
     </joint>
-    <link name="${prefix}_wrist_roll"><inertial><mass value="0.5"/><inertia ixx="0.003" ixy="0" ixz="0" iyy="0.003" iyz="0" izz="0.002"/></inertial></link>
+    <link name="${prefix}_wrist_roll"><inertial><mass value="0.5"/><inertia ixx="0.003" ixy="0" ixz="0" iyy="0.003" iyz="0" izz="0.002"/></inertial>
+      <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><sphere radius="0.030"/></geometry><material name="gunmetal"/></visual></link>
     <joint name="${prefix}_wrist_roll" type="revolute">
       <parent link="${prefix}_wrist_pitch"/><child link="${prefix}_wrist_roll"/>
       <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -251,20 +258,23 @@
 
   <!-- ========== LEGS 12 DOF (hip 3 + knee1 + ankle2 per leg) ========== -->
   <xacro:macro name="leg" params="prefix y">
-    <!-- hip yaw -> roll -> pitch dummy chain -->
-    <link name="${prefix}_hip_yaw"><inertial><mass value="0.8"/><inertia ixx="0.008" ixy="0" ixz="0" iyy="0.008" iyz="0" izz="0.008"/></inertial></link>
+    <!-- hip 3DOF — ball cup 95mm + hinge housings aesthetic -->
+    <link name="${prefix}_hip_yaw"><inertial><mass value="0.8"/><inertia ixx="0.008" ixy="0" ixz="0" iyy="0.008" iyz="0" izz="0.008"/></inertial>
+      <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><sphere radius="0.050"/></geometry><material name="gunmetal"/></visual></link>
     <joint name="${prefix}_hip_yaw" type="revolute">
       <parent link="base_link"/><child link="${prefix}_hip_yaw"/>
       <origin xyz="0 ${y} -0.085" rpy="0 0 0"/>
       <axis xyz="0 0 1"/><limit lower="-0.524" upper="0.524" effort="200" velocity="2.0"/>
     </joint>
-    <link name="${prefix}_hip_roll"><inertial><mass value="0.8"/><inertia ixx="0.008" ixy="0" ixz="0" iyy="0.008" iyz="0" izz="0.008"/></inertial></link>
+    <link name="${prefix}_hip_roll"><inertial><mass value="0.8"/><inertia ixx="0.008" ixy="0" ixz="0" iyy="0.008" iyz="0" izz="0.008"/></inertial>
+      <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><sphere radius="0.045"/></geometry><material name="dark_grey"/></visual></link>
     <joint name="${prefix}_hip_roll" type="revolute">
       <parent link="${prefix}_hip_yaw"/><child link="${prefix}_hip_roll"/>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <axis xyz="1 0 0"/><limit lower="-0.785" upper="0.785" effort="280" velocity="2.0"/>
     </joint>
-    <link name="${prefix}_hip_pitch"><inertial><mass value="1.0"/><inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/></inertial></link>
+    <link name="${prefix}_hip_pitch"><inertial><mass value="1.0"/><inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/></inertial>
+      <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><sphere radius="0.045"/></geometry><material name="gunmetal"/></visual></link>
     <joint name="${prefix}_hip_pitch" type="revolute">
       <parent link="${prefix}_hip_roll"/><child link="${prefix}_hip_pitch"/>
       <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -290,14 +300,16 @@
     </joint>
     <link name="armour_${prefix}_shin"><inertial><mass value="0.8"/><inertia ixx="0.015" ixy="0" ixz="0" iyy="0.015" iyz="0" izz="0.008"/><origin xyz="0 0 0"/></inertial><visual><origin xyz="0.07 0 -0.24" rpy="0 0 0"/><geometry><box size="0.015 0.10 0.28"/></geometry><material name="flat_black"/></visual></link>
     <joint name="armour_${prefix}_shin_joint" type="fixed"><parent link="${prefix}_shin"/><child link="armour_${prefix}_shin"/><origin xyz="0 0 0" rpy="0 0 0"/></joint>
-    <!-- ankle pitch -> roll -->
-    <link name="${prefix}_ankle_pitch"><inertial><mass value="0.6"/><inertia ixx="0.006" ixy="0" ixz="0" iyy="0.006" iyz="0" izz="0.004"/></inertial></link>
+    <!-- ankle pitch -> roll — gimbal housing 80mm -->
+    <link name="${prefix}_ankle_pitch"><inertial><mass value="0.6"/><inertia ixx="0.006" ixy="0" ixz="0" iyy="0.006" iyz="0" izz="0.004"/></inertial>
+      <visual><origin xyz="0 0 0" rpy="0 1.5708 0"/><geometry><cylinder radius="0.040" length="0.08"/></geometry><material name="dark_grey"/></visual></link>
     <joint name="${prefix}_ankle_pitch" type="revolute">
       <parent link="${prefix}_shin"/><child link="${prefix}_ankle_pitch"/>
       <origin xyz="0 0 -0.48" rpy="0 0 0"/>
       <axis xyz="0 1 0"/><limit lower="-0.698" upper="0.698" effort="220" velocity="3.0"/>
     </joint>
-    <link name="${prefix}_ankle_roll"><inertial><mass value="0.5"/><inertia ixx="0.005" ixy="0" ixz="0" iyy="0.005" iyz="0" izz="0.003"/></inertial></link>
+    <link name="${prefix}_ankle_roll"><inertial><mass value="0.5"/><inertia ixx="0.005" ixy="0" ixz="0" iyy="0.005" iyz="0" izz="0.003"/></inertial>
+      <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><sphere radius="0.035"/></geometry><material name="gunmetal"/></visual></link>
     <joint name="${prefix}_ankle_roll" type="revolute">
       <parent link="${prefix}_ankle_pitch"/><child link="${prefix}_ankle_roll"/>
       <origin xyz="0 0 0" rpy="0 0 0"/>
