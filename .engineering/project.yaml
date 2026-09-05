@@ -14,8 +14,9 @@ config:
   - .gitignore
 git:
   branch: main
-  commit: 758f294049b15faba5c97e7e79dca7e3b922e5bd
+  commit: bfba7e918d6439d0d2ce274eb20fe696b95f2f68
   log:
+    - 'bfba7e9 chore: sync handoff 80 files 204 edges ops 5/6'
     - >-
       758f294 feat(ares1): hard rename acsr_description→ares1_description per arc.md 447kg 2430mm
       26-DOF meshes MuJoCo, 16 STL trimesh, ares1_controllers, mujoco placeholder, 41 tests
@@ -35,8 +36,24 @@ git:
     - >-
       ea3b956 feat: ACSR sim scaffolding — URDF 2.5m/450kg, shield/weapon/drone/battery/threat
       nodes, Gz worlds, Nav2, 26 tests, colcon build OK
-  dirty: false
-  status: []
+  dirty: true
+  status:
+    - M scripts/gen_ares1_meshes.py
+    - ' M src/ares1_description/meshes/collision/foot_col.stl'
+    - ' M src/ares1_description/meshes/collision/forearm_col.stl'
+    - ' M src/ares1_description/meshes/collision/hand_col.stl'
+    - ' M src/ares1_description/meshes/collision/head_col.stl'
+    - ' M src/ares1_description/meshes/collision/shin_col.stl'
+    - ' M src/ares1_description/meshes/collision/thigh_col.stl'
+    - ' M src/ares1_description/meshes/collision/upper_arm_col.stl'
+    - ' M src/ares1_description/meshes/visual/foot.stl'
+    - ' M src/ares1_description/meshes/visual/forearm.stl'
+    - ' M src/ares1_description/meshes/visual/hand.stl'
+    - ' M src/ares1_description/meshes/visual/head.stl'
+    - ' M src/ares1_description/meshes/visual/shin.stl'
+    - ' M src/ares1_description/meshes/visual/thigh.stl'
+    - ' M src/ares1_description/meshes/visual/upper_arm.stl'
+    - ' M src/ares1_description/urdf/ares1.urdf.xacro'
 envVars: []
 dependencies: {}
 structure:
@@ -54,4 +71,4 @@ structure:
   - src/
   - tests/
 projectType: robotics-project
-analyzedAt: '2026-09-04T15:54:22.107Z'
+analyzedAt: '2026-09-05T05:31:31.287Z'

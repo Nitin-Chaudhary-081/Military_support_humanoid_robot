@@ -65,26 +65,27 @@ def chest():
     m = trimesh.Trimesh(vertices=vertices, faces=faces, process=True)
     return m
 
-# 3 thigh — cylindrical flat front Ø200 L520 (20-sided)
+# 3 thigh — cylindrical flat front Ø200 L520 (20-sided) — origin at TOP (joint attachment) per visual-assembly fix
 def thigh():
     m = trimesh.creation.cylinder(radius=0.10, height=0.520, sections=20)
+    m.apply_translation([0, 0, -0.260])
     return m
 
-# 4 shin — D-profile extrusion 160x140x480 (32 faces target) -> use box as proxy
+# 4 shin — D-profile extrusion 160x140x480 (32 faces target) -> use box as proxy — origin at TOP
 def shin():
-    # D-profile: flat front, curved rear => use cylinder half + box
-    # Simple: box for now
     m = trimesh.creation.box(extents=[0.160, 0.140, 0.480])
+    m.apply_translation([0, 0, -0.240])
     return m
 
-# 5 foot — organic foot 380x200 heel80 toe40
+# 5 foot — organic foot 380x200 heel80 toe40 — origin at ankle TOP (0,0,0)
 def foot():
-    # Heel box + toe wedge
     heel = trimesh.creation.box(extents=[0.220, 0.200, 0.080])
     heel.apply_translation([0.080, 0, 0.040])
     toe = trimesh.creation.box(extents=[0.160, 0.200, 0.040])
     toe.apply_translation([-0.100, 0, 0.020])
     m = trimesh.util.concatenate([heel, toe])
+    # translate so top (max_z = 0.08 heel) is at 0
+    m.apply_translation([0, 0, -0.080])
     return m
 
 # 6 abdomen_ring — 300 faces target, cylinder 360 outer 300 inner 60 height
@@ -97,27 +98,27 @@ def shoulder_yoke():
     m = trimesh.creation.box(extents=[0.640, 0.120, 0.080])
     return m
 
-# 8 upper_arm — octagonal tapered 120x100 ->100x85 L380
+# 8 upper_arm — octagonal tapered 120x100 ->100x85 L380 — origin at TOP (shoulder)
 def upper_arm():
     m = trimesh.creation.cylinder(radius=0.060, height=0.380, sections=8)
+    m.apply_translation([0, 0, -0.190])
     return m
 
-# 9 forearm — rounded rect 100x85->90x75 L340
+# 9 forearm — rounded rect 100x85->90x75 L340 — origin at TOP (elbow)
 def forearm():
     m = trimesh.creation.box(extents=[0.100, 0.085, 0.340])
+    m.apply_translation([0, 0, -0.170])
     return m
 
-# 10 hand — 4-finger fist 140x90x160 64 faces
+# 10 hand — 4-finger fist 140x90x160 64 faces — origin at TOP (wrist)
 def hand():
     m = trimesh.creation.box(extents=[0.140, 0.090, 0.160])
+    m.apply_translation([0, 0, -0.080])
     return m
 
-# 11 head — chamfered box 280x260x240 + dome r90 (800 faces target)
+# 11 head — chamfered box 280x260x240 ONLY (dome removed; sensor_dome sphere provides visor per fix)
 def head():
-    box = trimesh.creation.box(extents=[0.280, 0.260, 0.240])
-    dome = trimesh.creation.icosphere(subdivisions=2, radius=0.090)
-    dome.apply_translation([0, 0, 0.120+0.045])
-    m = trimesh.util.concatenate([box, dome])
+    m = trimesh.creation.box(extents=[0.280, 0.260, 0.240])
     return m
 
 # 12 neck — tapered cylinder 70->90 diam 120 height
