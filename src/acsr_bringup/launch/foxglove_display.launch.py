@@ -17,13 +17,16 @@ def generate_launch_description():
     pkg_desc = get_package_share_directory('ares1_description')
     pkg_bringup = get_package_share_directory('acsr_bringup')
     use_sim = LaunchConfiguration('use_sim_time')
-    # Foxglove 3D panel cannot resolve package:// — rewrite visual mesh URIs to https://raw.githubusercontent.com
-    # so the browser fetches STL directly (collision keeps package:// for Gazebo). Verified: 15/16 visual meshes in /meshes/visual/*.stl
-    raw_base = 'https://raw.githubusercontent.com/Nitin-Chaudhary-081/Military_support_humanoid_robot/main/src/ares1_description'
+    # Foxglove 3D panel cannot resolve package:// — rewrite visual mesh URIs to CORS http://
+    # Local CORS server python3 scripts/cors_http.py serves install/.../meshes at :8000 with Access-Control-Allow-Origin *
+    # Use http://localhost:8000 via SSH tunnel (ssh -L 8000:localhost:8000) or http://13.207.111.213:8000 via Lightsail open port 8000
+    # Fallback https://raw.githubusercontent.com/.../visual/*.stl if local http unreachable (but raw lacks CORS — prefer local)
+    raw_base = 'http://localhost:8000'
+    # Alternative public: http://13.207.111.213:8000  and https raw: https://raw.githubusercontent.com/Nitin-Chaudhary-081/Military_support_humanoid_robot/main/src/ares1_description
     xacro_path = os.path.join(pkg_desc, 'urdf', 'ares1.urdf.xacro')
     foxglove_urdf_cmd = [
         'bash -c "xacro ', xacro_path,
-        ' | sed \'s|package://ares1_description|', raw_base, '|g\'"'
+        ' | sed \'s|package://ares1_description/meshes|', raw_base, '|g\'"'
     ]
     return LaunchDescription([
         DeclareLaunchArgument('use_sim_time', default_value='false', description='Use sim time false for static display'),

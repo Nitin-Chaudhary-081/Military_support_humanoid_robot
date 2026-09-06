@@ -1,12 +1,12 @@
 languages:
   counts:
     markdown: 7
-    python: 63
+    python: 61
     yaml: 12
     json: 2
     shell: 79
   primary: shell
-  totalFiles: 163
+  totalFiles: 161
 frameworks: []
 packageManagers: []
 entryPoints: []
@@ -14,8 +14,12 @@ config:
   - .gitignore
 git:
   branch: main
-  commit: 705ba6d7c384f49f9cfcdab252166704d3d2b445
+  commit: 15b8183360b81d1224128829f3399aab9a3fd0dd
   log:
+    - >-
+      15b8183 feat(colab): high 50K detailed meshes 46K faces via Colab T4 — chest 12K pelvis 2K
+      head 5K forearm 7K hand 4K, sleek white humanoid image, 2.3M STL, 69/68 447kg
+    - 972334a Add files via upload
     - >-
       705ba6d fix(foxglove): serve meshes via https raw.githubusercontent.com — package:// → https
       for browser, 15 visual STL now load solid not wireframe TF
@@ -38,48 +42,16 @@ git:
     - >-
       c4a08b3 feat(foxglove): bridge ws://8765 for browser Foxglove Studio, acsr_full
       use_foxglove:=true, layout json, docs/foxglove.md, R-011 VERIFIED 9/18
-    - >-
-      b309570 feat(ops): field_test + ops runbook + calibrate.sh + integration test, lifecycle ops
-      IN_PROGRESS 5/6 phases, risks MITIGATED
-    - '4d88862 chore: advance lifecycle to validate (4/6), handoff md, 10 reqs 7 verified'
   dirty: true
   status:
-    - M src/ares1_description/meshes/collision/abdomen_ring_col.stl
-    - ' M src/ares1_description/meshes/collision/chest_col.stl'
-    - ' M src/ares1_description/meshes/collision/foot_col.stl'
-    - ' M src/ares1_description/meshes/collision/forearm_col.stl'
-    - ' M src/ares1_description/meshes/collision/hand_col.stl'
-    - ' M src/ares1_description/meshes/collision/head_col.stl'
-    - ' M src/ares1_description/meshes/collision/missile_pod_col.stl'
-    - ' M src/ares1_description/meshes/collision/neck_col.stl'
-    - ' M src/ares1_description/meshes/collision/pelvis_col.stl'
-    - ' M src/ares1_description/meshes/collision/shin_col.stl'
-    - ' M src/ares1_description/meshes/collision/thigh_col.stl'
-    - ' M src/ares1_description/meshes/collision/upper_arm_col.stl'
-    - ' M src/ares1_description/meshes/visual/abdomen_ring.stl'
-    - ' M src/ares1_description/meshes/visual/chest.stl'
-    - ' M src/ares1_description/meshes/visual/drone_fixed_wing.stl'
-    - ' M src/ares1_description/meshes/visual/drone_quad.stl'
-    - ' M src/ares1_description/meshes/visual/foot.stl'
-    - ' M src/ares1_description/meshes/visual/forearm.stl'
-    - ' M src/ares1_description/meshes/visual/hand.stl'
-    - ' M src/ares1_description/meshes/visual/head.stl'
-    - ' M src/ares1_description/meshes/visual/missile_pod.stl'
-    - ' M src/ares1_description/meshes/visual/neck.stl'
-    - ' M src/ares1_description/meshes/visual/pelvis.stl'
-    - ' M src/ares1_description/meshes/visual/shield.stl'
-    - ' M src/ares1_description/meshes/visual/shin.stl'
-    - ' M src/ares1_description/meshes/visual/shoulder_yoke.stl'
-    - ' M src/ares1_description/meshes/visual/thigh.stl'
-    - ' M src/ares1_description/meshes/visual/upper_arm.stl'
-    - '?? ares1_new.urdf'
-    - '?? colab/'
-    - '?? gen_urdf.py'
-    - '?? launch_foxglove.py'
-    - '?? meshes/'
-    - '?? result.glb'
-    - '?? scripts/split_mesh.py'
-    - '?? single_color.stl'
+    - M .engineering/events/events.jsonl
+    - D  single_color.stl
+    - ' M src/acsr_bringup/launch/foxglove_display.launch.py'
+    - ' M src/ares1_description/config/ares1_controllers.yaml'
+    - ' M src/ares1_description/urdf/ares1.urdf.xacro'
+    - ' M tests/test_ares1_geometry.py'
+    - ' M tests/test_urdf.py'
+    - '?? scripts/cors_http.py'
 envVars: []
 dependencies: {}
 structure:
@@ -87,22 +59,16 @@ structure:
   - __pycache__/
   - arc.md
   - ares1.urdf
-  - ares1_new.urdf
   - build/
   - colab/
   - config/
   - docs/
-  - gen_urdf.py
   - goal.md
   - install/
-  - launch_foxglove.py
   - log/
-  - meshes/
   - mujoco/
-  - result.glb
   - scripts/
-  - single_color.stl
   - src/
   - tests/
 projectType: robotics-project
-analyzedAt: '2026-09-06T10:42:16.025Z'
+analyzedAt: '2026-09-06T19:06:52.357Z'

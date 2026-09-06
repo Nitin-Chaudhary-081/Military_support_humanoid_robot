@@ -89,16 +89,6 @@ nodes:
     language: md
     evidence: CODE
     verification: VERIFIED
-  - id: gen_urdf.py
-    type: File
-    label: gen_urdf.py
-    path: gen_urdf.py
-    ext: .py
-    size: 4262
-    hash: 7916ee886f6f
-    language: py
-    evidence: CODE
-    verification: VERIFIED
   - id: goal.md
     type: File
     label: goal.md
@@ -174,8 +164,8 @@ nodes:
     label: foxglove_display.launch.py
     path: install/acsr_bringup/share/acsr_bringup/launch/foxglove_display.launch.py
     ext: .py
-    size: 2868
-    hash: 48cf0a7b1d81
+    size: 3196
+    hash: bd6d129c5cf2
     language: py
     evidence: CODE
     verification: VERIFIED
@@ -224,8 +214,8 @@ nodes:
     label: ares1_controllers.yaml
     path: install/ares1_description/share/ares1_description/config/ares1_controllers.yaml
     ext: .yaml
-    size: 1974
-    hash: 027849032ddd
+    size: 1367
+    hash: 65d6fcb4bf0a
     language: yaml
     evidence: CODE
     verification: VERIFIED
@@ -409,13 +399,13 @@ nodes:
     language: py
     evidence: CODE
     verification: VERIFIED
-  - id: launch_foxglove.py
+  - id: scripts/cors_http.py
     type: File
-    label: launch_foxglove.py
-    path: launch_foxglove.py
+    label: cors_http.py
+    path: scripts/cors_http.py
     ext: .py
-    size: 787
-    hash: 1fd595c56103
+    size: 866
+    hash: b545345ecf6f
     language: py
     evidence: CODE
     verification: VERIFIED
@@ -456,16 +446,6 @@ nodes:
     ext: .py
     size: 6809
     hash: b1dd28e247fe
-    language: py
-    evidence: CODE
-    verification: VERIFIED
-  - id: scripts/split_mesh.py
-    type: File
-    label: split_mesh.py
-    path: scripts/split_mesh.py
-    ext: .py
-    size: 6938
-    hash: 4e6b8e516818
     language: py
     evidence: CODE
     verification: VERIFIED
@@ -514,8 +494,8 @@ nodes:
     label: foxglove_display.launch.py
     path: src/acsr_bringup/launch/foxglove_display.launch.py
     ext: .py
-    size: 2868
-    hash: 48cf0a7b1d81
+    size: 3196
+    hash: bd6d129c5cf2
     language: py
     evidence: CODE
     verification: VERIFIED
@@ -564,8 +544,8 @@ nodes:
     label: ares1_controllers.yaml
     path: src/ares1_description/config/ares1_controllers.yaml
     ext: .yaml
-    size: 1974
-    hash: 027849032ddd
+    size: 1367
+    hash: 65d6fcb4bf0a
     language: yaml
     evidence: CODE
     verification: VERIFIED
@@ -754,8 +734,8 @@ nodes:
     label: test_ares1_geometry.py
     path: tests/test_ares1_geometry.py
     ext: .py
-    size: 3884
-    hash: 5875cf729f46
+    size: 3969
+    hash: 7afe92e020a6
     language: py
     evidence: CODE
     verification: VERIFIED
@@ -824,8 +804,8 @@ nodes:
     label: test_urdf.py
     path: tests/test_urdf.py
     ext: .py
-    size: 1085
-    hash: 69aee884ab75
+    size: 1068
+    hash: d1278a1cbc44
     language: py
     evidence: CODE
     verification: VERIFIED
@@ -854,18 +834,6 @@ edges:
     evidence: INFERRED
   - from: colab/ares1_high50k.py
     to: colab/numpy
-    relationship: imports
-    evidence: INFERRED
-  - from: gen_urdf.py
-    to: trimesh
-    relationship: imports
-    evidence: INFERRED
-  - from: gen_urdf.py
-    to: numpy
-    relationship: imports
-    evidence: INFERRED
-  - from: gen_urdf.py
-    to: pathlib
     relationship: imports
     evidence: INFERRED
   - from: install/_local_setup_util_ps1.py
@@ -1236,17 +1204,9 @@ edges:
     to: weapon_control.weapon_logic
     relationship: depends_on
     evidence: INFERRED
-  - from: launch_foxglove.py
-    to: launch
-    relationship: imports
-    evidence: INFERRED
-  - from: launch_foxglove.py
-    to: launch_ros.actions
+  - from: scripts/cors_http.py
+    to: http.server
     relationship: depends_on
-    evidence: INFERRED
-  - from: launch_foxglove.py
-    to: os
-    relationship: imports
     evidence: INFERRED
   - from: scripts/eval_battery.py
     to: scripts/sys
@@ -1279,34 +1239,6 @@ edges:
   - from: scripts/gen_ares1_meshes.py
     to: scripts/math
     relationship: imports
-    evidence: INFERRED
-  - from: scripts/split_mesh.py
-    to: scripts/argparse
-    relationship: imports
-    evidence: INFERRED
-  - from: scripts/split_mesh.py
-    to: scripts/pathlib
-    relationship: imports
-    evidence: INFERRED
-  - from: scripts/split_mesh.py
-    to: scripts/sys
-    relationship: imports
-    evidence: INFERRED
-  - from: scripts/split_mesh.py
-    to: scripts/numpy
-    relationship: imports
-    evidence: INFERRED
-  - from: scripts/split_mesh.py
-    to: scripts/trimesh
-    relationship: imports
-    evidence: INFERRED
-  - from: scripts/split_mesh.py
-    to: sklearn.cluster
-    relationship: depends_on
-    evidence: INFERRED
-  - from: scripts/split_mesh.py
-    to: scipy.spatial
-    relationship: depends_on
     evidence: INFERRED
   - from: src/acsr_bringup/launch/acsr_full.launch.py
     to: src/acsr_bringup/launch/os
@@ -1724,4 +1656,4 @@ edges:
     to: weapon_control.weapon_logic
     relationship: depends_on
     evidence: INFERRED
-builtAt: '2026-09-06T10:42:16.120Z'
+builtAt: '2026-09-06T19:06:52.465Z'
