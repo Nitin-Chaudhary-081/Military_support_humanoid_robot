@@ -1,4 +1,4 @@
-level0: Project ms_robot — robotics-project. Primary language shell. 80 files, 204 dependencies.
+level0: Project ms_robot — robotics-project. Primary language shell. 84 files, 221 dependencies.
 level1:
   architecture:
     nodes:
@@ -20,6 +20,16 @@ level1:
         size: 26829
         hash: f07c996c0fb3
         language: md
+        evidence: CODE
+        verification: VERIFIED
+      - id: colab/ares1_high50k.py
+        type: File
+        label: ares1_high50k.py
+        path: colab/ares1_high50k.py
+        ext: .py
+        size: 7017
+        hash: 05fbd502a92e
+        language: py
         evidence: CODE
         verification: VERIFIED
       - id: config/ares1_params.yaml
@@ -80,6 +90,16 @@ level1:
         size: 2777
         hash: 7f0ac36f28b2
         language: md
+        evidence: CODE
+        verification: VERIFIED
+      - id: gen_urdf.py
+        type: File
+        label: gen_urdf.py
+        path: gen_urdf.py
+        ext: .py
+        size: 4262
+        hash: 7916ee886f6f
+        language: py
         evidence: CODE
         verification: VERIFIED
       - id: goal.md
@@ -392,6 +412,16 @@ level1:
         language: py
         evidence: CODE
         verification: VERIFIED
+      - id: launch_foxglove.py
+        type: File
+        label: launch_foxglove.py
+        path: launch_foxglove.py
+        ext: .py
+        size: 787
+        hash: 1fd595c56103
+        language: py
+        evidence: CODE
+        verification: VERIFIED
       - id: scripts/eval_battery.py
         type: File
         label: eval_battery.py
@@ -429,6 +459,16 @@ level1:
         ext: .py
         size: 6809
         hash: b1dd28e247fe
+        language: py
+        evidence: CODE
+        verification: VERIFIED
+      - id: scripts/split_mesh.py
+        type: File
+        label: split_mesh.py
+        path: scripts/split_mesh.py
+        ext: .py
+        size: 6938
+        hash: 4e6b8e516818
         language: py
         evidence: CODE
         verification: VERIFIED
@@ -803,6 +843,34 @@ level1:
         evidence: CODE
         verification: VERIFIED
     edges:
+      - from: colab/ares1_high50k.py
+        to: colab/pathlib
+        relationship: imports
+        evidence: INFERRED
+      - from: colab/ares1_high50k.py
+        to: colab/trimesh
+        relationship: imports
+        evidence: INFERRED
+      - from: colab/ares1_high50k.py
+        to: colab/trimesh
+        relationship: imports
+        evidence: INFERRED
+      - from: colab/ares1_high50k.py
+        to: colab/numpy
+        relationship: imports
+        evidence: INFERRED
+      - from: gen_urdf.py
+        to: trimesh
+        relationship: imports
+        evidence: INFERRED
+      - from: gen_urdf.py
+        to: numpy
+        relationship: imports
+        evidence: INFERRED
+      - from: gen_urdf.py
+        to: pathlib
+        relationship: imports
+        evidence: INFERRED
       - from: install/_local_setup_util_ps1.py
         to: install/argparse
         relationship: imports
@@ -1171,6 +1239,18 @@ level1:
         to: weapon_control.weapon_logic
         relationship: depends_on
         evidence: INFERRED
+      - from: launch_foxglove.py
+        to: launch
+        relationship: imports
+        evidence: INFERRED
+      - from: launch_foxglove.py
+        to: launch_ros.actions
+        relationship: depends_on
+        evidence: INFERRED
+      - from: launch_foxglove.py
+        to: os
+        relationship: imports
+        evidence: INFERRED
       - from: scripts/eval_battery.py
         to: scripts/sys
         relationship: imports
@@ -1202,6 +1282,34 @@ level1:
       - from: scripts/gen_ares1_meshes.py
         to: scripts/math
         relationship: imports
+        evidence: INFERRED
+      - from: scripts/split_mesh.py
+        to: scripts/argparse
+        relationship: imports
+        evidence: INFERRED
+      - from: scripts/split_mesh.py
+        to: scripts/pathlib
+        relationship: imports
+        evidence: INFERRED
+      - from: scripts/split_mesh.py
+        to: scripts/sys
+        relationship: imports
+        evidence: INFERRED
+      - from: scripts/split_mesh.py
+        to: scripts/numpy
+        relationship: imports
+        evidence: INFERRED
+      - from: scripts/split_mesh.py
+        to: scripts/trimesh
+        relationship: imports
+        evidence: INFERRED
+      - from: scripts/split_mesh.py
+        to: sklearn.cluster
+        relationship: depends_on
+        evidence: INFERRED
+      - from: scripts/split_mesh.py
+        to: scipy.spatial
+        relationship: depends_on
         evidence: INFERRED
       - from: src/acsr_bringup/launch/acsr_full.launch.py
         to: src/acsr_bringup/launch/os
@@ -1619,7 +1727,7 @@ level1:
         to: weapon_control.weapon_logic
         relationship: depends_on
         evidence: INFERRED
-    builtAt: '2026-09-05T05:53:53.505Z'
+    builtAt: '2026-09-06T10:42:16.120Z'
   dataflow:
     flows: []
     note: Dataflow INFERRED from imports; verify with runtime
@@ -1731,22 +1839,30 @@ level1:
         confidence: high
         date: '2026-09-04'
   graphSummary:
-    nodes: 80
-    edges: 204
+    nodes: 84
+    edges: 221
 level2:
   subsystems: []
   structure:
     - README.md
+    - __pycache__/
     - arc.md
     - ares1.urdf
+    - ares1_new.urdf
     - build/
+    - colab/
     - config/
     - docs/
+    - gen_urdf.py
     - goal.md
     - install/
+    - launch_foxglove.py
     - log/
+    - meshes/
     - mujoco/
+    - result.glb
     - scripts/
+    - single_color.stl
     - src/
     - tests/
 level3:
@@ -1759,6 +1875,9 @@ level4:
     - path: arc.md
       size: 26829
       hash: f07c996c0fb3
+    - path: colab/ares1_high50k.py
+      size: 7017
+      hash: 05fbd502a92e
     - path: config/ares1_params.yaml
       size: 2651
       hash: e0ec3eb11524
@@ -1777,6 +1896,9 @@ level4:
     - path: docs/ops.md
       size: 2777
       hash: 7f0ac36f28b2
+    - path: gen_urdf.py
+      size: 4262
+      hash: 7916ee886f6f
     - path: goal.md
       size: 8125
       hash: 36da0a81deed
@@ -1807,17 +1929,11 @@ level4:
     - path: install/acsr_gazebo/share/acsr_gazebo/launch/acsr_world.launch.py
       size: 2981
       hash: 3955e4e9b985
-    - path: install/acsr_nav/share/acsr_nav/config/nav2_params.yaml
-      size: 3124
-      hash: bc7acf228f6c
-    - path: install/acsr_nav/share/acsr_nav/launch/nav.launch.py
-      size: 699
-      hash: 03303b3ca874
-  note: Showing 20/80 files. Full list in architecture/graph.yaml
+  note: Showing 20/84 files. Full list in architecture/graph.yaml
 level5: >-
   Use `engineering explain --file <path>` for function/class details (requires AST parsing —
   INFERRED until implemented)
 level6: >-
   Actual source code lives in repository. Context system avoids loading all files; request specific
   file via read.
-generatedAt: '2026-09-05T05:53:53.649Z'
+generatedAt: '2026-09-06T10:42:16.236Z'

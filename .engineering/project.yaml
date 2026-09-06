@@ -1,12 +1,12 @@
 languages:
   counts:
     markdown: 7
+    python: 63
     yaml: 12
-    python: 59
     json: 2
     shell: 79
   primary: shell
-  totalFiles: 159
+  totalFiles: 163
 frameworks: []
 packageManagers: []
 entryPoints: []
@@ -14,8 +14,11 @@ config:
   - .gitignore
 git:
   branch: main
-  commit: c07b6e0cb4134228be2056dea30ebdb0afab280f
+  commit: 705ba6d7c384f49f9cfcdab252166704d3d2b445
   log:
+    - >-
+      705ba6d fix(foxglove): serve meshes via https raw.githubusercontent.com — package:// → https
+      for browser, 15 visual STL now load solid not wireframe TF
     - >-
       c07b6e0 fix(ares1): aesthetic linked body — rpy align chest/pelvis/yoke to Y lateral, foot toe
       forward, joint ball housings, no floating plates
@@ -39,27 +42,67 @@ git:
       b309570 feat(ops): field_test + ops runbook + calibrate.sh + integration test, lifecycle ops
       IN_PROGRESS 5/6 phases, risks MITIGATED
     - '4d88862 chore: advance lifecycle to validate (4/6), handoff md, 10 reqs 7 verified'
-    - >-
-      ea3b956 feat: ACSR sim scaffolding — URDF 2.5m/450kg, shield/weapon/drone/battery/threat
-      nodes, Gz worlds, Nav2, 26 tests, colcon build OK
   dirty: true
   status:
-    - M  src/acsr_bringup/launch/foxglove_display.launch.py
+    - M src/ares1_description/meshes/collision/abdomen_ring_col.stl
+    - ' M src/ares1_description/meshes/collision/chest_col.stl'
+    - ' M src/ares1_description/meshes/collision/foot_col.stl'
+    - ' M src/ares1_description/meshes/collision/forearm_col.stl'
+    - ' M src/ares1_description/meshes/collision/hand_col.stl'
+    - ' M src/ares1_description/meshes/collision/head_col.stl'
+    - ' M src/ares1_description/meshes/collision/missile_pod_col.stl'
+    - ' M src/ares1_description/meshes/collision/neck_col.stl'
+    - ' M src/ares1_description/meshes/collision/pelvis_col.stl'
+    - ' M src/ares1_description/meshes/collision/shin_col.stl'
+    - ' M src/ares1_description/meshes/collision/thigh_col.stl'
+    - ' M src/ares1_description/meshes/collision/upper_arm_col.stl'
+    - ' M src/ares1_description/meshes/visual/abdomen_ring.stl'
+    - ' M src/ares1_description/meshes/visual/chest.stl'
+    - ' M src/ares1_description/meshes/visual/drone_fixed_wing.stl'
+    - ' M src/ares1_description/meshes/visual/drone_quad.stl'
+    - ' M src/ares1_description/meshes/visual/foot.stl'
+    - ' M src/ares1_description/meshes/visual/forearm.stl'
+    - ' M src/ares1_description/meshes/visual/hand.stl'
+    - ' M src/ares1_description/meshes/visual/head.stl'
+    - ' M src/ares1_description/meshes/visual/missile_pod.stl'
+    - ' M src/ares1_description/meshes/visual/neck.stl'
+    - ' M src/ares1_description/meshes/visual/pelvis.stl'
+    - ' M src/ares1_description/meshes/visual/shield.stl'
+    - ' M src/ares1_description/meshes/visual/shin.stl'
+    - ' M src/ares1_description/meshes/visual/shoulder_yoke.stl'
+    - ' M src/ares1_description/meshes/visual/thigh.stl'
+    - ' M src/ares1_description/meshes/visual/upper_arm.stl'
+    - '?? ares1_new.urdf'
+    - '?? colab/'
+    - '?? gen_urdf.py'
+    - '?? launch_foxglove.py'
+    - '?? meshes/'
+    - '?? result.glb'
+    - '?? scripts/split_mesh.py'
+    - '?? single_color.stl'
 envVars: []
 dependencies: {}
 structure:
   - README.md
+  - __pycache__/
   - arc.md
   - ares1.urdf
+  - ares1_new.urdf
   - build/
+  - colab/
   - config/
   - docs/
+  - gen_urdf.py
   - goal.md
   - install/
+  - launch_foxglove.py
   - log/
+  - meshes/
   - mujoco/
+  - result.glb
   - scripts/
+  - single_color.stl
   - src/
   - tests/
 projectType: robotics-project
-analyzedAt: '2026-09-05T05:53:53.431Z'
+analyzedAt: '2026-09-06T10:42:16.025Z'

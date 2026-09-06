@@ -9,17 +9,17 @@ currentArchitecture:
   languages:
     counts:
       markdown: 7
+      python: 63
       yaml: 12
-      python: 59
       json: 2
       shell: 79
     primary: shell
-    totalFiles: 159
+    totalFiles: 163
   frameworks: []
   components: []
   graphSummary:
-    nodes: 80
-    edges: 204
+    nodes: 84
+    edges: 221
 lifecycle:
   model:
     id: robotics-project
@@ -149,8 +149,8 @@ lifecycle:
     - type: CODE
       source: .engineering/architecture/graph.yaml
       kind: FACT
-      details: 80 files
-  updatedAt: '2026-09-05T05:31:31.526Z'
+      details: 84 files
+  updatedAt: '2026-09-06T10:42:16.288Z'
 completedWork:
   - ARES-1 platform 2.43m 447kg 26-DOF mesh URDF
   - Shield 1.2x0.7m 18kg boron-carbide pivot
@@ -376,34 +376,6 @@ runtimeState:
   systemVerified: UNKNOWN
   note: CODE EXISTS != CODE WORKS. Run full verification for SYSTEM VERIFIED.
 recentChanges:
-  - timestamp: '2026-09-04T10:51:30.846Z'
-    type: verification
-    summary: Verified 8/17 claims
-    metadata:
-      total: 17
-      verified: 8
-      implemented: 6
-      unknown: 2
-      failed: 0
-      conflicting: 0
-  - timestamp: '2026-09-04T11:12:00.545Z'
-    type: architecture_changed
-    summary: Synced state from codebase
-    files: []
-  - timestamp: '2026-09-04T11:12:00.970Z'
-    type: verification
-    summary: Verified 9/18 claims
-    metadata:
-      total: 18
-      verified: 9
-      implemented: 6
-      unknown: 2
-      failed: 0
-      conflicting: 0
-  - timestamp: '2026-09-04T15:53:39.134Z'
-    type: architecture_changed
-    summary: Synced state from codebase
-    files: []
   - timestamp: '2026-09-04T15:53:39.784Z'
     type: verification
     summary: Verified 7/18 claims
@@ -450,6 +422,28 @@ recentChanges:
       unknown: 1
       failed: 0
       conflicting: 0
+  - timestamp: '2026-09-05T05:44:58.201Z'
+    type: architecture_changed
+    summary: Synced state from codebase
+    files: []
+  - timestamp: '2026-09-05T05:53:53.695Z'
+    type: architecture_changed
+    summary: Synced state from codebase
+    files: []
+  - timestamp: '2026-09-06T10:42:16.292Z'
+    type: architecture_changed
+    summary: Synced state from codebase
+    files: []
+  - timestamp: '2026-09-06T10:42:16.752Z'
+    type: verification
+    summary: Verified 10/19 claims
+    metadata:
+      total: 19
+      verified: 10
+      implemented: 7
+      unknown: 1
+      failed: 0
+      conflicting: 0
 unverifiedAssumptions:
   - Dependencies have no known vulnerabilities
 conflicts: []
@@ -457,5 +451,5 @@ highestRisks:
   - R-010
 nextRecommendedActions:
   - 'Implement R-010: Three hard problems quantified'
-generatedAt: '2026-09-05T05:31:35.200Z'
+generatedAt: '2026-09-06T10:42:27.685Z'
 evidencePolicy: All claims require evidence; UNKNOWN is valid. See evidence.yaml
