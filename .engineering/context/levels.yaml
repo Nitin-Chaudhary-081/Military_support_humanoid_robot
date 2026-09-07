@@ -217,8 +217,8 @@ level1:
         label: ares1_controllers.yaml
         path: install/ares1_description/share/ares1_description/config/ares1_controllers.yaml
         ext: .yaml
-        size: 1367
-        hash: 65d6fcb4bf0a
+        size: 1974
+        hash: 027849032ddd
         language: yaml
         evidence: CODE
         verification: VERIFIED
@@ -547,8 +547,8 @@ level1:
         label: ares1_controllers.yaml
         path: src/ares1_description/config/ares1_controllers.yaml
         ext: .yaml
-        size: 1367
-        hash: 65d6fcb4bf0a
+        size: 1974
+        hash: 027849032ddd
         language: yaml
         evidence: CODE
         verification: VERIFIED
@@ -737,8 +737,8 @@ level1:
         label: test_ares1_geometry.py
         path: tests/test_ares1_geometry.py
         ext: .py
-        size: 4225
-        hash: f2164be17247
+        size: 4299
+        hash: db20d7525fb1
         language: py
         evidence: CODE
         verification: VERIFIED
@@ -807,8 +807,8 @@ level1:
         label: test_urdf.py
         path: tests/test_urdf.py
         ext: .py
-        size: 1068
-        hash: d1278a1cbc44
+        size: 1110
+        hash: aba229e07e12
         language: py
         evidence: CODE
         verification: VERIFIED
@@ -1659,7 +1659,7 @@ level1:
         to: weapon_control.weapon_logic
         relationship: depends_on
         evidence: INFERRED
-    builtAt: '2026-09-07T05:17:27.247Z'
+    builtAt: '2026-09-07T05:23:37.285Z'
   dataflow:
     flows: []
     note: Dataflow INFERRED from imports; verify with runtime
@@ -1862,4 +1862,4 @@ level5: >-
 level6: >-
   Actual source code lives in repository. Context system avoids loading all files; request specific
   file via read.
-generatedAt: '2026-09-07T05:17:27.374Z'
+generatedAt: '2026-09-07T05:23:37.445Z'

@@ -5,7 +5,10 @@ controller_manager:
       type: joint_state_broadcaster/JointStateBroadcaster
     ares1_controller:
       type: joint_trajectory_controller/JointTrajectoryController
-    # shield/pod/drone removed — weapon-free clean no mounts (re-add after build)
+    shield_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
+    pod_controller:
+      type: joint_trajectory_controller/JointTrajectoryController
 
 # 26-DOF per arc.md 509 — neck2 + shoulder6 + elbow2 + wrist4 + hip6 + knee2 + ankle4
 ares1_controller:
@@ -44,6 +47,26 @@ ares1_controller:
     allow_partial_joints_goal: true
     constraints:
       goal_time: 0.8
+      stopped_velocity_tolerance: 0.05
+
+shield_controller:
+  ros__parameters:
+    joints: [shield_pivot]
+    command_interfaces: [position]
+    state_interfaces: [position, velocity]
+    state_publish_rate: 50.0
+    constraints:
+      goal_time: 0.4
+      stopped_velocity_tolerance: 0.05
+
+pod_controller:
+  ros__parameters:
+    joints: [pod_left_joint, pod_right_joint]
+    command_interfaces: [position]
+    state_interfaces: [position, velocity]
+    state_publish_rate: 20.0
+    constraints:
+      goal_time: 0.6
       stopped_velocity_tolerance: 0.05
 
 joint_state_broadcaster:

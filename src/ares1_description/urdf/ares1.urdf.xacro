@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="ares1">
   <xacro:include filename="$(find ares1_description)/urdf/detailed_visuals.xacro"/>
-  <!-- ARES-1 v1.0 weapon-free 402kg 26-DOF — mounts removed per user, high 50K 46K faces -->
-  <!-- Meshes generated procedural at src/ares1_description/meshes/visual/*.stl scale 1 (meters) -->
+  <!-- ARES-1 v1.0 full 447kg 26-DOF + weapons — next stage after clean 402kg base -->
+  <!-- High 159 detailed human parts + weapon meshes procedural -->
   <!-- Height stack: foot80 + shin480 + knee60 + thigh520 + hip60 + pelvis180 + abdomen220 + chest380 + neck120 + head240 + dome90 = 2430 -->
-  <!-- Weight budget: 402kg weapon-free (447kg - shield18 - pods26.4 - drones2.25 - rifle4.6 - launcher1.5 =394.3 +7.7 redistributed to chest) -->
+  <!-- Weight budget: 447kg (402kg base + shield18 + pods26.4 + drones2.25 + rifle4.6 + launcher1.5) -->
   <xacro:property name="mass_head" value="12.0"/>
   <xacro:property name="mass_neck" value="6.0"/>
-  <xacro:property name="mass_chest" value="39.75"/>
+  <xacro:property name="mass_chest" value="32.0"/>
   <xacro:property name="mass_abdomen_ring" value="4.0"/>
   <xacro:property name="mass_pelvis" value="22.0"/>
   <xacro:property name="mass_shoulder_yoke" value="14.0"/>
@@ -121,7 +121,11 @@
   </link>
   <joint name="yoke_joint" type="fixed"><parent link="chest"/><child link="shoulder_yoke"/><origin xyz="0 0 0.235" rpy="0 0 0"/></joint>
 
-  <!-- Missile pods removed — weapon-free clean no mounts (re-add after build) -->
+  <!-- Missile pods 400x80x80 each 1.2kg + 3 missiles 4kg each -->
+  <link name="pod_left"><inertial><mass value="13.2"/><inertia ixx="0.18" ixy="0" ixz="0" iyy="0.18" iyz="0" izz="0.06"/><origin xyz="0 0 0"/></inertial><visual><geometry><mesh filename="package://ares1_description/meshes/visual/missile_pod.stl"/></geometry><material name="olive_drab"/></visual><collision><geometry><mesh filename="package://ares1_description/meshes/collision/missile_pod_col.stl"/></geometry></collision></link>
+  <joint name="pod_left_joint" type="revolute"><parent link="shoulder_yoke"/><child link="pod_left"/><origin xyz="0 0.28 0.06" rpy="0 0 0"/><axis xyz="0 1 0"/><limit lower="0" upper="0.785" effort="30" velocity="1.0"/></joint>
+  <link name="pod_right"><inertial><mass value="13.2"/><inertia ixx="0.18" ixy="0" ixz="0" iyy="0.18" iyz="0" izz="0.06"/><origin xyz="0 0 0"/></inertial><visual><geometry><mesh filename="package://ares1_description/meshes/visual/missile_pod.stl"/></geometry><material name="olive_drab"/></visual><collision><geometry><mesh filename="package://ares1_description/meshes/collision/missile_pod_col.stl"/></geometry></collision></link>
+  <joint name="pod_right_joint" type="revolute"><parent link="shoulder_yoke"/><child link="pod_right"/><origin xyz="0 -0.28 0.06" rpy="0 0 0"/><axis xyz="0 1 0"/><limit lower="0" upper="0.785" effort="30" velocity="1.0"/></joint>
 
   <!-- ========== NECK 70->90x120 6kg 2-DOF ========== -->
   <link name="neck_base">
@@ -149,7 +153,25 @@
   <link name="sensor_dome"><inertial><mass value="0.5"/><inertia ixx="0.005" ixy="0" ixz="0" iyy="0.005" iyz="0" izz="0.005"/></inertial><visual><origin xyz="0 0 0.14" rpy="0 0 0"/><geometry><sphere radius="0.09"/></geometry><material name="visor_blue"/></visual></link>
   <joint name="dome_joint" type="fixed"><parent link="head"/><child link="sensor_dome"/><origin xyz="0 0 0" rpy="0 0 0"/></joint>
 
-  <!-- Drone bays & shield removed — weapon-free clean no mounts (re-add after build) -->
+  <!-- ========== DRONE BAYS (left fixed 1.4kg, right quad 0.85kg) per arc.md 459 ========== -->
+  <link name="drone_fixed_wing"><inertial><mass value="${mass_drone_fixed}"/><inertia ixx="0.02" ixy="0" ixz="0" iyy="0.02" iyz="0" izz="0.015"/><origin xyz="0 0 0"/></inertial><visual><geometry><mesh filename="package://ares1_description/meshes/visual/drone_fixed_wing.stl"/></geometry><material name="flat_black"/></visual></link>
+  <joint name="drone1_fixed" type="fixed"><parent link="chest"/><child link="drone_fixed_wing"/><origin xyz="-0.16 0.11 -0.08" rpy="0 0 0"/></joint>
+  <link name="drone_quad"><inertial><mass value="${mass_drone_quad}"/><inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.008"/><origin xyz="0 0 0"/></inertial><visual><geometry><mesh filename="package://ares1_description/meshes/visual/drone_quad.stl"/></geometry><material name="flat_black"/></visual></link>
+  <joint name="drone2_fixed" type="fixed"><parent link="chest"/><child link="drone_quad"/><origin xyz="-0.16 -0.11 -0.08" rpy="0 0 0"/></joint>
+
+  <!-- ========== SHIELD 1200x700x48 18kg B4C+UHMWPE+Ti ========== -->
+  <link name="shield">
+    <inertial><mass value="${mass_shield}"/><inertia ixx="2.1" ixy="0" ixz="0" iyy="0.9" iyz="0" izz="2.4"/><origin xyz="0 0 0.60"/></inertial>
+    <visual><geometry><mesh filename="package://ares1_description/meshes/visual/shield.stl"/></geometry><material name="charcoal"/></visual>
+    <collision><geometry><mesh filename="package://ares1_description/meshes/collision/shield_col.stl"/></geometry></collision>
+  </link>
+  <joint name="shield_pivot" type="revolute">
+    <parent link="shoulder_yoke"/><child link="shield"/>
+    <origin xyz="0 0.32 0.0" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="0" upper="1.83" effort="500" velocity="3.5"/>
+    <dynamics damping="12" friction="3"/>
+  </joint>
 
   <!-- ========== ARMS 26-DOF detailed ========== -->
   <xacro:macro name="arm" params="prefix y">
@@ -201,7 +223,15 @@
     <joint name="${prefix}_forearm_fixed" type="fixed"><parent link="${prefix}_elbow_link"/><child link="${prefix}_forearm"/><origin xyz="0 0 0" rpy="0 0 0"/></joint>
     <link name="armour_${prefix}_forearm"><inertial><mass value="0.5"/><inertia ixx="0.006" ixy="0" ixz="0" iyy="0.006" iyz="0" izz="0.003"/></inertial><visual><origin xyz="0.055 0 -0.17" rpy="0 0 0"/><geometry><box size="0.010 0.06 0.20"/></geometry><material name="flat_black"/></visual></link>
     <joint name="armour_${prefix}_forearm_joint" type="fixed"><parent link="${prefix}_forearm"/><child link="armour_${prefix}_forearm"/><origin xyz="0 0 0" rpy="0 0 0"/></joint>
-    <!-- weapons removed — clean no mounts -->
+    <!-- weapons per arm: left rifle SCAR-H 4.6kg 880mm, right grenade M320 1.5kg -->
+    <xacro:if value="${prefix == 'left'}">
+      <link name="${prefix}_rifle"><inertial><mass value="4.6"/><inertia ixx="0.05" ixy="0" ixz="0" iyy="0.05" iyz="0" izz="0.02"/><origin xyz="0.44 0 0"/></inertial><visual><origin xyz="0.44 0 0" rpy="0 1.57 0"/><geometry><box size="0.88 0.04 0.06"/></geometry><material name="olive_drab"/></visual></link>
+      <joint name="${prefix}_rifle_joint" type="fixed"><parent link="${prefix}_forearm"/><child link="${prefix}_rifle"/><origin xyz="0 0 -0.34" rpy="0 0 0"/></joint>
+    </xacro:if>
+    <xacro:if value="${prefix == 'right'}">
+      <link name="${prefix}_launcher"><inertial><mass value="1.5"/><inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.005"/><origin xyz="0 0 -0.12"/></inertial><visual><origin xyz="0 0 -0.12" rpy="0 1.57 0"/><geometry><box size="0.23 0.04 0.04"/></geometry><material name="olive_drab"/></visual></link>
+      <joint name="${prefix}_launcher_joint" type="fixed"><parent link="${prefix}_forearm"/><child link="${prefix}_launcher"/><origin xyz="0.02 0 -0.34" rpy="0 0 0"/></joint>
+    </xacro:if>
     <!-- wrist 2 DOF — housing -->
     <link name="${prefix}_wrist_pitch"><inertial><mass value="0.6"/><inertia ixx="0.004" ixy="0" ixz="0" iyy="0.004" iyz="0" izz="0.002"/></inertial>
       <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><cylinder radius="0.035" length="0.04"/></geometry><material name="dark_grey"/></visual></link>
@@ -342,4 +372,5 @@
     <sensor name="right_ft" type="force_torque"><always_on>true</always_on><update_rate>1000</update_rate><topic>/ares1/sensors/foot/right/ft</topic></sensor>
   </gazebo>
 
+  <gazebo reference="shield"><material>Gazebo/Charcoal</material></gazebo>
 </robot>
