@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="ares1">
+  <xacro:include filename="$(find ares1_description)/urdf/detailed_visuals.xacro"/>
   <!-- ARES-1 v1.0 weapon-free 402kg 26-DOF — mounts removed per user, high 50K 46K faces -->
   <!-- Meshes generated procedural at src/ares1_description/meshes/visual/*.stl scale 1 (meters) -->
   <!-- Height stack: foot80 + shin480 + knee60 + thigh520 + hip60 + pelvis180 + abdomen220 + chest380 + neck120 + head240 + dome90 = 2430 -->
@@ -38,12 +39,13 @@
     </inertial>
     <visual>
       <origin xyz="0 0 0" rpy="0 0 1.5708"/>
-      <geometry><mesh filename="package://ares1_description/meshes/visual/pelvis.stl" scale="1 1 1"/></geometry>
+      <geometry><box size="0.46 0.26 0.18"/></geometry>
       <material name="dark_grey"/>
     </visual>
+    <xacro:detailed_visuals/>
     <collision>
       <origin xyz="0 0 0" rpy="0 0 1.5708"/>
-      <geometry><mesh filename="package://ares1_description/meshes/collision/pelvis_col.stl" scale="1 1 1"/></geometry>
+      <geometry><box size="0.46 0.26 0.18"/></geometry>
     </collision>
   </link>
 
@@ -55,30 +57,30 @@
   <!-- ========== ABDOMEN 3 rings (abdomen 220 = 60+25+60+25+60) 12kg total ========== -->
   <link name="abdomen_ring1">
     <inertial><mass value="${mass_abdomen_ring}"/><inertia ixx="0.12" ixy="0" ixz="0" iyy="0.12" iyz="0" izz="0.08"/><origin xyz="0 0 0"/></inertial>
-    <visual><geometry><mesh filename="package://ares1_description/meshes/visual/abdomen_ring.stl" scale="1 1 1"/></geometry><material name="dark_grey"/></visual>
-    <collision><geometry><mesh filename="package://ares1_description/meshes/collision/abdomen_ring_col.stl"/></geometry></collision>
+    <visual><geometry><cylinder radius="0.18" length="0.06"/></geometry><material name="dark_grey"/></visual>
+    <collision><geometry><cylinder radius="0.18" length="0.06"/></geometry></collision>
   </link>
   <joint name="abdomen1_fixed" type="fixed"><parent link="base_link"/><child link="abdomen_ring1"/><origin xyz="0 0 0.115" rpy="0 0 0"/></joint>
 
   <link name="abdomen_ring2">
     <inertial><mass value="${mass_abdomen_ring}"/><inertia ixx="0.12" ixy="0" ixz="0" iyy="0.12" iyz="0" izz="0.08"/><origin xyz="0 0 0"/></inertial>
-    <visual><geometry><mesh filename="package://ares1_description/meshes/visual/abdomen_ring.stl"/></geometry><material name="flat_black"/></visual>
-    <collision><geometry><mesh filename="package://ares1_description/meshes/collision/abdomen_ring_col.stl"/></geometry></collision>
+    <visual><geometry><cylinder radius="0.18" length="0.06"/></geometry><material name="flat_black"/></visual>
+    <collision><geometry><cylinder radius="0.18" length="0.06"/></geometry></collision>
   </link>
   <joint name="abdomen2_fixed" type="fixed"><parent link="abdomen_ring1"/><child link="abdomen_ring2"/><origin xyz="0 0 0.085" rpy="0 0 0"/></joint>
 
   <link name="abdomen_ring3">
     <inertial><mass value="${mass_abdomen_ring}"/><inertia ixx="0.12" ixy="0" ixz="0" iyy="0.12" iyz="0" izz="0.08"/><origin xyz="0 0 0"/></inertial>
-    <visual><geometry><mesh filename="package://ares1_description/meshes/visual/abdomen_ring.stl"/></geometry><material name="dark_grey"/></visual>
-    <collision><geometry><mesh filename="package://ares1_description/meshes/collision/abdomen_ring_col.stl"/></geometry></collision>
+    <visual><geometry><cylinder radius="0.18" length="0.06"/></geometry><material name="dark_grey"/></visual>
+    <collision><geometry><cylinder radius="0.18" length="0.06"/></geometry></collision>
   </link>
   <joint name="abdomen3_fixed" type="fixed"><parent link="abdomen_ring2"/><child link="abdomen_ring3"/><origin xyz="0 0 0.085" rpy="0 0 0"/></joint>
 
   <!-- ========== CHEST 520->440x280x380 32kg trapezoidal — rpy aligns width Y 520 depth X 280 -->
   <link name="chest">
     <inertial><mass value="${mass_chest}"/><inertia ixx="1.2" ixy="0" ixz="0" iyy="1.0" iyz="0" izz="0.9"/><origin xyz="0 0 0"/></inertial>
-    <visual><origin xyz="0 0 0" rpy="0 0 1.5708"/><geometry><mesh filename="package://ares1_description/meshes/visual/chest.stl"/></geometry><material name="dark_grey"/></visual>
-    <collision><origin xyz="0 0 0" rpy="0 0 1.5708"/><geometry><mesh filename="package://ares1_description/meshes/collision/chest_col.stl"/></geometry></collision>
+    <visual><origin xyz="0 0 0" rpy="0 0 1.5708"/><geometry><box size="0.28 0.52 0.38"/></geometry><material name="dark_grey"/></visual>
+    <collision><origin xyz="0 0 0" rpy="0 0 1.5708"/><geometry><box size="0.28 0.52 0.38"/></geometry></collision>
   </link>
   <joint name="chest_joint" type="fixed"><parent link="abdomen_ring3"/><child link="chest"/><origin xyz="0 0 0.225" rpy="0 0 0"/></joint>
   <joint name="battery_joint" type="fixed"><parent link="chest"/><child link="battery_pack"/><origin xyz="0 0 -0.05" rpy="0 0 0"/></joint>
@@ -114,8 +116,8 @@
   <!-- ========== SHOULDER YOKE 640 span 80x120 14kg + pods — rpy aligns span Y 640 -->
   <link name="shoulder_yoke">
     <inertial><mass value="${mass_shoulder_yoke}"/><inertia ixx="0.45" ixy="0" ixz="0" iyy="0.85" iyz="0" izz="0.65"/><origin xyz="0 0 0"/></inertial>
-    <visual><origin xyz="0 0 0" rpy="0 0 1.5708"/><geometry><mesh filename="package://ares1_description/meshes/visual/shoulder_yoke.stl"/></geometry><material name="gunmetal"/></visual>
-    <collision><origin xyz="0 0 0" rpy="0 0 1.5708"/><geometry><mesh filename="package://ares1_description/meshes/collision/shoulder_yoke_col.stl"/></geometry></collision>
+    <visual><origin xyz="0 0 0" rpy="0 0 1.5708"/><geometry><box size="0.12 0.64 0.08"/></geometry><material name="gunmetal"/></visual>
+    <collision><origin xyz="0 0 0" rpy="0 0 1.5708"/><geometry><box size="0.12 0.64 0.08"/></geometry></collision>
   </link>
   <joint name="yoke_joint" type="fixed"><parent link="chest"/><child link="shoulder_yoke"/><origin xyz="0 0 0.235" rpy="0 0 0"/></joint>
 
@@ -124,8 +126,8 @@
   <!-- ========== NECK 70->90x120 6kg 2-DOF ========== -->
   <link name="neck_base">
     <inertial><mass value="2.0"/><inertia ixx="0.02" ixy="0" ixz="0" iyy="0.02" iyz="0" izz="0.01"/><origin xyz="0 0 0"/></inertial>
-    <visual><geometry><mesh filename="package://ares1_description/meshes/visual/neck.stl"/></geometry><material name="gunmetal"/></visual>
-    <collision><geometry><mesh filename="package://ares1_description/meshes/collision/neck_col.stl"/></geometry></collision>
+    <visual><geometry><cylinder radius="0.045" length="0.12"/></geometry><material name="gunmetal"/></visual>
+    <collision><geometry><cylinder radius="0.045" length="0.12"/></geometry></collision>
   </link>
   <joint name="neck_yaw" type="revolute"><parent link="chest"/><child link="neck_base"/><origin xyz="0 0 0.250" rpy="0 0 0"/><axis xyz="0 0 1"/><limit lower="-1.57" upper="1.57" effort="120" velocity="2.0"/><dynamics damping="5" friction="1"/></joint>
   <link name="neck_pitch_link"><inertial><mass value="4.0"/><inertia ixx="0.03" ixy="0" ixz="0" iyy="0.03" iyz="0" izz="0.02"/><origin xyz="0 0 0.06"/></inertial></link>
@@ -134,8 +136,8 @@
   <!-- ========== HEAD 280x260x240 box ONLY 12kg (dome via sensor_dome) ========== -->
   <link name="head">
     <inertial><mass value="${mass_head}"/><inertia ixx="0.18" ixy="0" ixz="0" iyy="0.16" iyz="0" izz="0.12"/><origin xyz="0 0 0.00"/></inertial>
-    <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/visual/head.stl"/></geometry><material name="dark_grey"/></visual>
-    <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/collision/head_col.stl"/></geometry></collision>
+    <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><box size="0.28 0.26 0.24"/></geometry><material name="dark_grey"/></visual>
+    <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><box size="0.28 0.26 0.24"/></geometry></collision>
   </link>
   <joint name="head_joint" type="fixed"><parent link="neck_pitch_link"/><child link="head"/><origin xyz="0 0 0.07" rpy="0 0 0"/></joint>
 
@@ -176,8 +178,8 @@
     <!-- upper arm octagonal 380 — mesh origin at TOP (0 top, -0.38 bottom) -->
     <link name="${prefix}_upper_arm">
       <inertial><mass value="${mass_upper_arm}"/><inertia ixx="0.08" ixy="0" ixz="0" iyy="0.08" iyz="0" izz="0.04"/><origin xyz="0 0 -0.19"/></inertial>
-      <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/visual/upper_arm.stl"/></geometry><material name="dark_grey"/></visual>
-      <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/collision/upper_arm_col.stl"/></geometry></collision>
+      <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><cylinder radius="0.055" length="0.38"/></geometry><material name="dark_grey"/></visual>
+      <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><cylinder radius="0.055" length="0.38"/></geometry></collision>
     </link>
     <joint name="${prefix}_upper_fixed" type="fixed"><parent link="${prefix}_shoulder_pitch"/><child link="${prefix}_upper_arm"/><origin xyz="0 0 -0.04" rpy="0 0 0"/></joint>
     <link name="armour_${prefix}_upper"><inertial><mass value="0.4"/><inertia ixx="0.005" ixy="0" ixz="0" iyy="0.005" iyz="0" izz="0.005"/></inertial><visual><origin xyz="0.064 0 -0.19" rpy="0 0 0"/><geometry><box size="0.012 0.04 0.20"/></geometry><material name="flat_black"/></visual></link>
@@ -193,8 +195,8 @@
     <!-- forearm 340 — mesh origin at TOP -->
     <link name="${prefix}_forearm">
       <inertial><mass value="${mass_forearm}"/><inertia ixx="0.06" ixy="0" ixz="0" iyy="0.06" iyz="0" izz="0.03"/><origin xyz="0 0 -0.17"/></inertial>
-      <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/visual/forearm.stl"/></geometry><material name="dark_grey"/></visual>
-      <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/collision/forearm_col.stl"/></geometry></collision>
+      <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><cylinder radius="0.045" length="0.34"/></geometry><material name="dark_grey"/></visual>
+      <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><cylinder radius="0.045" length="0.34"/></geometry></collision>
     </link>
     <joint name="${prefix}_forearm_fixed" type="fixed"><parent link="${prefix}_elbow_link"/><child link="${prefix}_forearm"/><origin xyz="0 0 0" rpy="0 0 0"/></joint>
     <link name="armour_${prefix}_forearm"><inertial><mass value="0.5"/><inertia ixx="0.006" ixy="0" ixz="0" iyy="0.006" iyz="0" izz="0.003"/></inertial><visual><origin xyz="0.055 0 -0.17" rpy="0 0 0"/><geometry><box size="0.010 0.06 0.20"/></geometry><material name="flat_black"/></visual></link>
@@ -217,8 +219,8 @@
     </joint>
     <link name="${prefix}_hand">
       <inertial><mass value="${mass_hand}"/><inertia ixx="0.02" ixy="0" ixz="0" iyy="0.02" iyz="0" izz="0.01"/><origin xyz="0 0 -0.08"/></inertial>
-      <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/visual/hand.stl"/></geometry><material name="gunmetal"/></visual>
-      <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/collision/hand_col.stl"/></geometry></collision>
+      <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><box size="0.095 0.085 0.11"/></geometry><material name="gunmetal"/></visual>
+      <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><box size="0.095 0.085 0.11"/></geometry></collision>
     </link>
     <joint name="${prefix}_hand_joint" type="fixed"><parent link="${prefix}_wrist_roll"/><child link="${prefix}_hand"/><origin xyz="0 0 0" rpy="0 0 0"/></joint>
   </xacro:macro>
@@ -252,16 +254,16 @@
     </joint>
     <link name="${prefix}_thigh">
       <inertial><mass value="${mass_thigh}"/><inertia ixx="0.45" ixy="0" ixz="0" iyy="0.45" iyz="0" izz="0.12"/><origin xyz="0 0 -0.26"/></inertial>
-      <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/visual/thigh.stl"/></geometry><material name="dark_grey"/></visual>
-      <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/collision/thigh_col.stl"/></geometry></collision>
+      <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><cylinder radius="0.10" length="0.52"/></geometry><material name="dark_grey"/></visual>
+      <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><cylinder radius="0.10" length="0.52"/></geometry></collision>
     </link>
     <joint name="${prefix}_thigh_joint" type="fixed"><parent link="${prefix}_hip_pitch"/><child link="${prefix}_thigh"/><origin xyz="0 0 0" rpy="0 0 0"/></joint>
     <link name="armour_${prefix}_thigh"><inertial><mass value="1.1"/><inertia ixx="0.02" ixy="0" ixz="0" iyy="0.02" iyz="0" izz="0.01"/><origin xyz="0 0 0"/></inertial><visual><origin xyz="0.08 0 -0.26" rpy="0 0 0"/><geometry><box size="0.018 0.12 0.30"/></geometry><material name="flat_black"/></visual></link>
     <joint name="armour_${prefix}_thigh_joint" type="fixed"><parent link="${prefix}_thigh"/><child link="armour_${prefix}_thigh"/><origin xyz="0 0 0" rpy="0 0 0"/></joint>
     <link name="${prefix}_shin">
       <inertial><mass value="${mass_shin}"/><inertia ixx="0.28" ixy="0" ixz="0" iyy="0.28" iyz="0" izz="0.09"/><origin xyz="0 0 -0.24"/></inertial>
-      <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/visual/shin.stl"/></geometry><material name="dark_grey"/></visual>
-      <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/collision/shin_col.stl"/></geometry></collision>
+      <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><cylinder radius="0.08" length="0.48"/></geometry><material name="dark_grey"/></visual>
+      <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><cylinder radius="0.08" length="0.48"/></geometry></collision>
     </link>
     <joint name="${prefix}_knee" type="revolute">
       <parent link="${prefix}_thigh"/><child link="${prefix}_shin"/>
@@ -287,8 +289,8 @@
     </joint>
     <link name="${prefix}_foot">
       <inertial><mass value="${mass_foot}"/><inertia ixx="0.04" ixy="0" ixz="0" iyy="0.06" iyz="0" izz="0.05"/><origin xyz="0.00 0 -0.04"/></inertial>
-      <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/visual/foot.stl"/></geometry><material name="gunmetal"/></visual>
-      <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/collision/foot_col.stl"/></geometry></collision>
+      <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><box size="0.24 0.20 0.045"/></geometry><material name="gunmetal"/></visual>
+      <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><box size="0.24 0.20 0.045"/></geometry></collision>
     </link>
     <joint name="${prefix}_foot_joint" type="fixed"><parent link="${prefix}_ankle_roll"/><child link="${prefix}_foot"/><origin xyz="0 0 0" rpy="0 0 0"/></joint>
   </xacro:macro>

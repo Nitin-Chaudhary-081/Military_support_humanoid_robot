@@ -737,8 +737,8 @@ level1:
         label: test_ares1_geometry.py
         path: tests/test_ares1_geometry.py
         ext: .py
-        size: 3969
-        hash: 7afe92e020a6
+        size: 4225
+        hash: f2164be17247
         language: py
         evidence: CODE
         verification: VERIFIED
@@ -1659,7 +1659,7 @@ level1:
         to: weapon_control.weapon_logic
         relationship: depends_on
         evidence: INFERRED
-    builtAt: '2026-09-06T19:06:52.465Z'
+    builtAt: '2026-09-07T05:17:27.247Z'
   dataflow:
     flows: []
     note: Dataflow INFERRED from imports; verify with runtime
@@ -1862,4 +1862,4 @@ level5: >-
 level6: >-
   Actual source code lives in repository. Context system avoids loading all files; request specific
   file via read.
-generatedAt: '2026-09-06T19:06:52.607Z'
+generatedAt: '2026-09-07T05:17:27.374Z'

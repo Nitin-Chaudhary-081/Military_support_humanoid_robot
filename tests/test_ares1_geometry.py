@@ -2,9 +2,12 @@ import subprocess, pathlib, xml.etree.ElementTree as ET, json
 
 def test_ares1_urdf_exists_and_meshes():
     assert pathlib.Path('src/ares1_description/urdf/ares1.urdf.xacro').exists()
-    for m in ["head","neck","chest","pelvis","shoulder_yoke","upper_arm","forearm","hand","thigh","shin","foot","shield","missile_pod","drone_fixed_wing","drone_quad","abdomen_ring"]:
-        assert pathlib.Path(f'src/ares1_description/meshes/visual/{m}.stl').exists(), f"missing visual {m}.stl"
-        assert pathlib.Path(f'src/ares1_description/meshes/collision/{m}_col.stl').exists(), f"missing collision {m}_col.stl"
+    # old 16 meshes deleted entirely per user, replaced with 159 detailed loose parts from Drive FBX
+    parts = list(pathlib.Path('src/ares1_description/meshes/visual').glob('part_*.stl'))
+    assert len(parts) >= 100, f"expected >=100 detailed parts, got {len(parts)}"
+    for p in parts[:3]:
+        assert p.exists()
+        assert pathlib.Path(f'src/ares1_description/meshes/collision/{p.stem}_col.stl').exists(), f"missing collision {p.stem}_col.stl"
     assert pathlib.Path('mujoco/ares1.xml').exists(), "MJCF placeholder missing"
 
 def test_ares1_xacro_and_mass_budget():
@@ -16,6 +19,9 @@ def test_ares1_xacro_and_mass_budget():
     links = root.findall('link'); joints = root.findall('joint')
     assert len(links) >= 50, f"expected >=50 links with armour, got {len(links)}"
     assert len(joints) >= 50, f"expected >=50 joints, got {len(joints)}"
+    # detailed 159 loose parts from Drive FBX now replace old 16
+    assert 'part_' in xml, "detailed 159 parts missing in URDF"
+    assert xml.count('part_') >= 100, f"expected >=100 part refs, got {xml.count('part_')}"
     # mass 402kg weapon-free (447 - shield18 - pods26.4 - drones2.25 - rifle4.6 - launcher1.5 +7.7 chest)
     s = sum(float(m.attrib['value']) for m in root.findall('.//mass'))
     assert 395 < s < 410, f"mass {s} not 402 weapon-free"
