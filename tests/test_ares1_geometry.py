@@ -2,12 +2,12 @@ import subprocess, pathlib, xml.etree.ElementTree as ET, json
 
 def test_ares1_urdf_exists_and_meshes():
     assert pathlib.Path('src/ares1_description/urdf/ares1.urdf.xacro').exists()
-    # old 16 meshes deleted entirely per user, replaced with 159 detailed loose parts from Drive FBX
-    parts = list(pathlib.Path('src/ares1_description/meshes/visual').glob('part_*.stl'))
-    assert len(parts) >= 100, f"expected >=100 detailed parts, got {len(parts)}"
-    for p in parts[:3]:
+    # new 19 OBJs from Drive folder replace old 16 entirely (per user, keep .obj, stay 62 links)
+    parts = list(pathlib.Path('src/ares1_description/meshes/visual').glob('*.obj'))
+    assert len(parts) == 19, f"expected 19 OBJs from Drive folder, got {len(parts)}: {[p.name for p in parts]}"
+    for p in parts:
         assert p.exists()
-        assert pathlib.Path(f'src/ares1_description/meshes/collision/{p.stem}_col.stl').exists(), f"missing collision {p.stem}_col.stl"
+        assert pathlib.Path(f'src/ares1_description/meshes/collision/{p.name}').exists(), f"missing collision {p.name}"
     assert pathlib.Path('mujoco/ares1.xml').exists(), "MJCF placeholder missing"
 
 def test_ares1_xacro_and_mass_budget():
@@ -19,19 +19,19 @@ def test_ares1_xacro_and_mass_budget():
     links = root.findall('link'); joints = root.findall('joint')
     assert len(links) >= 50, f"expected >=50 links with armour, got {len(links)}"
     assert len(joints) >= 50, f"expected >=50 joints, got {len(joints)}"
-    # detailed 159 loose parts from Drive FBX now replace old 16 (keep 4 weapon meshes re-added)
-    assert 'part_' in xml, "detailed 159 parts missing in URDF"
-    assert xml.count('part_') >= 100, f"expected >=100 part refs, got {xml.count('part_')}"
-    # mass 447kg full (402 base + weapons) — weapons re-added
+    # new 19 OBJs replace old 16 entirely (keep .obj, stay 62 links weapon-free per user)
+    assert '.obj' in xml, "new 19 OBJs missing in URDF"
+    assert xml.count('.obj') >= 19, f"expected >=19 obj refs, got {xml.count('.obj')}"
+    # mass 402kg weapon-free clean no mounts (stay 62 links)
     s = sum(float(m.attrib['value']) for m in root.findall('.//mass'))
-    assert 440 < s < 455, f"mass {s} not 447 full with weapons"
+    assert 395 < s < 410, f"mass {s} not 402 weapon-free"
     # height: check dome exists
     assert root.find(".//link[@name='sensor_dome']") is not None
-    # weapons re-added
-    assert root.find(".//link[@name='shield']") is not None, "shield should exist with weapons"
-    assert root.find(".//link[@name='pod_left']") is not None
-    assert root.find(".//link[@name='drone_fixed_wing']") is not None
-    assert root.find(".//link[@name='left_rifle']") is not None
+    # weapon-free clean no mounts — weapons removed per user
+    assert root.find(".//link[@name='shield']") is None, "shield should be removed weapon-free"
+    assert root.find(".//link[@name='pod_left']") is None
+    assert root.find(".//link[@name='drone_fixed_wing']") is None
+    assert root.find(".//link[@name='left_rifle']") is None
     # 26-DOF joints per table 509 must exist
     required = ["neck_yaw","neck_pitch","left_shoulder_yaw","left_shoulder_roll","left_shoulder_pitch","left_elbow","left_wrist_pitch","left_wrist_roll",
                 "right_shoulder_yaw","right_shoulder_roll","right_shoulder_pitch","right_elbow","right_wrist_pitch","right_wrist_roll",
@@ -52,9 +52,8 @@ def test_ares1_controllers_26dof():
     j = data['ares1_controller']['ros__parameters']['joints']
     assert len(j) == 26, f"expected 26 joints, got {len(j)}"
     assert 'neck_yaw' in j and 'left_knee' in j and 'right_ankle_roll' in j
-    # weapons re-added: shield/pod controllers present
-    assert data['shield_controller']['ros__parameters']['joints'] == ['shield_pivot']
-    assert 'pod_left_joint' in data['pod_controller']['ros__parameters']['joints']
+    # weapon-free: shield/pod controllers removed
+    assert 'shield_controller' not in data and 'pod_controller' not in data
     # check torque-relevant joints present per arc.md 509
     assert 'left_shoulder_pitch' in j
 

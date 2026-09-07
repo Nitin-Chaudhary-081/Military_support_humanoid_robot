@@ -1,12 +1,12 @@
 languages:
   counts:
     markdown: 7
-    python: 61
     yaml: 12
+    python: 60
     json: 2
     shell: 79
   primary: shell
-  totalFiles: 161
+  totalFiles: 160
 frameworks: []
 packageManagers: []
 entryPoints: []
@@ -14,8 +14,18 @@ config:
   - .gitignore
 git:
   branch: main
-  commit: 71d258d49e18f0192eecc34653d03727908634ae
+  commit: f5369c199e1aa0ff8a7aaad66b7d64a0b5bd1769
   log:
+    - >-
+      f5369c1 feat(ares1): use 19 named OBJs from Drive folder as robot mesh — delete old 159
+      part_*.stl and high50K entirely, keep .obj, stay 62 links 402kg weapon-free no mounts,
+      per-link OBJ mapping, colab CPU only
+    - >-
+      0e490a4 fix(foxglove): VPS ws://13.207.111.213:8765 via package:// asset fetching over
+      websocket (no http CORS), keep mesh_http :8000 fallback for tunnel
+    - >-
+      780cb11 feat(next): re-add weapons after clean 402kg base — shield/pods/drones/rifle/launcher,
+      69/68 447kg, 159 detailed parts retained, detailed_visuals 159 visuals base_link, cors 8000
     - >-
       71d258d feat(ares1): Option B detailed 159 loose parts from Drive FBX — delete old 16 high50K
       entirely, 159 part_*.stl 41K faces 62 links 61 joints 402kg, detailed_visuals.xacro base_link
@@ -37,27 +47,8 @@ git:
     - >-
       8245077 fix(ares1): align STL origins to joint frames, remove head dome duplicate,
       visual/collision 0 0 0, limbs top-origin, Foxglove verified
-    - 'bfba7e9 chore: sync handoff 80 files 204 edges ops 5/6'
-    - >-
-      758f294 feat(ares1): hard rename acsr_description→ares1_description per arc.md 447kg 2430mm
-      26-DOF meshes MuJoCo, 16 STL trimesh, ares1_controllers, mujoco placeholder, 41 tests
-    - >-
-      b672512 feat(foxglove): display launch static robot (robot_state+joint+bridge 8765) for
-      browser viz without Gz
-  dirty: true
-  status:
-    - M src/ares1_description/config/ares1_controllers.yaml
-    - ' M src/ares1_description/urdf/ares1.urdf.xacro'
-    - ' M tests/test_ares1_geometry.py'
-    - ' M tests/test_urdf.py'
-    - '?? src/ares1_description/meshes/collision/drone_fixed_wing_col.stl'
-    - '?? src/ares1_description/meshes/collision/drone_quad_col.stl'
-    - '?? src/ares1_description/meshes/collision/missile_pod_col.stl'
-    - '?? src/ares1_description/meshes/collision/shield_col.stl'
-    - '?? src/ares1_description/meshes/visual/drone_fixed_wing.stl'
-    - '?? src/ares1_description/meshes/visual/drone_quad.stl'
-    - '?? src/ares1_description/meshes/visual/missile_pod.stl'
-    - '?? src/ares1_description/meshes/visual/shield.stl'
+  dirty: false
+  status: []
 envVars: []
 dependencies: {}
 structure:
@@ -77,4 +68,4 @@ structure:
   - src/
   - tests/
 projectType: robotics-project
-analyzedAt: '2026-09-07T05:23:37.189Z'
+analyzedAt: '2026-09-07T16:31:29.828Z'

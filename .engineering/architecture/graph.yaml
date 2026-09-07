@@ -19,16 +19,6 @@ nodes:
     language: md
     evidence: CODE
     verification: VERIFIED
-  - id: colab/ares1_high50k.py
-    type: File
-    label: ares1_high50k.py
-    path: colab/ares1_high50k.py
-    ext: .py
-    size: 7017
-    hash: 05fbd502a92e
-    language: py
-    evidence: CODE
-    verification: VERIFIED
   - id: config/ares1_params.yaml
     type: File
     label: ares1_params.yaml
@@ -164,8 +154,8 @@ nodes:
     label: foxglove_display.launch.py
     path: install/acsr_bringup/share/acsr_bringup/launch/foxglove_display.launch.py
     ext: .py
-    size: 3196
-    hash: bd6d129c5cf2
+    size: 2581
+    hash: ccaa1248fa3a
     language: py
     evidence: CODE
     verification: VERIFIED
@@ -214,8 +204,8 @@ nodes:
     label: ares1_controllers.yaml
     path: install/ares1_description/share/ares1_description/config/ares1_controllers.yaml
     ext: .yaml
-    size: 1974
-    hash: 027849032ddd
+    size: 1367
+    hash: 65d6fcb4bf0a
     language: yaml
     evidence: CODE
     verification: VERIFIED
@@ -494,8 +484,8 @@ nodes:
     label: foxglove_display.launch.py
     path: src/acsr_bringup/launch/foxglove_display.launch.py
     ext: .py
-    size: 3196
-    hash: bd6d129c5cf2
+    size: 2581
+    hash: ccaa1248fa3a
     language: py
     evidence: CODE
     verification: VERIFIED
@@ -544,8 +534,8 @@ nodes:
     label: ares1_controllers.yaml
     path: src/ares1_description/config/ares1_controllers.yaml
     ext: .yaml
-    size: 1974
-    hash: 027849032ddd
+    size: 1367
+    hash: 65d6fcb4bf0a
     language: yaml
     evidence: CODE
     verification: VERIFIED
@@ -734,8 +724,8 @@ nodes:
     label: test_ares1_geometry.py
     path: tests/test_ares1_geometry.py
     ext: .py
-    size: 4299
-    hash: db20d7525fb1
+    size: 4202
+    hash: c73772f32629
     language: py
     evidence: CODE
     verification: VERIFIED
@@ -804,8 +794,8 @@ nodes:
     label: test_urdf.py
     path: tests/test_urdf.py
     ext: .py
-    size: 1110
-    hash: aba229e07e12
+    size: 1068
+    hash: d1278a1cbc44
     language: py
     evidence: CODE
     verification: VERIFIED
@@ -820,22 +810,6 @@ nodes:
     evidence: CODE
     verification: VERIFIED
 edges:
-  - from: colab/ares1_high50k.py
-    to: colab/pathlib
-    relationship: imports
-    evidence: INFERRED
-  - from: colab/ares1_high50k.py
-    to: colab/trimesh
-    relationship: imports
-    evidence: INFERRED
-  - from: colab/ares1_high50k.py
-    to: colab/trimesh
-    relationship: imports
-    evidence: INFERRED
-  - from: colab/ares1_high50k.py
-    to: colab/numpy
-    relationship: imports
-    evidence: INFERRED
   - from: install/_local_setup_util_ps1.py
     to: install/argparse
     relationship: imports
@@ -1656,4 +1630,4 @@ edges:
     to: weapon_control.weapon_logic
     relationship: depends_on
     evidence: INFERRED
-builtAt: '2026-09-07T05:23:37.285Z'
+builtAt: '2026-09-07T16:31:29.935Z'

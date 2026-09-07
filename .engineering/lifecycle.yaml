@@ -3,7 +3,7 @@ project:
   name: ms_robot
   type: robotics-project
   category: robotics
-  summary: ms_robot — shell markdown, python, yaml, json, shell
+  summary: ms_robot — shell markdown, yaml, python, json, shell
 lifecycleModel:
   id: robotics-project
   name: Robotics Project
@@ -192,7 +192,7 @@ evidenceLinks:
   - type: CODE
     source: .engineering/architecture/graph.yaml
     kind: FACT
-    details: 82 files
+    details: 81 files
 evidencePolicy: All claims require evidence; UNKNOWN is valid. See VERIFICATION_STATES.
 history:
   - timestamp: '2026-09-04T09:24:57.532Z'
@@ -260,5 +260,8 @@ history:
   - timestamp: '2026-09-07T05:23:37.479Z'
     type: sync
     summary: 'Synced: 82 files, type robotics-project'
+  - timestamp: '2026-09-07T16:31:30.103Z'
+    type: sync
+    summary: 'Synced: 81 files, type robotics-project'
 generatedAt: '2026-09-04T09:24:57.532Z'
-updatedAt: '2026-09-07T05:23:37.479Z'
+updatedAt: '2026-09-07T16:31:30.103Z'
