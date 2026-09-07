@@ -1633,7 +1633,7 @@ level1:
         to: weapon_control.weapon_logic
         relationship: depends_on
         evidence: INFERRED
-    builtAt: '2026-09-07T16:31:29.935Z'
+    builtAt: '2026-09-07T16:43:33.418Z'
   dataflow:
     flows: []
     note: Dataflow INFERRED from imports; verify with runtime
@@ -1836,4 +1836,4 @@ level5: >-
 level6: >-
   Actual source code lives in repository. Context system avoids loading all files; request specific
   file via read.
-generatedAt: '2026-09-07T16:31:30.066Z'
+generatedAt: '2026-09-07T16:43:33.597Z'

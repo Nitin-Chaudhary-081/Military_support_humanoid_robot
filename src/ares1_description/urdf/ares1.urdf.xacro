@@ -28,6 +28,7 @@
   <material name="visor_blue"><color rgba="0.078 0.157 0.314 1.0"/></material>
   <material name="olive_drab"><color rgba="0.333 0.353 0.235 1.0"/></material>
   <material name="charcoal"><color rgba="0.216 0.216 0.227 1.0"/></material>
+  <material name="transparent"><color rgba="0 0 0 0"/></material>
 
   <!-- ========== PELVIS (base_link) — hex 460x260x180 22kg — rpy aligns width Y 460 depth X 260 -->
   <link name="base_link">
@@ -86,12 +87,12 @@
   <!-- Chest armour plate 6.2kg curved (separate link for Foxglove toggle) -->
   <link name="armour_chest_front">
     <inertial><mass value="6.2"/><inertia ixx="0.15" ixy="0" ixz="0" iyy="0.12" iyz="0" izz="0.10"/><origin xyz="0 0 0"/></inertial>
-    <visual><origin xyz="0.14 0 0" rpy="0 0 0"/><geometry><box size="0.02 0.32 0.28"/></geometry><material name="flat_black"/></visual>
+    <visual><origin xyz="0.14 0 0" rpy="0 0 0"/><geometry><box size="0.02 0.32 0.28"/></geometry><material name="transparent"/></visual>
   </link>
   <joint name="armour_chest_joint" type="fixed"><parent link="chest"/><child link="armour_chest_front"/><origin xyz="0 0 0" rpy="0 0 0"/></joint>
 
   <!-- Additional armour per arc.md 8.1 to reach 27kg total (chest 6.2 already + head 1.8 + arm 1.8 + leg 4 = 13.8, need +13.2) -->
-  <link name="armour_back"><inertial><mass value="2.4"/><inertia ixx="0.06" ixy="0" ixz="0" iyy="0.06" iyz="0" izz="0.04"/><origin xyz="0 0 0"/></inertial><visual><origin xyz="-0.14 0 0" rpy="0 0 0"/><geometry><box size="0.02 0.28 0.30"/></geometry><material name="flat_black"/></visual></link>
+  <link name="armour_back"><inertial><mass value="2.4"/><inertia ixx="0.06" ixy="0" ixz="0" iyy="0.06" iyz="0" izz="0.04"/><origin xyz="0 0 0"/></inertial><visual><origin xyz="-0.14 0 0" rpy="0 0 0"/><geometry><box size="0.02 0.28 0.30"/></geometry><material name="transparent"/></visual></link>
   <joint name="armour_back_joint" type="fixed"><parent link="chest"/><child link="armour_back"/><origin xyz="0 0 0" rpy="0 0 0"/></joint>
   <link name="armour_shoulder_caps"><inertial><mass value="1.4"/><inertia ixx="0.03" ixy="0" ixz="0" iyy="0.03" iyz="0" izz="0.02"/><origin xyz="0 0 0"/></inertial></link>
   <joint name="armour_shoulder_joint" type="fixed"><parent link="shoulder_yoke"/><child link="armour_shoulder_caps"/><origin xyz="0 0 0" rpy="0 0 0"/></joint>
@@ -114,7 +115,7 @@
   <!-- ========== SHOULDER YOKE 640 span 80x120 14kg + pods — rpy aligns span Y 640 -->
   <link name="shoulder_yoke">
     <inertial><mass value="${mass_shoulder_yoke}"/><inertia ixx="0.45" ixy="0" ixz="0" iyy="0.85" iyz="0" izz="0.65"/><origin xyz="0 0 0"/></inertial>
-    <visual><origin xyz="0 0 0" rpy="0 0 1.5708"/><geometry><box size="0.12 0.64 0.08"/></geometry><material name="gunmetal"/></visual>
+    <visual><origin xyz="0 0 0" rpy="0 0 1.5708"/><geometry><box size="0.12 0.64 0.08"/></geometry><material name="transparent"/></visual>
     <collision><origin xyz="0 0 0" rpy="0 0 1.5708"/><geometry><box size="0.12 0.64 0.08"/></geometry></collision>
   </link>
   <joint name="yoke_joint" type="fixed"><parent link="chest"/><child link="shoulder_yoke"/><origin xyz="0 0 0.235" rpy="0 0 0"/></joint>

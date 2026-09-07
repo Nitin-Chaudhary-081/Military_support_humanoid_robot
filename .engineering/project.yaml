@@ -14,10 +14,10 @@ config:
   - .gitignore
 git:
   branch: main
-  commit: f5369c199e1aa0ff8a7aaad66b7d64a0b5bd1769
+  commit: 8035a7c188de1fc7219e8ebd57d660958af2720f
   log:
     - >-
-      f5369c1 feat(ares1): use 19 named OBJs from Drive folder as robot mesh — delete old 159
+      8035a7c feat(ares1): use 19 named OBJs from Drive folder as robot mesh — delete old 159
       part_*.stl and high50K entirely, keep .obj, stay 62 links 402kg weapon-free no mounts,
       per-link OBJ mapping, colab CPU only
     - >-
@@ -47,8 +47,11 @@ git:
     - >-
       8245077 fix(ares1): align STL origins to joint frames, remove head dome duplicate,
       visual/collision 0 0 0, limbs top-origin, Foxglove verified
-  dirty: false
-  status: []
+  dirty: true
+  status:
+    - M src/ares1_description/urdf/ares1.urdf.xacro
+    - '?? src/ares1_description/meshes/collision/material.mtl'
+    - '?? src/ares1_description/meshes/visual/material.mtl'
 envVars: []
 dependencies: {}
 structure:
@@ -68,4 +71,4 @@ structure:
   - src/
   - tests/
 projectType: robotics-project
-analyzedAt: '2026-09-07T16:31:29.828Z'
+analyzedAt: '2026-09-07T16:43:33.286Z'
