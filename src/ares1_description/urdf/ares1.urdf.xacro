@@ -56,24 +56,24 @@
   <!-- ========== ABDOMEN 3 rings (abdomen 220 = 60+25+60+25+60) 12kg total ========== -->
   <link name="abdomen_ring1">
     <inertial><mass value="${mass_abdomen_ring}"/><inertia ixx="0.12" ixy="0" ixz="0" iyy="0.12" iyz="0" izz="0.08"/><origin xyz="0 0 0"/></inertial>
-    <visual><geometry><mesh filename="package://ares1_description/meshes/visual/abdominal.obj" scale="1 1 1"/></geometry><material name="dark_grey"/></visual>
-    <collision><geometry><mesh filename="package://ares1_description/meshes/collision/abdominal.obj"/></geometry></collision>
+    <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/visual/abdominal.obj" scale="1 1 1"/></geometry><material name="dark_grey"/></visual>
+    <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/collision/abdominal.obj"/></geometry></collision>
   </link>
-  <joint name="abdomen1_fixed" type="fixed"><parent link="base_link"/><child link="abdomen_ring1"/><origin xyz="0 0 0.115" rpy="0 0 0"/></joint>
+  <joint name="abdomen1_fixed" type="fixed"><parent link="base_link"/><child link="abdomen_ring1"/><origin xyz="0 0 0.274" rpy="0 0 0"/></joint>
 
   <link name="abdomen_ring2">
     <inertial><mass value="${mass_abdomen_ring}"/><inertia ixx="0.12" ixy="0" ixz="0" iyy="0.12" iyz="0" izz="0.08"/><origin xyz="0 0 0"/></inertial>
-    <visual><geometry><mesh filename="package://ares1_description/meshes/visual/abdominal.obj" scale="1 1 1"/></geometry><material name="flat_black"/></visual>
-    <collision><geometry><mesh filename="package://ares1_description/meshes/collision/abdominal.obj"/></geometry></collision>
+    <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/visual/abdominal.obj" scale="1 1 1"/></geometry><material name="flat_black"/></visual>
+    <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/collision/abdominal.obj"/></geometry></collision>
   </link>
-  <joint name="abdomen2_fixed" type="fixed"><parent link="abdomen_ring1"/><child link="abdomen_ring2"/><origin xyz="0 0 0.085" rpy="0 0 0"/></joint>
+  <joint name="abdomen2_fixed" type="fixed"><parent link="abdomen_ring1"/><child link="abdomen_ring2"/><origin xyz="0 0 0.266" rpy="0 0 0"/></joint>
 
   <link name="abdomen_ring3">
     <inertial><mass value="${mass_abdomen_ring}"/><inertia ixx="0.12" ixy="0" ixz="0" iyy="0.12" iyz="0" izz="0.08"/><origin xyz="0 0 0"/></inertial>
-    <visual><geometry><mesh filename="package://ares1_description/meshes/visual/abdominal.obj"/></geometry><material name="dark_grey"/></visual>
-    <collision><geometry><mesh filename="package://ares1_description/meshes/collision/abdominal.obj"/></geometry></collision>
+    <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/visual/abdominal.obj"/></geometry><material name="dark_grey"/></visual>
+    <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/collision/abdominal.obj"/></geometry></collision>
   </link>
-  <joint name="abdomen3_fixed" type="fixed"><parent link="abdomen_ring2"/><child link="abdomen_ring3"/><origin xyz="0 0 0.085" rpy="0 0 0"/></joint>
+  <joint name="abdomen3_fixed" type="fixed"><parent link="abdomen_ring2"/><child link="abdomen_ring3"/><origin xyz="0 0 0.266" rpy="0 0 0"/></joint>
 
   <!-- ========== CHEST 520->440x280x380 32kg trapezoidal — rpy aligns width Y 520 depth X 280 -->
   <link name="chest">
@@ -81,18 +81,18 @@
     <visual><origin xyz="0 0 0" rpy="0 0 1.5708"/><geometry><mesh filename="package://ares1_description/meshes/visual/chest.obj" scale="1 1 1"/></geometry><material name="dark_grey"/></visual>
     <collision><origin xyz="0 0 0" rpy="0 0 1.5708"/><geometry><mesh filename="package://ares1_description/meshes/collision/chest.obj"/></geometry></collision>
   </link>
-  <joint name="chest_joint" type="fixed"><parent link="abdomen_ring3"/><child link="chest"/><origin xyz="0 0 0.225" rpy="0 0 0"/></joint>
+  <joint name="chest_joint" type="fixed"><parent link="abdomen_ring3"/><child link="chest"/><origin xyz="0 0 0.311" rpy="0 0 0"/></joint>
   <joint name="battery_joint" type="fixed"><parent link="chest"/><child link="battery_pack"/><origin xyz="0 0 -0.05" rpy="0 0 0"/></joint>
 
   <!-- Chest armour plate 6.2kg curved (separate link for Foxglove toggle) -->
   <link name="armour_chest_front">
     <inertial><mass value="6.2"/><inertia ixx="0.15" ixy="0" ixz="0" iyy="0.12" iyz="0" izz="0.10"/><origin xyz="0 0 0"/></inertial>
-    <visual><origin xyz="0.14 0 0" rpy="0 0 0"/><geometry><box size="0.02 0.32 0.28"/></geometry><material name="transparent"/></visual>
+    
   </link>
   <joint name="armour_chest_joint" type="fixed"><parent link="chest"/><child link="armour_chest_front"/><origin xyz="0 0 0" rpy="0 0 0"/></joint>
 
   <!-- Additional armour per arc.md 8.1 to reach 27kg total (chest 6.2 already + head 1.8 + arm 1.8 + leg 4 = 13.8, need +13.2) -->
-  <link name="armour_back"><inertial><mass value="2.4"/><inertia ixx="0.06" ixy="0" ixz="0" iyy="0.06" iyz="0" izz="0.04"/><origin xyz="0 0 0"/></inertial><visual><origin xyz="-0.14 0 0" rpy="0 0 0"/><geometry><box size="0.02 0.28 0.30"/></geometry><material name="transparent"/></visual></link>
+  <link name="armour_back"><inertial><mass value="2.4"/><inertia ixx="0.06" ixy="0" ixz="0" iyy="0.06" iyz="0" izz="0.04"/><origin xyz="0 0 0"/></inertial></link>
   <joint name="armour_back_joint" type="fixed"><parent link="chest"/><child link="armour_back"/><origin xyz="0 0 0" rpy="0 0 0"/></joint>
   <link name="armour_shoulder_caps"><inertial><mass value="1.4"/><inertia ixx="0.03" ixy="0" ixz="0" iyy="0.03" iyz="0" izz="0.02"/><origin xyz="0 0 0"/></inertial></link>
   <joint name="armour_shoulder_joint" type="fixed"><parent link="shoulder_yoke"/><child link="armour_shoulder_caps"/><origin xyz="0 0 0" rpy="0 0 0"/></joint>
@@ -115,8 +115,8 @@
   <!-- ========== SHOULDER YOKE 640 span 80x120 14kg + pods — rpy aligns span Y 640 -->
   <link name="shoulder_yoke">
     <inertial><mass value="${mass_shoulder_yoke}"/><inertia ixx="0.45" ixy="0" ixz="0" iyy="0.85" iyz="0" izz="0.65"/><origin xyz="0 0 0"/></inertial>
-    <visual><origin xyz="0 0 0" rpy="0 0 1.5708"/><geometry><box size="0.12 0.64 0.08"/></geometry><material name="transparent"/></visual>
-    <collision><origin xyz="0 0 0" rpy="0 0 1.5708"/><geometry><box size="0.12 0.64 0.08"/></geometry></collision>
+    
+    
   </link>
   <joint name="yoke_joint" type="fixed"><parent link="chest"/><child link="shoulder_yoke"/><origin xyz="0 0 0.235" rpy="0 0 0"/></joint>
 
@@ -125,10 +125,10 @@
   <!-- ========== NECK 70->90x120 6kg 2-DOF ========== -->
   <link name="neck_base">
     <inertial><mass value="2.0"/><inertia ixx="0.02" ixy="0" ixz="0" iyy="0.02" iyz="0" izz="0.01"/><origin xyz="0 0 0"/></inertial>
-    <visual><geometry><mesh filename="package://ares1_description/meshes/visual/neck.obj" scale="1 1 1"/></geometry><material name="gunmetal"/></visual>
-    <collision><geometry><mesh filename="package://ares1_description/meshes/collision/neck.obj"/></geometry></collision>
+    <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/visual/neck.obj" scale="1 1 1"/></geometry><material name="gunmetal"/></visual>
+    <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/collision/neck.obj"/></geometry></collision>
   </link>
-  <joint name="neck_yaw" type="revolute"><parent link="chest"/><child link="neck_base"/><origin xyz="0 0 0.250" rpy="0 0 0"/><axis xyz="0 0 1"/><limit lower="-1.57" upper="1.57" effort="120" velocity="2.0"/><dynamics damping="5" friction="1"/></joint>
+  <joint name="neck_yaw" type="revolute"><parent link="chest"/><child link="neck_base"/><origin xyz="0 0 0.261" rpy="0 0 0"/><axis xyz="0 0 1"/><limit lower="-1.57" upper="1.57" effort="120" velocity="2.0"/><dynamics damping="5" friction="1"/></joint>
   <link name="neck_pitch_link"><inertial><mass value="4.0"/><inertia ixx="0.03" ixy="0" ixz="0" iyy="0.03" iyz="0" izz="0.02"/><origin xyz="0 0 0.06"/></inertial></link>
   <joint name="neck_pitch" type="revolute"><parent link="neck_base"/><child link="neck_pitch_link"/><origin xyz="0 0 0.08" rpy="0 0 0"/><axis xyz="0 1 0"/><limit lower="-0.524" upper="0.524" effort="120" velocity="2.0"/></joint>
 
@@ -138,14 +138,14 @@
     <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/visual/head.obj" scale="1 1 1"/></geometry><material name="dark_grey"/></visual>
     <collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/collision/head.obj"/></geometry></collision>
   </link>
-  <joint name="head_joint" type="fixed"><parent link="neck_pitch_link"/><child link="head"/><origin xyz="0 0 0.07" rpy="0 0 0"/></joint>
+  <joint name="head_joint" type="fixed"><parent link="neck_pitch_link"/><child link="head"/><origin xyz="0 0 0.155" rpy="0 0 0"/></joint>
 
   <!-- Head armour + visor -->
-  <link name="armour_head_front"><inertial><mass value="1.8"/><inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.005"/><origin xyz="0 0 0"/></inertial><visual><origin xyz="0.12 0 0.02" rpy="0 0 0"/><geometry><box size="0.02 0.22 0.14"/></geometry><material name="flat_black"/></visual></link>
+  <link name="armour_head_front"><inertial><mass value="1.8"/><inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.005"/><origin xyz="0 0 0"/></inertial></link>
   <joint name="armour_head_joint" type="fixed"><parent link="head"/><child link="armour_head_front"/><origin xyz="0 0 0" rpy="0 0 0"/></joint>
 
   <!-- Sensor dome -->
-  <link name="sensor_dome"><inertial><mass value="0.5"/><inertia ixx="0.005" ixy="0" ixz="0" iyy="0.005" iyz="0" izz="0.005"/></inertial><visual><origin xyz="0 0 0.14" rpy="0 0 0"/><geometry><sphere radius="0.09"/></geometry><material name="visor_blue"/></visual></link>
+  <link name="sensor_dome"><inertial><mass value="0.5"/><inertia ixx="0.005" ixy="0" ixz="0" iyy="0.005" iyz="0" izz="0.005"/></inertial></link>
   <joint name="dome_joint" type="fixed"><parent link="head"/><child link="sensor_dome"/><origin xyz="0 0 0" rpy="0 0 0"/></joint>
 
   <!-- Drone bays & shield removed — weapon-free clean no mounts (re-add after build) -->
@@ -154,21 +154,21 @@
   <xacro:macro name="arm" params="prefix y">
     <!-- shoulder 3 DOF: yaw->roll->pitch — ball housing 110mm aesthetic -->
     <link name="${prefix}_shoulder_yaw"><inertial><mass value="0.5"/><inertia ixx="0.005" ixy="0" ixz="0" iyy="0.005" iyz="0" izz="0.005"/></inertial>
-      <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><sphere radius="0.055"/></geometry><material name="gunmetal"/></visual></link>
+      </link>
     <joint name="${prefix}_shoulder_yaw" type="revolute">
       <parent link="shoulder_yoke"/><child link="${prefix}_shoulder_yaw"/>
       <origin xyz="0 ${y} 0.0" rpy="0 0 0"/>
       <axis xyz="0 0 1"/><limit lower="-0.785" upper="0.785" effort="180" velocity="2.0"/>
     </joint>
     <link name="${prefix}_shoulder_roll"><inertial><mass value="0.5"/><inertia ixx="0.005" ixy="0" ixz="0" iyy="0.005" iyz="0" izz="0.005"/></inertial>
-      <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><sphere radius="0.050"/></geometry><material name="dark_grey"/></visual></link>
+      </link>
     <joint name="${prefix}_shoulder_roll" type="revolute">
       <parent link="${prefix}_shoulder_yaw"/><child link="${prefix}_shoulder_roll"/>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <axis xyz="1 0 0"/><limit lower="-1.57" upper="1.57" effort="220" velocity="2.0"/>
     </joint>
     <link name="${prefix}_shoulder_pitch"><inertial><mass value="1.0"/><inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/></inertial>
-      <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><sphere radius="0.045"/></geometry><material name="gunmetal"/></visual></link>
+      </link>
     <joint name="${prefix}_shoulder_pitch" type="revolute">
       <parent link="${prefix}_shoulder_roll"/><child link="${prefix}_shoulder_pitch"/>
       <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -177,17 +177,17 @@
     <!-- upper arm octagonal 380 — mesh origin at TOP (0 top, -0.38 bottom) -->
     <link name="${prefix}_upper_arm">
       <inertial><mass value="${mass_upper_arm}"/><inertia ixx="0.08" ixy="0" ixz="0" iyy="0.08" iyz="0" izz="0.04"/><origin xyz="0 0 -0.19"/></inertial>
-      <xacro:if value="${prefix == 'left'}"><visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/visual/upper_arm_L.obj"/></geometry><material name="dark_grey"/></visual></xacro:if>
-      <xacro:if value="${prefix == 'right'}"><visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/visual/upper_arm_R.obj"/></geometry><material name="dark_grey"/></visual></xacro:if>
-      <xacro:if value="${prefix == 'left'}"><collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/collision/upper_arm_L.obj"/></geometry></collision></xacro:if>
-      <xacro:if value="${prefix == 'right'}"><collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/collision/upper_arm_R.obj"/></geometry></collision></xacro:if>
+      <xacro:if value="${prefix == 'left'}"><visual><origin xyz="0 0 -0.1715" rpy="1.5708 0 0"/><geometry><mesh filename="package://ares1_description/meshes/visual/upper_arm_L.obj"/></geometry><material name="dark_grey"/></visual></xacro:if>
+      <xacro:if value="${prefix == 'right'}"><visual><origin xyz="0 0 -0.1715" rpy="1.5708 0 0"/><geometry><mesh filename="package://ares1_description/meshes/visual/upper_arm_R.obj"/></geometry><material name="dark_grey"/></visual></xacro:if>
+      <xacro:if value="${prefix == 'left'}"><collision><origin xyz="0 0 -0.1715" rpy="1.5708 0 0"/><geometry><mesh filename="package://ares1_description/meshes/collision/upper_arm_L.obj"/></geometry></collision></xacro:if>
+      <xacro:if value="${prefix == 'right'}"><collision><origin xyz="0 0 -0.1715" rpy="1.5708 0 0"/><geometry><mesh filename="package://ares1_description/meshes/collision/upper_arm_R.obj"/></geometry></collision></xacro:if>
     </link>
     <joint name="${prefix}_upper_fixed" type="fixed"><parent link="${prefix}_shoulder_pitch"/><child link="${prefix}_upper_arm"/><origin xyz="0 0 -0.04" rpy="0 0 0"/></joint>
-    <link name="armour_${prefix}_upper"><inertial><mass value="0.4"/><inertia ixx="0.005" ixy="0" ixz="0" iyy="0.005" iyz="0" izz="0.005"/></inertial><visual><origin xyz="0.064 0 -0.19" rpy="0 0 0"/><geometry><box size="0.012 0.04 0.20"/></geometry><material name="flat_black"/></visual></link>
+    <link name="armour_${prefix}_upper"><inertial><mass value="0.4"/><inertia ixx="0.005" ixy="0" ixz="0" iyy="0.005" iyz="0" izz="0.005"/></inertial></link>
     <joint name="armour_${prefix}_upper_joint" type="fixed"><parent link="${prefix}_upper_arm"/><child link="armour_${prefix}_upper"/><origin xyz="0 0 0" rpy="0 0 0"/></joint>
     <!-- elbow — pin housing 85mm -->
     <link name="${prefix}_elbow_link"><inertial><mass value="0.3"/><inertia ixx="0.003" ixy="0" ixz="0" iyy="0.003" iyz="0" izz="0.002"/></inertial>
-      <visual><origin xyz="0 0 0" rpy="0 1.5708 0"/><geometry><cylinder radius="0.042" length="0.10"/></geometry><material name="gunmetal"/></visual></link>
+      </link>
     <joint name="${prefix}_elbow" type="revolute">
       <parent link="${prefix}_upper_arm"/><child link="${prefix}_elbow_link"/>
       <origin xyz="0 0 -0.38" rpy="0 0 0"/>
@@ -196,25 +196,25 @@
     <!-- forearm 340 — mesh origin at TOP -->
     <link name="${prefix}_forearm">
       <inertial><mass value="${mass_forearm}"/><inertia ixx="0.06" ixy="0" ixz="0" iyy="0.06" iyz="0" izz="0.03"/><origin xyz="0 0 -0.17"/></inertial>
-      <xacro:if value="${prefix == 'left'}"><visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/visual/forearm_L.obj"/></geometry><material name="dark_grey"/></visual></xacro:if>
-      <xacro:if value="${prefix == 'right'}"><visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/visual/forearm_R.obj"/></geometry><material name="dark_grey"/></visual></xacro:if>
-      <xacro:if value="${prefix == 'left'}"><collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/collision/forearm_L.obj"/></geometry></collision></xacro:if>
-      <xacro:if value="${prefix == 'right'}"><collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/collision/forearm_R.obj"/></geometry></collision></xacro:if>
+      <xacro:if value="${prefix == 'left'}"><visual><origin xyz="0 0 -0.129" rpy="1.5708 0 0"/><geometry><mesh filename="package://ares1_description/meshes/visual/forearm_L.obj"/></geometry><material name="dark_grey"/></visual></xacro:if>
+      <xacro:if value="${prefix == 'right'}"><visual><origin xyz="0 0 -0.129" rpy="1.5708 0 0"/><geometry><mesh filename="package://ares1_description/meshes/visual/forearm_R.obj"/></geometry><material name="dark_grey"/></visual></xacro:if>
+      <xacro:if value="${prefix == 'left'}"><collision><origin xyz="0 0 -0.129" rpy="1.5708 0 0"/><geometry><mesh filename="package://ares1_description/meshes/collision/forearm_L.obj"/></geometry></collision></xacro:if>
+      <xacro:if value="${prefix == 'right'}"><collision><origin xyz="0 0 -0.129" rpy="1.5708 0 0"/><geometry><mesh filename="package://ares1_description/meshes/collision/forearm_R.obj"/></geometry></collision></xacro:if>
     </link>
     <joint name="${prefix}_forearm_fixed" type="fixed"><parent link="${prefix}_elbow_link"/><child link="${prefix}_forearm"/><origin xyz="0 0 0" rpy="0 0 0"/></joint>
-    <link name="armour_${prefix}_forearm"><inertial><mass value="0.5"/><inertia ixx="0.006" ixy="0" ixz="0" iyy="0.006" iyz="0" izz="0.003"/></inertial><visual><origin xyz="0.055 0 -0.17" rpy="0 0 0"/><geometry><box size="0.010 0.06 0.20"/></geometry><material name="flat_black"/></visual></link>
+    <link name="armour_${prefix}_forearm"><inertial><mass value="0.5"/><inertia ixx="0.006" ixy="0" ixz="0" iyy="0.006" iyz="0" izz="0.003"/></inertial></link>
     <joint name="armour_${prefix}_forearm_joint" type="fixed"><parent link="${prefix}_forearm"/><child link="armour_${prefix}_forearm"/><origin xyz="0 0 0" rpy="0 0 0"/></joint>
     <!-- weapons removed — clean no mounts -->
     <!-- wrist 2 DOF — housing -->
     <link name="${prefix}_wrist_pitch"><inertial><mass value="0.6"/><inertia ixx="0.004" ixy="0" ixz="0" iyy="0.004" iyz="0" izz="0.002"/></inertial>
-      <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><cylinder radius="0.035" length="0.04"/></geometry><material name="dark_grey"/></visual></link>
+      </link>
     <joint name="${prefix}_wrist_pitch" type="revolute">
       <parent link="${prefix}_forearm"/><child link="${prefix}_wrist_pitch"/>
       <origin xyz="0 0 -0.34" rpy="0 0 0"/>
       <axis xyz="0 1 0"/><limit lower="-1.047" upper="1.047" effort="80" velocity="3.0"/>
     </joint>
     <link name="${prefix}_wrist_roll"><inertial><mass value="0.5"/><inertia ixx="0.003" ixy="0" ixz="0" iyy="0.003" iyz="0" izz="0.002"/></inertial>
-      <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><sphere radius="0.030"/></geometry><material name="gunmetal"/></visual></link>
+      </link>
     <joint name="${prefix}_wrist_roll" type="revolute">
       <parent link="${prefix}_wrist_pitch"/><child link="${prefix}_wrist_roll"/>
       <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -222,10 +222,10 @@
     </joint>
     <link name="${prefix}_hand">
       <inertial><mass value="${mass_hand}"/><inertia ixx="0.02" ixy="0" ixz="0" iyy="0.02" iyz="0" izz="0.01"/><origin xyz="0 0 -0.08"/></inertial>
-      <xacro:if value="${prefix == 'left'}"><visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/visual/palm_L.obj"/></geometry><material name="gunmetal"/></visual></xacro:if>
-      <xacro:if value="${prefix == 'right'}"><visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/visual/palm_R.obj"/></geometry><material name="gunmetal"/></visual></xacro:if>
-      <xacro:if value="${prefix == 'left'}"><collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/collision/palm_L.obj"/></geometry></collision></xacro:if>
-      <xacro:if value="${prefix == 'right'}"><collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/collision/palm_R.obj"/></geometry></collision></xacro:if>
+      <xacro:if value="${prefix == 'left'}"><visual><origin xyz="0 0 -0.082" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/visual/palm_L.obj"/></geometry><material name="gunmetal"/></visual></xacro:if>
+      <xacro:if value="${prefix == 'right'}"><visual><origin xyz="0 0 -0.082" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/visual/palm_R.obj"/></geometry><material name="gunmetal"/></visual></xacro:if>
+      <xacro:if value="${prefix == 'left'}"><collision><origin xyz="0 0 -0.082" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/collision/palm_L.obj"/></geometry></collision></xacro:if>
+      <xacro:if value="${prefix == 'right'}"><collision><origin xyz="0 0 -0.082" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/collision/palm_R.obj"/></geometry></collision></xacro:if>
     </link>
     <joint name="${prefix}_hand_joint" type="fixed"><parent link="${prefix}_wrist_roll"/><child link="${prefix}_hand"/><origin xyz="0 0 0" rpy="0 0 0"/></joint>
   </xacro:macro>
@@ -245,14 +245,14 @@
       <axis xyz="0 0 1"/><limit lower="-0.524" upper="0.524" effort="200" velocity="2.0"/>
     </joint>
     <link name="${prefix}_hip_roll"><inertial><mass value="0.8"/><inertia ixx="0.008" ixy="0" ixz="0" iyy="0.008" iyz="0" izz="0.008"/></inertial>
-      <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><sphere radius="0.045"/></geometry><material name="dark_grey"/></visual></link>
+      </link>
     <joint name="${prefix}_hip_roll" type="revolute">
       <parent link="${prefix}_hip_yaw"/><child link="${prefix}_hip_roll"/>
       <origin xyz="0 0 0" rpy="0 0 0"/>
       <axis xyz="1 0 0"/><limit lower="-0.785" upper="0.785" effort="280" velocity="2.0"/>
     </joint>
     <link name="${prefix}_hip_pitch"><inertial><mass value="1.0"/><inertia ixx="0.01" ixy="0" ixz="0" iyy="0.01" iyz="0" izz="0.01"/></inertial>
-      <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><sphere radius="0.045"/></geometry><material name="gunmetal"/></visual></link>
+      </link>
     <joint name="${prefix}_hip_pitch" type="revolute">
       <parent link="${prefix}_hip_roll"/><child link="${prefix}_hip_pitch"/>
       <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -260,38 +260,38 @@
     </joint>
     <link name="${prefix}_thigh">
       <inertial><mass value="${mass_thigh}"/><inertia ixx="0.45" ixy="0" ixz="0" iyy="0.45" iyz="0" izz="0.12"/><origin xyz="0 0 -0.26"/></inertial>
-      <xacro:if value="${prefix == 'left'}"><visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/visual/thigh_L.obj"/></geometry><material name="dark_grey"/></visual></xacro:if>
-      <xacro:if value="${prefix == 'right'}"><visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/visual/thigh_R.obj"/></geometry><material name="dark_grey"/></visual></xacro:if>
-      <xacro:if value="${prefix == 'left'}"><collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/collision/thigh_L.obj"/></geometry></collision></xacro:if>
-      <xacro:if value="${prefix == 'right'}"><collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/collision/thigh_R.obj"/></geometry></collision></xacro:if>
+      <xacro:if value="${prefix == 'left'}"><visual><origin xyz="0 0 -0.25" rpy="1.5708 0 0"/><geometry><mesh filename="package://ares1_description/meshes/visual/thigh_L.obj"/></geometry><material name="dark_grey"/></visual></xacro:if>
+      <xacro:if value="${prefix == 'right'}"><visual><origin xyz="0 0 -0.25" rpy="1.5708 0 0"/><geometry><mesh filename="package://ares1_description/meshes/visual/thigh_R.obj"/></geometry><material name="dark_grey"/></visual></xacro:if>
+      <xacro:if value="${prefix == 'left'}"><collision><origin xyz="0 0 -0.25" rpy="1.5708 0 0"/><geometry><mesh filename="package://ares1_description/meshes/collision/thigh_L.obj"/></geometry></collision></xacro:if>
+      <xacro:if value="${prefix == 'right'}"><collision><origin xyz="0 0 -0.25" rpy="1.5708 0 0"/><geometry><mesh filename="package://ares1_description/meshes/collision/thigh_R.obj"/></geometry></collision></xacro:if>
     </link>
     <joint name="${prefix}_thigh_joint" type="fixed"><parent link="${prefix}_hip_pitch"/><child link="${prefix}_thigh"/><origin xyz="0 0 0" rpy="0 0 0"/></joint>
-    <link name="armour_${prefix}_thigh"><inertial><mass value="1.1"/><inertia ixx="0.02" ixy="0" ixz="0" iyy="0.02" iyz="0" izz="0.01"/><origin xyz="0 0 0"/></inertial><visual><origin xyz="0.08 0 -0.26" rpy="0 0 0"/><geometry><box size="0.018 0.12 0.30"/></geometry><material name="flat_black"/></visual></link>
+    <link name="armour_${prefix}_thigh"><inertial><mass value="1.1"/><inertia ixx="0.02" ixy="0" ixz="0" iyy="0.02" iyz="0" izz="0.01"/><origin xyz="0 0 0"/></inertial></link>
     <joint name="armour_${prefix}_thigh_joint" type="fixed"><parent link="${prefix}_thigh"/><child link="armour_${prefix}_thigh"/><origin xyz="0 0 0" rpy="0 0 0"/></joint>
     <link name="${prefix}_shin">
       <inertial><mass value="${mass_shin}"/><inertia ixx="0.28" ixy="0" ixz="0" iyy="0.28" iyz="0" izz="0.09"/><origin xyz="0 0 -0.24"/></inertial>
-      <xacro:if value="${prefix == 'left'}"><visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/visual/calf_L.obj"/></geometry><material name="dark_grey"/></visual></xacro:if>
-      <xacro:if value="${prefix == 'right'}"><visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/visual/calf_R.obj"/></geometry><material name="dark_grey"/></visual></xacro:if>
-      <xacro:if value="${prefix == 'left'}"><collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/collision/calf_L.obj"/></geometry></collision></xacro:if>
-      <xacro:if value="${prefix == 'right'}"><collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/collision/calf_R.obj"/></geometry></collision></xacro:if>
+      <xacro:if value="${prefix == 'left'}"><visual><origin xyz="0 0 -0.2255" rpy="1.5708 0 0"/><geometry><mesh filename="package://ares1_description/meshes/visual/calf_L.obj"/></geometry><material name="dark_grey"/></visual></xacro:if>
+      <xacro:if value="${prefix == 'right'}"><visual><origin xyz="0 0 -0.2255" rpy="1.5708 0 0"/><geometry><mesh filename="package://ares1_description/meshes/visual/calf_R.obj"/></geometry><material name="dark_grey"/></visual></xacro:if>
+      <xacro:if value="${prefix == 'left'}"><collision><origin xyz="0 0 -0.2255" rpy="1.5708 0 0"/><geometry><mesh filename="package://ares1_description/meshes/collision/calf_L.obj"/></geometry></collision></xacro:if>
+      <xacro:if value="${prefix == 'right'}"><collision><origin xyz="0 0 -0.2255" rpy="1.5708 0 0"/><geometry><mesh filename="package://ares1_description/meshes/collision/calf_R.obj"/></geometry></collision></xacro:if>
     </link>
     <joint name="${prefix}_knee" type="revolute">
       <parent link="${prefix}_thigh"/><child link="${prefix}_shin"/>
       <origin xyz="0 0 -0.52" rpy="0 0 0"/>
       <axis xyz="0 1 0"/><limit lower="0" upper="2.443" effort="360" velocity="2.5"/>
     </joint>
-    <link name="armour_${prefix}_shin"><inertial><mass value="0.8"/><inertia ixx="0.015" ixy="0" ixz="0" iyy="0.015" iyz="0" izz="0.008"/><origin xyz="0 0 0"/></inertial><visual><origin xyz="0.07 0 -0.24" rpy="0 0 0"/><geometry><box size="0.015 0.10 0.28"/></geometry><material name="flat_black"/></visual></link>
+    <link name="armour_${prefix}_shin"><inertial><mass value="0.8"/><inertia ixx="0.015" ixy="0" ixz="0" iyy="0.015" iyz="0" izz="0.008"/><origin xyz="0 0 0"/></inertial></link>
     <joint name="armour_${prefix}_shin_joint" type="fixed"><parent link="${prefix}_shin"/><child link="armour_${prefix}_shin"/><origin xyz="0 0 0" rpy="0 0 0"/></joint>
     <!-- ankle pitch -> roll — gimbal housing 80mm -->
     <link name="${prefix}_ankle_pitch"><inertial><mass value="0.6"/><inertia ixx="0.006" ixy="0" ixz="0" iyy="0.006" iyz="0" izz="0.004"/></inertial>
-      <visual><origin xyz="0 0 0" rpy="0 1.5708 0"/><geometry><cylinder radius="0.040" length="0.08"/></geometry><material name="dark_grey"/></visual></link>
+      </link>
     <joint name="${prefix}_ankle_pitch" type="revolute">
       <parent link="${prefix}_shin"/><child link="${prefix}_ankle_pitch"/>
       <origin xyz="0 0 -0.48" rpy="0 0 0"/>
       <axis xyz="0 1 0"/><limit lower="-0.698" upper="0.698" effort="220" velocity="3.0"/>
     </joint>
     <link name="${prefix}_ankle_roll"><inertial><mass value="0.5"/><inertia ixx="0.005" ixy="0" ixz="0" iyy="0.005" iyz="0" izz="0.003"/></inertial>
-      <visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><sphere radius="0.035"/></geometry><material name="gunmetal"/></visual></link>
+      </link>
     <joint name="${prefix}_ankle_roll" type="revolute">
       <parent link="${prefix}_ankle_pitch"/><child link="${prefix}_ankle_roll"/>
       <origin xyz="0 0 0" rpy="0 0 0"/>
@@ -299,10 +299,10 @@
     </joint>
     <link name="${prefix}_foot">
       <inertial><mass value="${mass_foot}"/><inertia ixx="0.04" ixy="0" ixz="0" iyy="0.06" iyz="0" izz="0.05"/><origin xyz="0.00 0 -0.04"/></inertial>
-      <xacro:if value="${prefix == 'left'}"><visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/visual/foot_L.obj"/></geometry><material name="gunmetal"/></visual></xacro:if>
-      <xacro:if value="${prefix == 'right'}"><visual><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/visual/foot_R.obj"/></geometry><material name="gunmetal"/></visual></xacro:if>
-      <xacro:if value="${prefix == 'left'}"><collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/collision/foot_L.obj"/></geometry></collision></xacro:if>
-      <xacro:if value="${prefix == 'right'}"><collision><origin xyz="0 0 0" rpy="0 0 0"/><geometry><mesh filename="package://ares1_description/meshes/collision/foot_R.obj"/></geometry></collision></xacro:if>
+      <xacro:if value="${prefix == 'left'}"><visual><origin xyz="0.10 0 -0.0925" rpy="1.5708 0 1.5708"/><geometry><mesh filename="package://ares1_description/meshes/visual/foot_L.obj"/></geometry><material name="gunmetal"/></visual></xacro:if>
+      <xacro:if value="${prefix == 'right'}"><visual><origin xyz="0.10 0 -0.0925" rpy="1.5708 0 1.5708"/><geometry><mesh filename="package://ares1_description/meshes/visual/foot_R.obj"/></geometry><material name="gunmetal"/></visual></xacro:if>
+      <xacro:if value="${prefix == 'left'}"><collision><origin xyz="0.10 0 -0.0925" rpy="1.5708 0 1.5708"/><geometry><mesh filename="package://ares1_description/meshes/collision/foot_L.obj"/></geometry></collision></xacro:if>
+      <xacro:if value="${prefix == 'right'}"><collision><origin xyz="0.10 0 -0.0925" rpy="1.5708 0 1.5708"/><geometry><mesh filename="package://ares1_description/meshes/collision/foot_R.obj"/></geometry></collision></xacro:if>
     </link>
     <joint name="${prefix}_foot_joint" type="fixed"><parent link="${prefix}_ankle_roll"/><child link="${prefix}_foot"/><origin xyz="0 0 0" rpy="0 0 0"/></joint>
   </xacro:macro>
